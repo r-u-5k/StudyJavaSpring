@@ -1,0 +1,10 @@
+--insert
+INSERT INTO ADDRESS VALUES(ADDRESS_NO_SEQ.NEXTVAL, '김경호', '123-4567', '서울시여러분');
+--pk update
+UPDATE ADDRESS SET NAME = '김변경', PHONE = '888-8888', ADDRESS = '부산시여러분' WHERE NO = 1;
+--pk delete
+DELETE FROM ADDRESS WHERE NO = 1;
+--select (pk select)
+SELECT NO, NAME, PHONE, ADDRESS FROM ADDRESS WHERE NO = 3;
+--select (all select)
+SELECT NO, NAME, PHONE, ADDRESS FROM ADDRESS;

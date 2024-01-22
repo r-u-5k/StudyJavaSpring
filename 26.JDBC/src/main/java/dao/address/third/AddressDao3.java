@@ -1,12 +1,14 @@
-package dao.address.second;
+package dao.address.third;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
-public class AddressDao2 {
+public class AddressDao3 {
 	/*
 	 * 데이터베이스 접속 정보를 이용하여 
 	 * Connection 객체를 생성하여 반환하는 메서드
@@ -30,42 +32,45 @@ public class AddressDao2 {
 		con.close();
 	}
 	
-	public void insert(String name, String phone, String address) throws Exception {
+	
+	public int insert(Address address) throws Exception {
 		String insertSql = "INSERT INTO ADDRESS VALUES(ADDRESS_NO_SEQ.NEXTVAL, '" 
-							+ name + "', '" + phone + "', '" + address +"')";
+							+ address.getName() + "', '" + address.getPhone() + "', '" + address.getAddress() +"')";
 		Connection con = getConnection();
 		Statement stmt = con.createStatement();
 		int rowCount = stmt.executeUpdate(insertSql);
-		System.out.println(">> Insert Row Count: " + rowCount);
 
 		stmt.close();
 		close(con);
+		return rowCount;
 	}
 	
-	public void updateByNo(int no, String name, String phone, String address) throws Exception {
-		String updateSql = "UPDATE ADDRESS SET NAME = '" + name + "', PHONE = '" + phone + "', ADDRESS = '" + address + "' WHERE NO = " + no;
+	public int updateByNo(Address address) throws Exception {
+		String updateSql = "UPDATE ADDRESS SET NAME = '" + address.getName() + "', PHONE = '" + address.getPhone() + "', "
+							+ "ADDRESS = '" + address.getAddress() + "' WHERE NO = " + address.getNo();
 		Connection con = getConnection();
 		Statement stmt = con.createStatement();
 		int rowCount = stmt.executeUpdate(updateSql);
-		System.out.println(">> Update Row Count: " + rowCount);
 		
 		stmt.close();
 		close(con);
+		return rowCount;
 	}
 	
-	public void deleteByNo(int no) throws Exception {
+	public int deleteByNo(int no) throws Exception {
 		String deleteSql = "DELETE FROM ADDRESS WHERE NO = " + no;
 		Connection con = getConnection();
 		Statement stmt = con.createStatement();
 		int rowCount = stmt.executeUpdate(deleteSql);
-		System.out.println(">> Delete Row Count: " + rowCount);
 		
 		stmt.close();
 		close(con);
+		return rowCount;
 	}
 
-	public void selectByNo(int num) throws Exception {
-		String selectSql = "SELECT " + num + ", NAME, PHONE, ADDRESS FROM ADDRESS WHERE NO = 3";
+	public Address selectByNo(int num) throws Exception {
+		String selectSql = "SELECT NO, NAME, PHONE, ADDRESS FROM ADDRESS WHERE NO = " + num;
+		Address findAddress = null;
 		Connection con = getConnection();
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(selectSql);
@@ -75,17 +80,21 @@ public class AddressDao2 {
 			String name = rs.getString("NAME");
 			String phone = rs.getString("PHONE");
 			String address = rs.getString("ADDRESS");
-			System.out.println(no + "\t" + name + "\t" + phone + "\t" + address + "\t");
+			findAddress = new Address(no, name, phone, address);
 		} else {
-			System.out.println("그런 사람 없습니다");
+			findAddress = null;
 		}
 		
+		rs.close();
 		stmt.close();
 		close(con);
+		
+		return findAddress;
 	}
 	
-	public void selectAll() throws Exception {
+	public List<Address> selectAll() throws Exception {
 		String selectSql = "SELECT NO, NAME, PHONE, ADDRESS FROM ADDRESS";
+		List<Address> addressList = new ArrayList<>();
 		Connection con = getConnection();
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(selectSql);
@@ -95,12 +104,16 @@ public class AddressDao2 {
 				int no = rs.getInt("NO");
 				String name = rs.getString("NAME");
 				String phone = rs.getString("PHONE");
-				String address = rs.getString("ADDRESS");
-				System.out.println(no + "\t" + name + "\t" + phone + "\t" + address + "\t");
+				String addr = rs.getString("ADDRESS");
+				Address address = new Address(no, name, phone, addr);
+				addressList.add(address);
 			} while (rs.next());
 		}
 		
+		rs.close();
 		stmt.close();
 		close(con);
+		
+		return addressList;
 	}
 }
