@@ -1,0 +1,6 @@
+/*************** 데이터베이스 접속 정보 ***************/
+		String driverClass = "oracle.jdbc.OracleDriver";
+		String url = "jdbc:oracle:thin:@124.198.47.195:1521:xe";
+		String user = "jdeveloper43";
+		String password = "jdeveloper43";
+		/******************************************************/
