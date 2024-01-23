@@ -23,6 +23,7 @@ public class AddressDao {
 	public int insert(Address address) throws Exception {
 		String insertSql = "INSERT INTO ADDRESS VALUES(ADDRESS_NO_SEQ.NEXTVAL, '" 
 							+ address.getName() + "', '" + address.getPhone() + "', '" + address.getAddress() +"')";
+		
 		Connection con = dataSource.getConnection();
 		Statement stmt = con.createStatement();
 		int rowCount = stmt.executeUpdate(insertSql);
@@ -35,6 +36,7 @@ public class AddressDao {
 	public int updateByNo(Address address) throws Exception {
 		String updateSql = "UPDATE ADDRESS SET NAME = '" + address.getName() + "', PHONE = '" + address.getPhone() + "', "
 							+ "ADDRESS = '" + address.getAddress() + "' WHERE NO = " + address.getNo();
+		
 		Connection con = dataSource.getConnection();
 		Statement stmt = con.createStatement();
 		int rowCount = stmt.executeUpdate(updateSql);
@@ -46,6 +48,7 @@ public class AddressDao {
 	
 	public int deleteByNo(int no) throws Exception {
 		String deleteSql = "DELETE FROM ADDRESS WHERE NO = " + no;
+		
 		Connection con = dataSource.getConnection();
 		Statement stmt = con.createStatement();
 		int rowCount = stmt.executeUpdate(deleteSql);
@@ -57,6 +60,7 @@ public class AddressDao {
 
 	public Address selectByNo(int num) throws Exception {
 		String selectSql = "SELECT NO, NAME, PHONE, ADDRESS FROM ADDRESS WHERE NO = " + num;
+		
 		Address findAddress = null;
 		Connection con = dataSource.getConnection();
 		Statement stmt = con.createStatement();
