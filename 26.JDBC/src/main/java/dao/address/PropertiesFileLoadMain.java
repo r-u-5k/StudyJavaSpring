@@ -18,7 +18,7 @@ public class PropertiesFileLoadMain {
 		/*
 		 * << 상대경로 >>
 		 */
-		InputStream fis = PropertiesFileLoadMain.class.getResourceAsStream("/a.properties");
+		InputStream fis = PropertiesFileLoadMain.class.getResourceAsStream("/프로퍼티파일.properties");
 		properties.load(fis);
 		
 		/*
