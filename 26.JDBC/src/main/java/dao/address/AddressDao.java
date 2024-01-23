@@ -8,13 +8,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.common.DataSource;
+
 public class AddressDao {
 	/*
 	 * DataSource 객체를 멤버 필드로 가짐
 	 * (Connection을 생성/해제하는 객체)
 	 */
 	private DataSource dataSource;
-	public AddressDao() {
+	public AddressDao() throws Exception {
 		dataSource = new DataSource();
 	}
 	

@@ -1,4 +1,16 @@
 package com.itwill.jdbc.dao.board;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 /*
 VO(Value Object),DTO(Data Transfer Object)
 	- board 테이블 1개 row의 데이타의 값을 가지는객체
@@ -20,4 +32,5 @@ public class Board {
 	private String board_content;
 	private String board_wday;
 	private int board_read_count;
+	
 }
