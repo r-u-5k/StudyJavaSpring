@@ -13,7 +13,7 @@ public class BoardDao {
 	}
 	
 	public int insert(Board board) throws Exception {
-		String insertSql = "INSERT INTO BOARD(BOARD_NO, BOARD_TITLE, BOARD_CONTENT) "
+		String insertSql = "INSERT INTO BOARD(BOARD_NO, BOARD_TITLE, BOARD_CONTENT)"
 				+ "VALUES(" + board.getBoard_no() + ", '" + board.getBoard_title() + "', '" + board.getBoard_content() + "')";
 		Connection con = dataSource.getConnection();
 		Statement stmt = con.createStatement();
