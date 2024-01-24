@@ -12,9 +12,8 @@ public class AddressDaoTestMain {
 		System.out.println(">> Insert Row Count: " + addressDao3.insert(address));
 		
 		System.out.println("2. updateByNo");
-		Address updateAddress = new Address(10, "텐수정", "100-1000", "텐네시");
+		Address updateAddress = new Address(11, "일레븐수정", "100-1000", "텐네시");
 		System.out.println(">> Update Row Count: " + addressDao3.updateByNo(updateAddress));
-		System.out.println(">> Update Row Count: " + addressDao3.updateByNo(new Address(18, "열여덟", "181-1818", "제주도")));
 		
 		System.out.println("3. deleteByNo");
 		System.out.println(">> Delete Row Count: " + addressDao3.deleteByNo(22));

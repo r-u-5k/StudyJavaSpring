@@ -2,6 +2,7 @@ package dao.address;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,6 +21,105 @@ public class AddressDao {
 		dataSource = new DataSource();
 	}
 	
+	/* PreparedStatement */
+	public int insert(Address address) throws Exception {
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(AddressSQL.ADDRESS_INSERT);
+		pstmt.setString(1, address.getName());
+		pstmt.setString(2, address.getPhone());
+		pstmt.setString(3, address.getAddress());
+		int rowCount = pstmt.executeUpdate();
+		pstmt.close();
+		dataSource.close(con);
+		return rowCount;
+	}
+	
+	public int updateByNo(int no, String name, String phone, String address) throws Exception {
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(AddressSQL.ADDRESS_UPDATE);
+		pstmt.setString(1, name);
+		pstmt.setString(2, phone);
+		pstmt.setString(3, address);
+		pstmt.setInt(4, no);
+		int rowCount = pstmt.executeUpdate();
+		pstmt.close();
+		dataSource.close(con);
+		return rowCount;
+	}
+	
+	public int updateByNo(Address address) throws Exception {
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(AddressSQL.ADDRESS_UPDATE);
+		pstmt.setString(1, address.getName());
+		pstmt.setString(2, address.getPhone());
+		pstmt.setString(3, address.getAddress());
+		pstmt.setInt(4, address.getNo());
+		int rowCount = pstmt.executeUpdate();
+		pstmt.close();
+		dataSource.close(con);
+		return rowCount;
+	}
+	
+	public int deleteByNo(int no) throws Exception {
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(AddressSQL.ADDRESS_DELETE);
+		pstmt.setInt(1, no);
+		int rowCount = pstmt.executeUpdate();
+		pstmt.close();
+		dataSource.close(con);
+		return rowCount;
+	}
+
+	public Address selectByNo(int num) throws Exception {
+		Address findAddress = null;
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(AddressSQL.ADDRESS_SELECT_BY_NO);
+		pstmt.setInt(1, num);
+		ResultSet rs = pstmt.executeQuery();
+		
+		if (rs.next()) {
+			int no = rs.getInt("NO");
+			String name = rs.getString("NAME");
+			String phone = rs.getString("PHONE");
+			String address = rs.getString("ADDRESS");
+			findAddress = new Address(no, name, phone, address);
+		} else {
+			findAddress = null;
+		}
+		
+		rs.close();
+		pstmt.close();
+		dataSource.close(con);
+		
+		return findAddress;
+	}
+	
+	public List<Address> selectAll() throws Exception {
+		List<Address> addressList = new ArrayList<>();
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(AddressSQL.ADDRESS_SELECT_ALL);
+		ResultSet rs = pstmt.executeQuery();
+		
+		if (rs.next()) {
+			do {
+				int no = rs.getInt("NO");
+				String name = rs.getString("NAME");
+				String phone = rs.getString("PHONE");
+				String addr = rs.getString("ADDRESS");
+				Address address = new Address(no, name, phone, addr);
+				addressList.add(address);
+			} while (rs.next());
+		}
+		
+		rs.close();
+		pstmt.close();
+		dataSource.close(con);
+		
+		return addressList;
+	}
+	
+	/* Statement */
+	/*
 	public int insert(Address address) throws Exception {
 		String insertSql = "INSERT INTO ADDRESS VALUES(ADDRESS_NO_SEQ.NEXTVAL, '" 
 							+ address.getName() + "', '" + address.getPhone() + "', '" + address.getAddress() +"')";
@@ -107,4 +207,6 @@ public class AddressDao {
 		
 		return addressList;
 	}
+	*/
+	
 }

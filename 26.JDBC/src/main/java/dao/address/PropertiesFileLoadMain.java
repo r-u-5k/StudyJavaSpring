@@ -24,7 +24,7 @@ public class PropertiesFileLoadMain {
 		/*
 		<<Properties객체>>
 		------------------------------------------------------
-		 key(String)| value(String)
+		key(String) | value(String)
 		------------------------------------------------------
 		driverClass |oracle.jdbc.OracleDriver
 		url         |jdbc:oracle:thin:@124.198.47.195:1521:xe
