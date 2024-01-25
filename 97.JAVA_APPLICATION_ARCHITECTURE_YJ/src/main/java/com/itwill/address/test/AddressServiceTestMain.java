@@ -1,4 +1,7 @@
-package com.itwill.address;
+package com.itwill.address.test;
+
+import com.itwill.address.Address;
+import com.itwill.address.AddressService;
 
 public class AddressServiceTestMain {
 

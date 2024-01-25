@@ -17,7 +17,11 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class AddressMainFramePre extends JFrame {
 	/*** 1. AddressService 멤버 필드 선언 ***/
@@ -25,6 +29,7 @@ public class AddressMainFramePre extends JFrame {
 	/****************************************/
 
 	private JPanel contentPane;
+	private JTable addressListTable;
 
 	/**
 	 * Launch the application.
@@ -106,7 +111,27 @@ public class AddressMainFramePre extends JFrame {
 				/**************주소록리스트**************/
 				try {
 					List<Address> addressList = addressService.addressList();
-					System.out.println("UI >> " + addressList);
+					
+					Vector<String> columnVector = new Vector<>();
+					columnVector.add("번호");
+					columnVector.add("이름");
+					columnVector.add("전화번호");
+					columnVector.add("주소");
+					
+					Vector tableVector = new Vector();
+					for (Address address : addressList) {
+						Vector rowVector = new Vector();
+						rowVector.add(address.getNo());
+						rowVector.add(address.getName());
+						rowVector.add(address.getPhone());
+						rowVector.add(address.getAddress());
+						tableVector.add(rowVector);
+					}
+
+					DefaultTableModel tableModel = new DefaultTableModel(tableVector, columnVector);
+					
+					addressListTable.setModel(tableModel);
+					
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "호갱님 ㅈㅅ ;;");
 					e1.printStackTrace();
@@ -117,6 +142,32 @@ public class AddressMainFramePre extends JFrame {
 		addressListButton.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		addressListButton.setBounds(145, 187, 115, 23);
 		addressListPanel.add(addressListButton);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 20, 395, 164);
+		addressListPanel.add(scrollPane);
+		
+		addressListTable = new JTable();
+		addressListTable.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null},
+				{null, null, null, null},
+			},
+			new String[] {
+				"\uBC88\uD638", "\uC774\uB984", "\uC804\uD654\uBC88\uD638", "\uC8FC\uC18C"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		addressListTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+		addressListTable.getColumnModel().getColumn(3).setPreferredWidth(150);
+		addressListTable.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		scrollPane.setViewportView(addressListTable);
 		
 		JPanel addressDetailPanel = new JPanel();
 		addressDetailPanel.setBackground(Color.GREEN);
