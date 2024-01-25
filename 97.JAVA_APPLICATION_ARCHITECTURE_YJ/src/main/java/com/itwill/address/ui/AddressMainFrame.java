@@ -331,8 +331,7 @@ public class AddressMainFrame extends JFrame {
 		/******************************************/
 	}// 생성자 끝
 	
-	/*** 주소록 리스트 보여주기 
-	 * @throws Exception ***/
+	/*** 주소록 리스트 보여주기 ***/
 	private void displayAddressList() {
 		List<Address> addressList;
 		try {
@@ -361,13 +360,6 @@ public class AddressMainFrame extends JFrame {
 		}
 		
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }//클래스 끝

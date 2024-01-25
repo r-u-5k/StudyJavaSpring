@@ -16,20 +16,27 @@ import javax.swing.JTextArea;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.itwill.address.Address;
 import com.itwill.guest.Guest;
+import com.itwill.guest.GuestDao;
 import com.itwill.guest.GuestService;
 
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class GuestMainFrame extends JFrame {
 	GuestService guestService;
-
+	int status = 0;
 	private JPanel contentPane;
 	private JTextField guestNameTextField;
 	private JTable guestListTable;
@@ -68,6 +75,11 @@ public class GuestMainFrame extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JTabbedPane guestTabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		guestTabbedPane.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				if (guestTabbedPane.getSelectedIndex() == 0 && status != 0) displayGuestList();
+			}
+		});
 		contentPane.add(guestTabbedPane, BorderLayout.CENTER);
 		
 		JPanel guestListPanel = new JPanel();
@@ -75,40 +87,13 @@ public class GuestMainFrame extends JFrame {
 		guestListPanel.setLayout(null);
 		
 		JButton guestListButton = new JButton("방명록리스트");
-		guestListButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				List<Guest> guestList;
-				try {
-					guestList = guestService.guestList();
-					Vector<String> columnVector = new Vector<>();
-					columnVector.add("번호");
-					columnVector.add("이름");
-					columnVector.add("작성일");
-					columnVector.add("이메일");
-					columnVector.add("홈페이지");
-					columnVector.add("제목");
-					columnVector.add("내용");
-					
-					Vector tableVector = new Vector();
-					for (Guest guest : guestList) {
-						Vector rowVector = new Vector();
-						rowVector.add(guest.getGuestNo());
-						rowVector.add(guest.getGuestName());
-						rowVector.add(guest.getGuestDate());
-						rowVector.add(guest.getGuestEmail());
-						rowVector.add(guest.getGuestHomepage());
-						rowVector.add(guest.getGuestTitle());
-						rowVector.add(guest.getGuestContent());
-					}
-					DefaultTableModel tableModel = new DefaultTableModel(tableVector, columnVector);
-					guestListTable.setModel(tableModel);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-					JOptionPane.showMessageDialog(null, "리스트가 없습니다.");
-				}
-				
+		guestListButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				displayGuestList();
 			}
 		});
+		
 		guestListButton.setBounds(116, 201, 150, 23);
 		guestListPanel.add(guestListButton);
 		
@@ -158,18 +143,36 @@ public class GuestMainFrame extends JFrame {
 		guestWriteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String name = guestNameTextField.getText();
-//				Date date = guestDateTextField.getText()
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				Date date = null;
+				try {
+					date = format.parse(guestDateTextField.getText());
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
 				String email = guestEmailTextField.getText();
 				String homepage = guestHomepageTextField.getText();
 				String title = guestTitleTextField.getText();
 				String content = guestContentTextPane.getText();
 				Guest guest = Guest.builder().guestContent(content)
-											 /*guestDate(date)*/
+											 .guestDate(date)
 											 .guestEmail(email)
 											 .guestHomepage(homepage)
 											 .guestName(name)
 											 .guestTitle(title)
 											 .build();
+				try {
+					int rowCount = guestService.guestWrite(guest);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				guestNameTextField.setText("");
+				guestHomepageTextField.setText("");
+				guestEmailTextField.setText("");
+				guestTitleTextField.setText("");
+				guestContentTextPane.setText("");
+				
+				guestTabbedPane.setSelectedIndex(0);
 			}
 		});
 		guestWriteButton.setBounds(81, 219, 150, 23);
@@ -192,14 +195,18 @@ public class GuestMainFrame extends JFrame {
 		guestTitleTextField.setColumns(10);
 		
 		JLabel guestDateLabel = new JLabel("작성일");
-		guestDateLabel.setBounds(27, 64, 42, 15);
+		guestDateLabel.setBounds(27, 74, 42, 15);
 		guestInsertPanel.add(guestDateLabel);
 		
 		JLabel guestEmailLabel = new JLabel("이메일");
 		guestEmailLabel.setBounds(27, 99, 42, 15);
 		guestInsertPanel.add(guestEmailLabel);
 		
-		guestDateTextField = new JTextField();
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		
+		guestDateTextField = new JTextField(formatter.format(date));
+		guestDateTextField.setEnabled(false);
 		guestDateTextField.setBounds(81, 67, 116, 21);
 		guestInsertPanel.add(guestDateTextField);
 		guestDateTextField.setColumns(10);
@@ -217,5 +224,48 @@ public class GuestMainFrame extends JFrame {
 		guestHomepageTextField.setBounds(81, 124, 116, 21);
 		guestInsertPanel.add(guestHomepageTextField);
 		guestHomepageTextField.setColumns(10);
+		
+		try {
+			guestService = new GuestService();
+			status = 1;
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		
+		
+	}
+	
+	private void displayGuestList() {
+		List<Guest> guestList;
+		try {
+			guestList = guestService.guestList();
+			Vector<String> columnVector = new Vector<>();
+			columnVector.add("번호");
+			columnVector.add("이름");
+			columnVector.add("작성일");
+			columnVector.add("이메일");
+			columnVector.add("홈페이지");
+			columnVector.add("제목");
+			columnVector.add("내용");
+			
+			Vector tableVector = new Vector();
+			for (Guest guest : guestList) {
+				Vector rowVector = new Vector();
+				rowVector.add(guest.getGuestNo());
+				rowVector.add(guest.getGuestName());
+				rowVector.add(guest.getGuestDate());
+				rowVector.add(guest.getGuestEmail());
+				rowVector.add(guest.getGuestHomepage());
+				rowVector.add(guest.getGuestTitle());
+				rowVector.add(guest.getGuestContent());
+				tableVector.add(rowVector);
+			}
+			DefaultTableModel tableModel = new DefaultTableModel(tableVector, columnVector);
+			guestListTable.setModel(tableModel);
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "리스트가 없습니다.");
+		}
+		
 	}
 }
