@@ -8,22 +8,36 @@ import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import com.itwill.guest.Guest;
+import com.itwill.guest.GuestService;
+
 import javax.swing.JTextPane;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Vector;
+import java.awt.event.ActionEvent;
 
 public class GuestMainFrame extends JFrame {
+	GuestService guestService;
 
 	private JPanel contentPane;
-	private JTextField nameTextField;
+	private JTextField guestNameTextField;
 	private JTable guestListTable;
-	private JTextField titleTextField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField guestTitleTextField;
+	private JTextField guestDateTextField;
+	private JTextField guestEmailTextField;
+	private JTextField guestHomepageTextField;
+	private JTextPane guestContentTextPane;
 
 	/**
 	 * Launch the application.
@@ -56,66 +70,45 @@ public class GuestMainFrame extends JFrame {
 		JTabbedPane guestTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(guestTabbedPane, BorderLayout.CENTER);
 		
-		JPanel guestInsertPanel = new JPanel();
-		guestTabbedPane.addTab("방명록쓰기", null, guestInsertPanel, null);
-		guestInsertPanel.setLayout(null);
-		
-		JLabel nameLabel = new JLabel("작성자");
-		nameLabel.setBounds(27, 14, 42, 15);
-		guestInsertPanel.add(nameLabel);
-		
-		JLabel addressLabel = new JLabel("내용");
-		addressLabel.setBounds(37, 170, 36, 18);
-		guestInsertPanel.add(addressLabel);
-		
-		nameTextField = new JTextField();
-		nameTextField.setBounds(82, 12, 96, 18);
-		guestInsertPanel.add(nameTextField);
-		nameTextField.setColumns(10);
-		
-		JButton guestWriteButton = new JButton("방명록쓰기");
-		guestWriteButton.setBounds(81, 219, 150, 23);
-		guestInsertPanel.add(guestWriteButton);
-		
-		JScrollPane guestContentScrollPane = new JScrollPane();
-		guestContentScrollPane.setBounds(83, 141, 158, 74);
-		guestInsertPanel.add(guestContentScrollPane);
-		
-		JTextPane guestContentTextPane = new JTextPane();
-		guestContentScrollPane.setViewportView(guestContentTextPane);
-		
-		JLabel titleLabel = new JLabel("제목");
-		titleLabel.setBounds(37, 43, 32, 15);
-		guestInsertPanel.add(titleLabel);
-		
-		titleTextField = new JTextField();
-		titleTextField.setBounds(81, 40, 116, 21);
-		guestInsertPanel.add(titleTextField);
-		titleTextField.setColumns(10);
-		
-		JLabel dateLabel = new JLabel("작성일");
-		dateLabel.setBounds(27, 81, 42, 15);
-		guestInsertPanel.add(dateLabel);
-		
-		JLabel emailLabel = new JLabel("이메일");
-		emailLabel.setBounds(27, 113, 42, 15);
-		guestInsertPanel.add(emailLabel);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(81, 78, 116, 21);
-		guestInsertPanel.add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(81, 110, 116, 21);
-		guestInsertPanel.add(textField_2);
-		textField_2.setColumns(10);
-		
 		JPanel guestListPanel = new JPanel();
 		guestTabbedPane.addTab("방명록리스트", null, guestListPanel, null);
 		guestListPanel.setLayout(null);
 		
 		JButton guestListButton = new JButton("방명록리스트");
+		guestListButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				List<Guest> guestList;
+				try {
+					guestList = guestService.guestList();
+					Vector<String> columnVector = new Vector<>();
+					columnVector.add("번호");
+					columnVector.add("이름");
+					columnVector.add("작성일");
+					columnVector.add("이메일");
+					columnVector.add("홈페이지");
+					columnVector.add("제목");
+					columnVector.add("내용");
+					
+					Vector tableVector = new Vector();
+					for (Guest guest : guestList) {
+						Vector rowVector = new Vector();
+						rowVector.add(guest.getGuestNo());
+						rowVector.add(guest.getGuestName());
+						rowVector.add(guest.getGuestDate());
+						rowVector.add(guest.getGuestEmail());
+						rowVector.add(guest.getGuestHomepage());
+						rowVector.add(guest.getGuestTitle());
+						rowVector.add(guest.getGuestContent());
+					}
+					DefaultTableModel tableModel = new DefaultTableModel(tableVector, columnVector);
+					guestListTable.setModel(tableModel);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "리스트가 없습니다.");
+				}
+				
+			}
+		});
 		guestListButton.setBounds(116, 201, 150, 23);
 		guestListPanel.add(guestListButton);
 		
@@ -143,5 +136,86 @@ public class GuestMainFrame extends JFrame {
 		});
 		guestListTable.getColumnModel().getColumn(6).setPreferredWidth(161);
 		guestListScrollPane.setViewportView(guestListTable);
+		
+		JPanel guestInsertPanel = new JPanel();
+		guestTabbedPane.addTab("방명록쓰기", null, guestInsertPanel, null);
+		guestInsertPanel.setLayout(null);
+		
+		JLabel guestNameLabel = new JLabel("작성자");
+		guestNameLabel.setBounds(27, 14, 42, 15);
+		guestInsertPanel.add(guestNameLabel);
+		
+		JLabel guestAddressLabel = new JLabel("내용");
+		guestAddressLabel.setBounds(37, 170, 36, 18);
+		guestInsertPanel.add(guestAddressLabel);
+		
+		guestNameTextField = new JTextField();
+		guestNameTextField.setBounds(81, 12, 96, 18);
+		guestInsertPanel.add(guestNameTextField);
+		guestNameTextField.setColumns(10);
+		
+		JButton guestWriteButton = new JButton("방명록쓰기");
+		guestWriteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String name = guestNameTextField.getText();
+//				Date date = guestDateTextField.getText()
+				String email = guestEmailTextField.getText();
+				String homepage = guestHomepageTextField.getText();
+				String title = guestTitleTextField.getText();
+				String content = guestContentTextPane.getText();
+				Guest guest = Guest.builder().guestContent(content)
+											 /*guestDate(date)*/
+											 .guestEmail(email)
+											 .guestHomepage(homepage)
+											 .guestName(name)
+											 .guestTitle(title)
+											 .build();
+			}
+		});
+		guestWriteButton.setBounds(81, 219, 150, 23);
+		guestInsertPanel.add(guestWriteButton);
+		
+		JScrollPane guestContentScrollPane = new JScrollPane();
+		guestContentScrollPane.setBounds(81, 155, 150, 60);
+		guestInsertPanel.add(guestContentScrollPane);
+		
+		guestContentTextPane = new JTextPane();
+		guestContentScrollPane.setViewportView(guestContentTextPane);
+		
+		JLabel guestTitleLabel = new JLabel("제목");
+		guestTitleLabel.setBounds(37, 39, 32, 15);
+		guestInsertPanel.add(guestTitleLabel);
+		
+		guestTitleTextField = new JTextField();
+		guestTitleTextField.setBounds(81, 40, 116, 17);
+		guestInsertPanel.add(guestTitleTextField);
+		guestTitleTextField.setColumns(10);
+		
+		JLabel guestDateLabel = new JLabel("작성일");
+		guestDateLabel.setBounds(27, 64, 42, 15);
+		guestInsertPanel.add(guestDateLabel);
+		
+		JLabel guestEmailLabel = new JLabel("이메일");
+		guestEmailLabel.setBounds(27, 99, 42, 15);
+		guestInsertPanel.add(guestEmailLabel);
+		
+		guestDateTextField = new JTextField();
+		guestDateTextField.setBounds(81, 67, 116, 21);
+		guestInsertPanel.add(guestDateTextField);
+		guestDateTextField.setColumns(10);
+		
+		guestEmailTextField = new JTextField();
+		guestEmailTextField.setBounds(82, 96, 116, 21);
+		guestInsertPanel.add(guestEmailTextField);
+		guestEmailTextField.setColumns(10);
+		
+		JLabel guestHomepageLabel = new JLabel("홈페이지");
+		guestHomepageLabel.setBounds(27, 130, 57, 15);
+		guestInsertPanel.add(guestHomepageLabel);
+		
+		guestHomepageTextField = new JTextField();
+		guestHomepageTextField.setBounds(81, 124, 116, 21);
+		guestInsertPanel.add(guestHomepageTextField);
+		guestHomepageTextField.setColumns(10);
 	}
 }
