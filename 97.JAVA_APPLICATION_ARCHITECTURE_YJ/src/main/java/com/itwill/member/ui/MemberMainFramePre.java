@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class MemberMainFramePre extends JFrame {
 
@@ -109,7 +110,8 @@ public class MemberMainFramePre extends JFrame {
 		shopMainTabPanel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(MemberMainFramePre.class.getResource("/images/o_big_dog.png")));
+		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel.setIcon(new ImageIcon(MemberMainFramePre.class.getResource("/images/pug.jpg")));
 		shopMainTabPanel.add(lblNewLabel, BorderLayout.CENTER);
 		
 		JPanel shopMemberTabPanel = new JPanel();
