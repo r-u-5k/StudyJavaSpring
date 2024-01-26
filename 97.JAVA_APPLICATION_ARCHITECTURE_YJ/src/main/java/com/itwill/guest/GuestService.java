@@ -1,5 +1,6 @@
 package com.itwill.guest;
 
+import java.util.ArrayList;
 import java.util.List;
 /*
  * - 방명록(guest) 관리 비즈니스로직(업무)를 수행하는 클래스
@@ -8,6 +9,10 @@ import java.util.List;
  */
 
 public class GuestService {
+	public static final int GUEST_SEARCH_BY_ALL = 0;
+	public static final int GUEST_SEARCH_BY_NAME = 1;
+	public static final int GUEST_SEARCH_BY_TITLE = 2;
+	public static final int GUEST_SEARCH_BY_CONTENT = 3;
 	private GuestDao guestDao;
 
 	public GuestService() throws Exception {
@@ -15,40 +20,62 @@ public class GuestService {
 	}
 
 	/*
-	 * 방명록쓰기
+	 * 방명록 쓰기
 	 */
 	public int guestWrite(Guest guest) throws Exception {
 		/*
-		<< GuestDao객체사용>>
+		<< GuestDao객체 사용>>
 		*/
 		return guestDao.insert(guest);
 	}
 
 	/*
-	 * 방명록번호로 1개보기
+	 * 방명록 번호로 1개 보기
 	 */
 	public Guest guestDetail(int guest_no) throws Exception {
 		return guestDao.findByGuestNo(guest_no);
 	}
 
 	/*
-	 * 방명록번호로삭제
+	 * 방명록 번호로 삭제
 	 */
 	public int guestDelete(int guest_no) throws Exception {
 		return guestDao.delete(guest_no);
 	}
 
 	/*
-	 * 방명록 리스트보기
+	 * 방명록 리스트 보기
 	 */
 	public List<Guest> guestList() throws Exception {
 		return guestDao.findByAll();
 	}
 	/*
-	 * 방명록 이름으로검색해서 리스트보기
+	 * 방명록 이름으로 검색해서 리스트 보기
 	 */
 	public List<Guest> findByGuestName(String guest_name) throws Exception {
 		return guestDao.findByGuestName(guest_name);
+	}
+	
+	/*
+	 * 방명록 전체, 이름, 제목, 내용으로 검색해서 리스트 보기
+	 */
+	public List<Guest> findByGuest(int searchType, String searchString) throws Exception {
+		List<Guest> guestList = new ArrayList<Guest>();
+		switch (searchType) {
+		case GUEST_SEARCH_BY_ALL: // 잘못됨
+			guestList = guestDao.findByAll();
+			break;
+		case GUEST_SEARCH_BY_NAME:
+			guestList = guestDao.findByGuestName(searchString);
+			break;
+		case GUEST_SEARCH_BY_TITLE:
+			guestList = guestDao.findByGuestTitle(searchString);
+			break;
+		case GUEST_SEARCH_BY_CONTENT:
+			guestList = guestDao.findByGuestContent(searchString);
+			break;
+		}
+		return guestList;
 	}
 
 	/*

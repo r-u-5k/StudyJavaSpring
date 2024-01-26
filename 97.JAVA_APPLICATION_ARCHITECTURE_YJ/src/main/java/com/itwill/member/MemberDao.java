@@ -67,9 +67,14 @@ public class MemberDao {
 
 		Member findMember = null;
 		if (rs.next()) {
-			findMember = new Member(rs.getString("member_id"), rs.getString("member_password"),
-					rs.getString("member_name"), rs.getString("member_address"), rs.getInt("member_age"),
-					rs.getString("member_married"), rs.getDate("member_regdate"));
+			findMember = new Member(
+					rs.getString("member_id"), 
+					rs.getString("member_password"),
+					rs.getString("member_name"), 
+					rs.getString("member_address"), 
+					rs.getInt("member_age"),
+					rs.getString("member_married"), 
+					rs.getDate("member_regdate"));
 		}
 		return findMember;
 	}
@@ -80,9 +85,14 @@ public class MemberDao {
 		ResultSet rs = pstmt.executeQuery();
 		ArrayList<Member> memberList = new ArrayList<Member>();
 		while (rs.next()) {
-			memberList.add(new Member(rs.getString("member_id"), rs.getString("member_password"),
-					rs.getString("member_name"), rs.getString("member_address"), rs.getInt("member_age"),
-					rs.getString("member_married"), rs.getDate("member_regdate")));
+			memberList.add(new Member(
+					rs.getString("member_id"), 
+					rs.getString("member_password"),
+					rs.getString("member_name"), 
+					rs.getString("member_address"), 
+					rs.getInt("member_age"),
+					rs.getString("member_married"), 
+					rs.getDate("member_regdate")));
 		}
 		return memberList;
 	}

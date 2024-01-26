@@ -8,13 +8,13 @@ select member_id,member_password,member_name,member_address,member_age,member_ma
 */
 public class MemberSQL {
 	public static final String  MEMBER_INSERT=
-	"insert into member(member_id,member_password,member_name,member_address,member_age,member_married,member_regdate) values(?,?,?,?,?,?,sysdate)";
+		"INSERT INTO MEMBER(MEMBER_ID, MEMBER_PASSWORD, MEMBER_NAME, MEMBER_ADDRESS, MEMBER_AGE, MEMBER_MARRIED, MEMBER_REGDATE) VALUES(?,?,?,?,?,?,SYSDATE)";
 	public static final String  MEMBER_UPDATE=
-	"update member set member_password=?,member_name=?,member_address=?,member_age=?,member_married=? where member_id=?";
+		"UPDATE MEMBER SET MEMBER_PASSWORD=?, MEMBER_NAME=?, MEMBER_ADDRESS=?, MEMBER_AGE=?, MEMBER_MARRIED=? WHERE MEMBER_ID=?";
 	public static final String  MEMBER_DELETE=
-	"delete from member where member_id=?";
+		"DELETE FROM MEMBER WHERE MEMBER_ID=?";
 	public static final String  MEMBER_SELECT_BY_ID=
-	"select member_id,member_password,member_name,member_address,member_age,member_married,member_regdate from member where member_id=?";
+		"SELECT MEMBER_ID, MEMBER_PASSWORD, MEMBER_NAME, MEMBER_ADDRESS, MEMBER_AGE, MEMBER_MARRIED, MEMBER_REGDATE FROM MEMBER WHERE MEMBER_ID=?";
 	public static final String  MEMBER_SELECT_ALL=
-	"select member_id,member_password,member_name,member_address,member_age,member_married,member_regdate from member";
+		"SELECT MEMBER_ID, MEMBER_PASSWORD, MEMBER_NAME, MEMBER_ADDRESS, MEMBER_AGE, MEMBER_MARRIED, MEMBER_REGDATE FROM MEMBER";
 }

@@ -22,6 +22,12 @@ public class GuestServiceTestMain {
 		System.out.println(">> " + guestService.findByGuestName("김봉선"));
 		System.out.println("6.방명록 리스트보기");
 		System.out.println(">> " + guestService.guestList());
+		System.out.println("7.방명록 검색");
+		System.out.println(">> " + guestService.findByGuest(GuestService.GUEST_SEARCH_BY_NAME, "고"));
+		System.out.println(">> " + guestService.findByGuest(GuestService.GUEST_SEARCH_BY_TITLE, "제"));
+		System.out.println(">> " + guestService.findByGuest(GuestService.GUEST_SEARCH_BY_CONTENT, "내"));
+		System.out.println("8.방명록 리스트보기");
+		System.out.println(">> " + guestService.findByGuest(GuestService.GUEST_SEARCH_BY_ALL, null));
 	}
 
 }

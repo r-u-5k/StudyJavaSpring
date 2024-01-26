@@ -17,7 +17,16 @@ M_MARRIED           CHAR(1)
 M_REGDATE           DATE     
  */
 
+
 import java.sql.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+
 
 public class Member {
 	private String memberId;
@@ -27,73 +36,5 @@ public class Member {
 	private int memberAge;
 	private String memberMarried;
 	private Date memberRegdate;
-	public Member() {
-		// TODO Auto-generated constructor stub
-	}
-	public Member(String memberId, String memberPassword, String memberName, String memberAddress, int memberAge,
-			String memberMarried, Date memberRegdate) {
-		super();
-		this.memberId = memberId;
-		this.memberPassword = memberPassword;
-		this.memberName = memberName;
-		this.memberAddress = memberAddress;
-		this.memberAge = memberAge;
-		this.memberMarried = memberMarried;
-		this.memberRegdate = memberRegdate;
-	}
-	public String getMemberId() {
-		return memberId;
-	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-	public String getMemberPassword() {
-		return memberPassword;
-	}
-	public void setMemberPassword(String memberPassword) {
-		this.memberPassword = memberPassword;
-	}
-	public String getMemberName() {
-		return memberName;
-	}
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
-	public String getMemberAddress() {
-		return memberAddress;
-	}
-	public void setMemberAddress(String memberAddress) {
-		this.memberAddress = memberAddress;
-	}
-	public int getMemberAge() {
-		return memberAge;
-	}
-	public void setMemberAge(int memberAge) {
-		this.memberAge = memberAge;
-	}
-	public String getMemberMarried() {
-		return memberMarried;
-	}
-	public void setMemberMarried(String memberMarried) {
-		this.memberMarried = memberMarried;
-	}
-	public Date getMemberRegdate() {
-		return memberRegdate;
-	}
-	public void setMemberRegdate(Date memberRegdate) {
-		this.memberRegdate = memberRegdate;
-	}
-	@Override
-	public String toString() {
-		return "Member [memberId=" + memberId + ", memberPassword=" + memberPassword + ", memberName=" + memberName
-				+ ", memberAddress=" + memberAddress + ", memberAge=" + memberAge + ", memberMarried=" + memberMarried
-				+ ", memberRegdate=" + memberRegdate + "]";
-	}
-	
-	
-	
-	
-	
-	
 	
 }

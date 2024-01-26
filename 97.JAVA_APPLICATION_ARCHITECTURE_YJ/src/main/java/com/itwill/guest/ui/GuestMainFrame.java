@@ -33,9 +33,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Cursor;
+import javax.swing.DefaultComboBoxModel;
 
 public class GuestMainFrame extends JFrame {
-	GuestService guestService;
+	private GuestService guestService;
 	int status = 0;
 	private JPanel contentPane;
 	private JTextField guestNameTextField;
@@ -45,6 +50,8 @@ public class GuestMainFrame extends JFrame {
 	private JTextField guestEmailTextField;
 	private JTextField guestHomepageTextField;
 	private JTextPane guestContentTextPane;
+	private JTabbedPane guestTabbedPane;
+	private JTextField searchTextField;
 
 	/**
 	 * Launch the application.
@@ -74,53 +81,9 @@ public class GuestMainFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JTabbedPane guestTabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		guestTabbedPane.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-				if (guestTabbedPane.getSelectedIndex() == 0 && status != 0) displayGuestList();
-			}
-		});
+		guestTabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		
 		contentPane.add(guestTabbedPane, BorderLayout.CENTER);
-		
-		JPanel guestListPanel = new JPanel();
-		guestTabbedPane.addTab("방명록리스트", null, guestListPanel, null);
-		guestListPanel.setLayout(null);
-		
-		JButton guestListButton = new JButton("방명록리스트");
-		guestListButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				displayGuestList();
-			}
-		});
-		
-		guestListButton.setBounds(116, 201, 150, 23);
-		guestListPanel.add(guestListButton);
-		
-		JScrollPane guestListScrollPane = new JScrollPane();
-		guestListScrollPane.setBounds(12, 10, 626, 187);
-		guestListPanel.add(guestListScrollPane);
-		
-		guestListTable = new JTable();
-		guestListTable.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"\uBC88\uD638", "\uC774\uB984", "\uB0A0\uC9DC", "\uC774\uBA54\uC77C", "\uD648\uD398\uC774\uC9C0", "\uC81C\uBAA9", "\uB0B4\uC6A9"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, Object.class, String.class, String.class, String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
-		guestListTable.getColumnModel().getColumn(6).setPreferredWidth(161);
-		guestListScrollPane.setViewportView(guestListTable);
 		
 		JPanel guestInsertPanel = new JPanel();
 		guestTabbedPane.addTab("방명록쓰기", null, guestInsertPanel, null);
@@ -201,10 +164,9 @@ public class GuestMainFrame extends JFrame {
 		JLabel guestEmailLabel = new JLabel("이메일");
 		guestEmailLabel.setBounds(27, 99, 42, 15);
 		guestInsertPanel.add(guestEmailLabel);
-		
+
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		
 		guestDateTextField = new JTextField(formatter.format(date));
 		guestDateTextField.setEnabled(false);
 		guestDateTextField.setBounds(81, 67, 116, 21);
@@ -225,20 +187,109 @@ public class GuestMainFrame extends JFrame {
 		guestInsertPanel.add(guestHomepageTextField);
 		guestHomepageTextField.setColumns(10);
 		
+		JPanel guestListPanel = new JPanel();
+		guestTabbedPane.addTab("방명록리스트", null, guestListPanel, null);
+		guestListPanel.setLayout(null);
+		
+		JButton guestListButton = new JButton("방명록리스트");
+		
+		
+		guestListButton.setBounds(117, 219, 150, 23);
+		guestListPanel.add(guestListButton);
+		
+		JScrollPane guestListScrollPane = new JScrollPane();
+		guestListScrollPane.setBounds(12, 27, 626, 187);
+		guestListPanel.add(guestListScrollPane);
+		
+		guestListTable = new JTable();
+		guestListTable.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+			},
+			new String[] {
+				"\uBC88\uD638", "\uC774\uB984", "\uB0A0\uC9DC", "\uC774\uBA54\uC77C", "\uD648\uD398\uC774\uC9C0", "\uC81C\uBAA9", "\uB0B4\uC6A9"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, String.class, Object.class, String.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		
+		guestListTable.getColumnModel().getColumn(6).setPreferredWidth(161);
+		guestListScrollPane.setViewportView(guestListTable);
+		
+		JComboBox searchComboBox = new JComboBox();
+		searchComboBox.setModel(new DefaultComboBoxModel(new String[] {"전체", "이름", "제목", "내용"}));
+		searchComboBox.setBounds(386, 3, 51, 23);
+		guestListPanel.add(searchComboBox);
+		
+		guestTabbedPane.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				if (guestTabbedPane.getSelectedIndex() == 0 && status != 0)
+					try {
+						int selectedIndex = searchComboBox.getSelectedIndex();
+						String searchString = searchTextField.getText();
+						displayGuestList(selectedIndex, searchString);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+			}
+		});
+		
+		guestListButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					int selectedIndex = searchComboBox.getSelectedIndex();
+					String searchString = searchTextField.getText();
+					displayGuestList(selectedIndex, searchString);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		searchTextField = new JTextField();
+		searchTextField.setBounds(441, 4, 161, 21);
+		guestListPanel.add(searchTextField);
+		searchTextField.setColumns(10);
+		
+		JButton searchButton = new JButton("");
+		searchButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int selectedIndex = searchComboBox.getSelectedIndex();
+				String searchString = searchTextField.getText();
+				displayGuestList(selectedIndex, searchString);
+			}
+		});
+		searchButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		searchButton.setBorder(null);
+		searchButton.setBackground(Color.WHITE);
+		searchButton.setOpaque(false);
+		searchButton.setIcon(new ImageIcon(GuestMainFrame.class.getResource("/images/search_image20.png")));
+		searchButton.setBounds(604, 3, 34, 23);
+		guestListPanel.add(searchButton);
+		
+		guestTabbedPane.setSelectedIndex(1);
+		
 		try {
-			guestService = new GuestService();
 			status = 1;
+			guestService = new GuestService();
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		
-		
-	}
+	}//생성자끝
 	
-	private void displayGuestList() {
+	private void displayGuestList(int searchType, String searchString) {
 		List<Guest> guestList;
 		try {
-			guestList = guestService.guestList();
+			guestList = guestService.findByGuest(searchType, searchString);
 			Vector<String> columnVector = new Vector<>();
 			columnVector.add("번호");
 			columnVector.add("이름");
@@ -268,4 +319,5 @@ public class GuestMainFrame extends JFrame {
 		}
 		
 	}
+	
 }
