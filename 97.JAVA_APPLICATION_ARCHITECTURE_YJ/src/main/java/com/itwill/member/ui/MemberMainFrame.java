@@ -596,7 +596,6 @@ public class MemberMainFrame extends JFrame {
 		********************************************/
 		this.loginMember = loginMember;
 		setTitle(loginMember.getMemberName() + "님");
-		
 		memberTabbedPane.setEnabledAt(1, false);
 		memberTabbedPane.setEnabledAt(2, false);
 		memberTabbedPane.setEnabledAt(3, true);
@@ -604,6 +603,11 @@ public class MemberMainFrame extends JFrame {
 		loginMenuItem.setEnabled(false);
 		joinMenuItem.setEnabled(false);
 		logoutMenuItem.setEnabled(true);
+		if (this.loginMember.getMemberId().equals("admin")) {
+			memberTabbedPane.setEnabledAt(4, true);
+		} else {
+			memberTabbedPane.setEnabledAt(4, false);
+		}
 	}
 	
 	private void displayMemberInfo(Member member) {
