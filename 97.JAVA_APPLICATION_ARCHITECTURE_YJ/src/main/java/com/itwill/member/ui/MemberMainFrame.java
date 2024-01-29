@@ -189,7 +189,7 @@ public class MemberMainFrame extends JFrame {
 		loginIdLabel.setBounds(96, 71, 57, 15);
 		memberLoginPanel.add(loginIdLabel);
 		
-		JLabel lgoinPasswordLabel = new JLabel("패쓰워드");
+		JLabel lgoinPasswordLabel = new JLabel("패스워드");
 		lgoinPasswordLabel.setBounds(96, 133, 57, 15);
 		memberLoginPanel.add(lgoinPasswordLabel);
 		
@@ -252,7 +252,7 @@ public class MemberMainFrame extends JFrame {
 		memberJoinPanel.add(joinIdTF);
 		joinIdTF.setColumns(10);
 		
-		JLabel joinPasswordLabel = new JLabel("패쓰워드");
+		JLabel joinPasswordLabel = new JLabel("패스워드");
 		joinPasswordLabel.setBounds(84, 110, 57, 15);
 		memberJoinPanel.add(joinPasswordLabel);
 		
@@ -384,7 +384,7 @@ public class MemberMainFrame extends JFrame {
 		infoIdTF.setBounds(162, 47, 116, 21);
 		memberInfoPanel.add(infoIdTF);
 		
-		JLabel memberInfoPasswordLabel = new JLabel("패쓰워드");
+		JLabel memberInfoPasswordLabel = new JLabel("패스워드");
 		memberInfoPasswordLabel.setBounds(84, 99, 57, 15);
 		memberInfoPanel.add(memberInfoPasswordLabel);
 		
@@ -482,7 +482,7 @@ public class MemberMainFrame extends JFrame {
 		memberTabbedPane.addTab("회원관리", null, memberAdminPanel, null);
 		memberAdminPanel.setLayout(null);
 		
-		JButton memberListBtn = new JButton("회원리스트");
+		JButton memberListBtn = new JButton("회원리스트[ADMIN]");
 		memberListBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				displayMemberList();
@@ -498,9 +498,12 @@ public class MemberMainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					/*************선택된아이디삭제************/
-					
+					String selectedId = (String) adminMemberListTable.getValueAt(adminMemberListTable.getSelectedRow(), 0);
+					memberService.memberDelete(selectedId);
+					memberDeleteBtn.setEnabled(false);
+					displayMemberList();
 				
-				}catch (Exception e1) {
+				} catch (Exception e1) {
 					System.out.println("회원삭제에러-->"+e1.getMessage());
 					
 				}
@@ -520,8 +523,7 @@ public class MemberMainFrame extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				/*******테이블클릭시 선택된아이디얻기&삭제버튼활성화*******/
-				
-				
+				memberDeleteBtn.setEnabled(true);
 			}
 		});
 		adminMemberListTable.setModel(new DefaultTableModel(
@@ -529,7 +531,7 @@ public class MemberMainFrame extends JFrame {
 				{null, null, null, null, null, null, null},
 			},
 			new String[] {
-				"\uC544\uC774\uB514", "\uD328\uC4F0\uC6CC\uB4DC", "\uC774\uB984", "\uC8FC\uC18C", "\uB098\uC774", "\uACB0\uD63C", "\uAC00\uC785\uC77C"
+				"\uC544\uC774\uB514", "\uD328\uC2A4\uC6CC\uB4DC", "\uC774\uB984", "\uC8FC\uC18C", "\uB098\uC774", "\uACB0\uD63C", "\uAC00\uC785\uC77C"
 			}
 		));
 		adminMemberScrollPane.setViewportView(adminMemberListTable);
@@ -544,8 +546,33 @@ public class MemberMainFrame extends JFrame {
 	private void displayMemberList() {
 		try {
 			/***************회원리스트보기[JTable]************/
+			List<Member> memberList = memberService.memberList();
 			
-		}catch(Exception e1) {
+			Vector columnVector = new Vector();
+			columnVector.add("아이디");
+			columnVector.add("패스워드");
+			columnVector.add("이름");
+			columnVector.add("주소");
+			columnVector.add("나이");
+			columnVector.add("결혼");
+			columnVector.add("가입일");
+			
+			Vector tableVector = new Vector();
+			for (Member member : memberList) {
+				Vector rowVector = new Vector();
+				rowVector.add(member.getMemberId());
+				rowVector.add(member.getMemberPassword());
+				rowVector.add(member.getMemberName());
+				rowVector.add(member.getMemberAddress());
+				rowVector.add(member.getMemberAge());
+				rowVector.add(member.getMemberMarried());
+				rowVector.add(member.getMemberRegdate());
+				tableVector.add(rowVector);
+			}
+		
+			adminMemberListTable.setModel(new DefaultTableModel(tableVector, columnVector));
+			memberDeleteBtn.setEnabled(false);
+		} catch(Exception e1) {
 			System.out.println("회원리스트보기에러-->"+e1.getMessage());
 		}
 	}
@@ -611,7 +638,7 @@ public class MemberMainFrame extends JFrame {
 	}
 	
 	private void displayMemberInfo(Member member) {
-		/****로그인한회원상세데이타보여주기*****/
+		/****로그인한 회원 상세 데이터 보여주기*****/
 		infoIdTF.setText(member.getMemberId());
 		infoPassTF.setText(member.getMemberPassword());
 		infoNameTF.setText(member.getMemberName());
@@ -624,15 +651,6 @@ public class MemberMainFrame extends JFrame {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
 
 
 
