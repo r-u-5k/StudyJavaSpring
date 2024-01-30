@@ -25,14 +25,7 @@ DROP SEQUENCE product_p_click_count_SEQ;
 
 CREATE SEQUENCE product_p_click_count_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-CREATE TRIGGER product_p_click_count_TRG
-BEFORE INSERT ON product
-FOR EACH ROW
-BEGIN
-IF :NEW.p_click_count IS NOT NULL THEN
-  SELECT product_p_click_count_SEQ.NEXTVAL INTO :NEW.p_click_count FROM DUAL;
-END IF;
-END;
+
 
 
 CREATE TABLE cart(
@@ -89,6 +82,7 @@ ALTER TABLE orders ADD CONSTRAINT IDX_orders_PK PRIMARY KEY (o_no);
 ALTER TABLE orders ADD CONSTRAINT IDX_orders_FK0 FOREIGN KEY (userId) REFERENCES userinfo (userId);
 
 ALTER TABLE order_item ADD CONSTRAINT IDX_order_item_PK PRIMARY KEY (oi_no);
-ALTER TABLE order_item ADD CONSTRAINT IDX_order_item_FK0 FOREIGN KEY (o_no) REFERENCES orders (o_no);
+ALTER TABLE order_item ADD CONSTRAINT IDX_order_item_FK0 FOREIGN KEY (o_no) REFERENCES orders (o_no) ON DELETE CASCADE;
 ALTER TABLE order_item ADD CONSTRAINT IDX_order_item_FK1 FOREIGN KEY (p_no) REFERENCES product (p_no);
 
+COMMIT;
