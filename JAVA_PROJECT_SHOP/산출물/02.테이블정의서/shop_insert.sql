@@ -45,4 +45,4 @@ SELECT * FROM ORDERS WHERE O_NO = 1;
 -- 3. 멤버 한 사람의 주문 1개의 주문 아이템 여러 개, 제품 정보
 SELECT * FROM ORDERS O JOIN ORDER_ITEM OI 
 ON o.o_no = oi.o_no
-WHERE O_NO = 1;
+WHERE O.O_NO = 1;
