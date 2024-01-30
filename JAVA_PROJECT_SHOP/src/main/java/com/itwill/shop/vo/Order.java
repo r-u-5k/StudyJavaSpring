@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 public class Order {
-	private int oNo;
+	private int oNo; // PK
 	private String oDesc;
 	private Date oDate;
 	private int oPrice;
