@@ -58,7 +58,7 @@ WHERE O.O_NO = 1;
 
 --3.로그인한멤버(yj9900)주문한개삭제
 -- on delete cascade
-DELETE FROM ORDERS WHERE O_NO = 1;
+DELETE FROM ORDERS WHERE O_NO = 1 AND USERID = 'yj9900';
 
 --4. 로그인한멤버(yj9900)주문전체삭제
 DELETE FROM ORDERS WHERE USERID = 'yj9900';
