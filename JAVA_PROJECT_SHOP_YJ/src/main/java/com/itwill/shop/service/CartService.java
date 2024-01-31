@@ -29,7 +29,7 @@ public class CartService {
 			cartDao.updateByProductNo(cart);
 		} else {
 			//추가
-			cartDao.insert(cart.builder().build());
+			cartDao.insert(cart);
 		}
 		return 0;
 	}
