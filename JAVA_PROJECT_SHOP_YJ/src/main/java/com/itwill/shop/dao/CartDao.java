@@ -118,6 +118,9 @@ public class CartDao {
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(CartSQL.CART_UPDATE_BY_PRODUCT_NO_USERID);
+			pstmt.setInt(1, cart.getCartQty());
+			pstmt.setString(2, cart.getUser().getUserid());
+			pstmt.setInt(3, cart.getCartQty());
 			rowCount = pstmt.executeUpdate();
 		} finally {
 			if (con != null) {
@@ -155,7 +158,8 @@ public class CartDao {
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(CartSQL.CART_UPDATE_BY_CART_NO);
-
+			pstmt.setInt(1, cart.getCartQty());
+			pstmt.setInt(2, cart.getCartNo());
 			rowCount = pstmt.executeUpdate();
 		} finally {
 			if (con != null) {

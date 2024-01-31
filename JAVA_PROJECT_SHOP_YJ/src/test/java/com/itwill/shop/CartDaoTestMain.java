@@ -12,16 +12,23 @@ public class CartDaoTestMain {
 	public static void main(String[] args) throws Exception {
 		CartDao cartDao = new CartDao();
 		System.out.println("1.add(insert)");
+		/*
 		int insertRowCount = cartDao.insert(Cart.builder()
 											    .user(User.builder().userid("yj9900").build())
 											    .product(Product.builder().pNo(5).build())
 											    .cartQty(3)
 											    .build());
+		*/
 
 		System.out.println("2.updateByCartNo");
-		
+		System.out.println(cartDao.updateByCartNo(Cart.builder().cartNo(6).cartQty(10).build()));
 
-		System.out.println("2.updateByProductNoAndUserId");
+		System.out.println("2.updateByProductNo");
+		System.out.println(cartDao.updateByProductNo(Cart.builder()
+														 .product(Product.builder().pNo(1).build())
+														 .user(User.builder().userid("yj9900").build())
+														 .cartQty(5)
+														 .build())); 
 		
 
 		System.out.println("3.delete");

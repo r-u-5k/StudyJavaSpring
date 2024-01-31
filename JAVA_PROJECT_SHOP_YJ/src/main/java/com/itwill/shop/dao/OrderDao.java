@@ -15,12 +15,11 @@ import com.itwill.shop.vo.Product;
 public class OrderDao {
 
 	private DataSource dataSource;
-	
-	
-	public OrderDao() throws Exception{
-		dataSource=new DataSource();
+
+	public OrderDao() throws Exception {
+		dataSource = new DataSource();
 	}
-	
+
 	/*
 	 * 주문전체삭제(ON DELETE CASCADE)
 	 */
@@ -87,7 +86,7 @@ public class OrderDao {
 		Connection con = null;
 		PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
-		
+
 		return 0;
 	}
 
@@ -123,7 +122,7 @@ public class OrderDao {
 	 * 주문+주문아이템 전체(특정사용자)
 	 */
 	public List<Order> findOrderWithOrderItemByUserId(String sUserId) throws Exception {
-		
+
 		List<Order> orderList = new ArrayList<Order>();
 		Connection con = null;
 		PreparedStatement pstmt1 = null;
@@ -141,7 +140,7 @@ public class OrderDao {
 			while (rs1.next()) {
 				orderList.add(new Order());
 			}
-				
+
 			pstmt2 = con.prepareStatement(OrderSQL.ORDER_SELECT_WITH_ORDERITEM_BY_O_NO);
 			for (int i = 0; i < orderList.size(); i++) {
 				Order tempOrder = orderList.get(i);
@@ -149,7 +148,7 @@ public class OrderDao {
 				 * select * from orders o join order_item oi on o.o_no=oi.o_no join product p on
 				 * oi.p_no=p.p_no where o.userid=? and o.o_no = ?
 				 */
-				
+
 				rs2 = pstmt2.executeQuery();
 				/*
 				 * O_NO O_DESC O_DATE O_PRICE      USERID OI_NO OI_QTY O_NO P_NO P_NAME 	P_PRICE P_IMAGE P_DESC 
@@ -158,11 +157,11 @@ public class OrderDao {
 				 * 2 비글외2마리 2023/01/06 1550000 guard2   2    3     1    2   달마시안 	500000 dalma.jpg 기타 상세 정보 등... 0
 				 * 2 비글외2마리 2023/01/06 1550000 guard2   2    2     1    2   달마시안 	500000 dalma.jpg 기타 상세 정보 등... 0
 				 */
-				Order orderWithOrderItem=null;
+				Order orderWithOrderItem = null;
 				if (rs2.next()) {
 					orderWithOrderItem = new Order();
 					do {
-					
+
 					} while (rs2.next());
 				}
 				orderList.set(i, orderWithOrderItem);
@@ -185,23 +184,23 @@ public class OrderDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-		con = dataSource.getConnection();
-		/*
-		 * select * from orders o join order_item oi on o.o_no=oi.o_no join product p on
-		 * oi.p_no=p.p_no where o.userid=? and o.o_no = ?
-		 */
-		pstmt = con.prepareStatement(OrderSQL.ORDER_SELECT_WITH_ORDERITEM_BY_O_NO);
-		pstmt.setInt(1, o_no);
-		rs = pstmt.executeQuery();
-		/*
-		  O_NO   O_DESC 	  O_DATE 	O_PRICE  USERID  OI_NO  OI_QTY O_NO P_NO P_NAME 	  P_PRICE   P_IMAGE 	P_DESC 
-		  ---------- ------------------------------------------------------------------------------------------------------------ 
-		  1   비글외1마리 	2023/01/06 	1550000  guard1 	1 	 1 		 1   1 	 비글 	      550000 	bigle.png 	기타 상세 정보 등... 0 
-		  1   비글외1마리 	2023/01/06 	1550000  guard1 	2 	 2 		 1   2 	 달마시안     500000 	dalma.jpg 	기타 상세 정보 등... 0
-		 */
-		if (rs.next()) {
-			
-		}
+			con = dataSource.getConnection();
+			/*
+			 * select * from orders o join order_item oi on o.o_no=oi.o_no join product p on
+			 * oi.p_no=p.p_no where o.userid=? and o.o_no = ?
+			 */
+			pstmt = con.prepareStatement(OrderSQL.ORDER_SELECT_WITH_ORDERITEM_BY_O_NO);
+			pstmt.setInt(1, o_no);
+			rs = pstmt.executeQuery();
+			/*
+			  O_NO   O_DESC 	  O_DATE 	O_PRICE  USERID  OI_NO  OI_QTY O_NO P_NO P_NAME 	  P_PRICE   P_IMAGE 	P_DESC 
+			  ---------- ------------------------------------------------------------------------------------------------------------ 
+			  1   비글외1마리 	2023/01/06 	1550000  guard1 	1 	 1 		 1   1 	 비글 	      550000 	bigle.png 	기타 상세 정보 등... 0 
+			  1   비글외1마리 	2023/01/06 	1550000  guard1 	2 	 2 		 1   2 	 달마시안     500000 	dalma.jpg 	기타 상세 정보 등... 0
+			 */
+			if (rs.next()) {
+
+			}
 		} finally {
 			if (con != null) {
 				con.close();
