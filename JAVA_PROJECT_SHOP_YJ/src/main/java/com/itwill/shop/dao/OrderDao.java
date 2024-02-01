@@ -25,7 +25,7 @@ public class OrderDao {
 	 */
 	public int deleteByUserId(String sUserId) throws Exception {
 		Connection con = null;
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt = null; 
 		int rowCount = 0;
 		try {
 			con = dataSource.getConnection();

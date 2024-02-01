@@ -45,9 +45,9 @@ import javax.swing.event.ChangeEvent;
 
 public class MemberMainFrame extends JFrame {
 	/*********1.MemberService멤버필드선언*****/
-	private MemberService memberService;
+	MemberService memberService;
 	/*********2.로그인한회원 멤버필드선언*****/
-	private Member loginMember;
+	Member loginMember;
 	private JPanel contentPane;
 	private JTextField joinIdTF;
 	private JPasswordField joinPassTF;
@@ -108,7 +108,11 @@ public class MemberMainFrame extends JFrame {
 		loginMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				/***********로그인화면********/
-				memberTabbedPane.setSelectedIndex(1);
+//				memberTabbedPane.setSelectedIndex(1);
+				LoginDialog loginDialog = new LoginDialog();
+				loginDialog.setMemberMainFrame(MemberMainFrame.this);
+				loginDialog.setModal(true);
+				loginDialog.setVisible(true);
 				
 			}
 		});

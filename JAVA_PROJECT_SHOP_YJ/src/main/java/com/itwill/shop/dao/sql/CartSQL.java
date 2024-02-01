@@ -3,13 +3,11 @@ public class CartSQL {
 	
 	/*
 	--insert
-	insert
-
-	into cart(cart_no,cart_qty,p_no,userid) values(cart_cart_no_SEQ.nextval,2,1,'guard1');
+	insert into cart(cart_no,cart_qty,p_no,userid) values(cart_cart_no_SEQ.nextval,2,1,'guard1');
 	--로그인한멤버(guard1)의 카트리스트
 	--select * from cart where userid='guard1';
 	--cart + product
-	select * from cart c join product p on c.p_no=p.p_no where userid='guard1' ;
+	select * from cart c join product p on c.p_no=p.p_no where userid='guard1';
 	--로그인한멤버(guard2)의 카트리스트
 	select * from cart c join product p on c.p_no=p.p_no where userid='guard2';
 	--로그인한멤버(guard3)의 카트리스트
