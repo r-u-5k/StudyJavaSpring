@@ -9,4 +9,38 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>HelloTextServlet</display-name>
+    <servlet-name>HelloTextServlet</servlet-name>
+    <servlet-class>com.itwill.servlet.HelloTextServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelloTextServlet</servlet-name>
+    <url-pattern>/hello</url-pattern>
+    <url-pattern>/hello.do</url-pattern>
+    <url-pattern>/hello.nhn</url-pattern>
+    <url-pattern>/hello.daum</url-pattern>
+    <url-pattern>/hello.itwill</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GugudanTextServlet</display-name>
+    <servlet-name>GugudanTextServlet</servlet-name>
+    <servlet-class>com.itwill.servlet.GugudanTextServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GugudanTextServlet</servlet-name>
+    <url-pattern>/gugudan</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletThreadServlet</display-name>
+    <servlet-name>ServletThreadServlet</servlet-name>
+    <servlet-class>com.itwill.servlet.ServletThreadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletThreadServlet</servlet-name>
+    <url-pattern>/servletThreadServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
