@@ -28,9 +28,15 @@ public class GugudanServlet extends HttpServlet {
 
 		out.println("<center><H2>서블릿 구구단</H2></center>");
 		out.println("<table border=1 width=600 bgcolor=#CCFF33 bordercolordark=#FF6600 cellspacing=0>");
-		out.println("<tr>");
-		out.println("<td align=center>2*1=2</td>");
-		out.println("</tr>");
+		
+		for (int i = 1; i < 10; i++) {
+			out.println("<tr>");
+			for (int j = 2; j < 10; j++) {
+				out.println("<td align=center>" + j + "*" + i + "=" + i * j + "</td>");
+			}
+			out.println("</tr>");
+		}
+		
 		out.println("</table>");
 		out.println("<br/>");
 		out.println("</BODY>");
