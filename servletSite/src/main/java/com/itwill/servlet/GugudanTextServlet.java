@@ -20,9 +20,9 @@ public class GugudanTextServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		//#2-3. 클라이언트로 데이타(text) 전송
-		for (int i = 2; i < 10; i++) {
-			for (int j = 1; j < 10; j++) {
-				out.printf("%d * %d = %d\n", i, j, i * j);
+		for (int i = 1; i < 10; i++) {
+			for (int j = 2; j < 10; j++) {
+				out.printf("%d*%d=%2d ", j, i, i * j);
 			}
 			out.println();
 		}
