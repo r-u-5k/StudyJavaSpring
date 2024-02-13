@@ -17,11 +17,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>HelloTextServlet</servlet-name>
-    <url-pattern>/hello</url-pattern>
-    <url-pattern>/hello.do</url-pattern>
-    <url-pattern>/hello.nhn</url-pattern>
-    <url-pattern>/hello.daum</url-pattern>
-    <url-pattern>/hello.itwill</url-pattern>
+    <url-pattern>/hellotext</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -31,7 +27,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>GugudanTextServlet</servlet-name>
-    <url-pattern>/gugudan</url-pattern>
+    <url-pattern>/gugudantext</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -52,5 +48,15 @@
   <servlet-mapping>
     <servlet-name>HelloServlet</servlet-name>
     <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GugudanServlet</display-name>
+    <servlet-name>GugudanServlet</servlet-name>
+    <servlet-class>com.itwill.servlet.GugudanServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GugudanServlet</servlet-name>
+    <url-pattern>/gugudan</url-pattern>
   </servlet-mapping>
 </web-app>
