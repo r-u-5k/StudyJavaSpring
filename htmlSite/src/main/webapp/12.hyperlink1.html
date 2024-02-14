@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />	
+	<title>hyperlink 요소 연습</title>
+</head>
+<body>
+	<!-- 
+			a 태그    : 다른 페이지로 이동(요청)할 때 사용하는 요소 
+		 -  href속성  : 요청uri 
+		 -  target속성: target속성을 지정해서 어느 창에 보일지 선택할 수 있습니다.
+    -->
+	<!--  -->
+	[절대경로(uri)]--> http:// 로시작하는경로
+	<ul>
+		<li>======= 12.hyperlink.html 과 다른 사이트에 있는 리소스 =====</li>
+		<li><a href="http://www.naver.com/index.html">네이버[클릭 시 href 속성에 있는 URL로 요청(이동)]</a>
+		<li><a href="http://192.168.15.31/tomcat.gif">클릭 시 강사 서버에 있는 고양이 사진 요청 [Static Resource]</a>
+		<li><a href="http://192.168.15.31/image/test.mp3">클릭 시 강사 서버에 있는 mp3 요청 [Static Resource]</a>
+		<li><a href="http://192.168.15.31/01.Hello.html">클릭 시 강사 서버에 있는 html 요청 [Static Resource]</a>
+		<li><a href="http://192.168.15.31/gugudan">클릭 시 강사 서버에 있는 서블릿 요청 [Dynamic Resource]</a>
+		<li><a href="http://192.168.15.31/05-00.search_form.html" target="_blank">클릭 시 강사 서버에 있는 html 요청 [새로운 창에 응답] [Static Resource]</a>
+		<li><a href="http://192.168.15.31/gugudan" target="_blank">클릭 시 강사 서버에 있는 서블릿 요청 [새로운 창에 응답] [Dynamic Resource]</a>
+		<li>======= 12.hyperlink.html 과 같은 사이트(servletSite)에 있는 리소스 =====</li>
+		<li>[ http://localhost/htmlSite/12.hyperlink.html ]</li>
+		<li><a href="http://localhost/htmlSite/01.structure1.html">01.structure1.html</a>
+		<li><a href="http://localhost/htmlSite/03.div1.html">03.div1.html</a>
+		<li><a href="http://localhost/htmlSite/04.p1.html">04.p1.html</a>
+		<li><a href="http://localhost/htmlSite/penguin1.gif">penguin1.gif</a>
+		<li><a href="http://localhost/htmlSite/penguin2.gif">penguin2.gif</a>
+		<li><a href="http://localhost/htmlSite/image/female.gif">female.gif</a>
+		<li><a href="http://localhost/htmlSite/image/male.jpg">male.jpg</a>
+		
+	</ul>
+	<h3>[상대경로(uri)]--> http://으로 시작하지않는경로</h3>
+	<hr>
+	<pre>
+
+		- 현재보여지는 리소스의URL(http://127.0.0.1/htmlSite/12.hyperlink.html) 의 
+		 	리소스이름(12.hyperlink.html)을 제외한 경로가 기준경로가 된다.
+		- 기준경로(http://127.0.0.1/htmlSite/)와 동일한 싸이트리소스들은 
+			기준경로를 생략하고 URL을 기술하면된다.  	
+		- 기준경로를 생략하고 기술하는 경로를 상대경로라고한다.
+	</pre>
+	<ul>
+		<li>======= 12.hyperlink.html 과 같은 사이트(servletSite)에 있는 리소스 =====</li>
+		<li>[ http://localhost/htmlSite/12.hyperlink.html ]</li>
+		<li><a href="01.structure1.html">01.structure1.html</a>
+		<li><a href="03.div1.html">03.div1.html</a>
+		<li><a href="04.p1.html">04.p1.html</a>
+		<li><a href="penguin1.gif">penguin1.gif</a>
+		<li><a href="penguin2.gif">penguin2.gif</a>
+		<li><a href="./image/female.gif">female.gif</a>
+		<li><a href="./image/male.jpg">male.jpg</a>
+		
+		
+	</ul>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
