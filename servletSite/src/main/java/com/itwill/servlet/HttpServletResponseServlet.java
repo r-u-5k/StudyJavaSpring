@@ -24,8 +24,7 @@ public class HttpServletResponseServlet extends HttpServlet {
 		
 		String cmd = request.getParameter("cmd");
 		if (cmd == null || cmd.equals("")) {
-			/* 
-			 * case 1
+			/* case 1
 			out.println("<h1>다시 요청하세요</h1><hr>");
 			out.println("<a href='04.HttpServletResponse.html'>04.HttpServletResponse.html</a>");
 			return;
