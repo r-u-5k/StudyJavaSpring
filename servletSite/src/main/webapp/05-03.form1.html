@@ -10,21 +10,21 @@
 	<br />
 	<br />
 
-	<form action="join1.do" method="post">
+	<form action="join1" method="post">
 		<table width="600px" border="1px" align="center">
 			<tr style="height: 40px">
 				<td style="width: 150px; text-align: center">아이디</td>
 				<td style="padding-left: 10px">
 					<!-- 한 줄 짜리 키보드 입력 요소 --> 
-					<input type="text" style="width: 400px"  placeholder="아이디" value="guard" name="id"/>
+					<input type="text" style="width: 400px" placeholder="아이디" value="guard" name="id"/>
 				</td>
 			</tr>
 
 			<tr style="height: 40px">
-				<td style="width: 150px; text-align: center">패쓰워드</td>
+				<td style="width: 150px; text-align: center">패스워드</td>
 				<td style="padding-left: 10px">
 					<!-- 비밀번호 입력 요소 : 입력하는 동안 입력 문자가 표시되지 X --> 
-					<input type="password" style="width: 400px" name="password"  value="1111"/>
+					<input type="password" style="width: 400px" name="password" value="1111"/>
 				</td>
 			</tr>
 
@@ -33,7 +33,7 @@
 				<td style="padding-left: 10px">
 				<input type="text" style="width: 200px" name="email1"  value="guard"/> @ <!-- 목록 중에서 하나를 선택하는 입력 요소 (Dropdown 방식) -->
 					<select style="width: 170px" name="email2">
-						<option >도메인을 선택하세요</option>
+						<option>도메인을 선택하세요</option>
 						<option>naver.com</option>
 						<option>daum.net</option>
 						<option selected="selected">gmail.com</option>
@@ -66,6 +66,13 @@
 			</tr>
 
 			<tr style="height: 40px">
+				<td style="width: 150px; text-align: center">생일</td>
+				<td style="padding-left: 10px">
+					<input type="date" name="birthday">
+				</td>
+			</tr>
+			
+			<tr style="height: 40px">
 				<td style="width: 150px; text-align: center">가입인사</td>
 				<td style="padding-left: 10px">
 					<!-- 여러 줄 키보드 자유 입력 요소 --> 
@@ -77,17 +84,18 @@
 			<tr style="height: 40px">
 				<td style="text-align: center" colspan="2">
 					<!-- button : 버튼 모양, 자바스크립트와 연결을 위해 사용 --> 
-					<input type="button"value="눌러주세요" /> 
+					<input type="button" value="눌러주세요"/> 
 					<!-- reset : 초기화, 최초 페이지 로딩할 때 상태로 전환 --> 
-					<input type="reset" value="초기화" /> 
-					<!-- image : 이미지 입힌 버튼 모양, 서버로 데이터 전송 -->
-					<input type="image" src="./image/join.png"  width="40" height="20"/> 
+					<input type="reset" value="초기화"/> 
+					<!-- image : 이미지 입힌 버튼 모양, 서버로 데이터 전송. submit과 같은 역할 -->
+					<input type="image" src="./image/w.png" width="40" height="20"/> 
 					<!-- submit : 버튼 모양, 서버로 데이터 전송 -->
-					<input type="submit" value="서버로 전송" />
+					<input type="submit" value="서버로 전송"/>
 				</td>
 			</tr>
 		</table>
 	</form>
+	<input type="submit" value="서버로 전송(하지 않음)"/> <!-- submit이 폼 밖에 있으면 아무런 기능을 하지 않음 -->
 
 </body>
 </html>
