@@ -24,7 +24,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /*
  * web.xml대신에 annotation[@] 사용
  */
-@WebServlet(name = "/annotation_mapping", urlPatterns = "/annotation_mapping")
+@WebServlet(name = "annotation_mapping", urlPatterns = "/annotation_mapping")
 //@WebServlet("/annotation_mapping")
 public class AnnotationMappingServlet extends HttpServlet {
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
