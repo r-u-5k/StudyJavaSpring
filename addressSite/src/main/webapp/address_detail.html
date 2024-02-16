@@ -8,7 +8,15 @@
 <h1>[김경호님 주소록상세보기]</h1><hr>
 <div>
 	<a href='address_delete_action?no=1'>김경호님삭제[GET]</a>
+	<form action='address_delete_action' method='post' style="display: inline;">
+		<input type='hidden' name='no' value='124'>
+		<input type='submit' value="김경호님삭제[POST]">
+	</form>
 	<a href='address_update_form'>[김경호님 주소록수정폼]</a>
+	<form action='address_update_action' method='post' style='display: inline;'>
+		<input type='hidden' name='no' value='124'>
+		<input type='submit' value="김경호님 주소록수정폼">
+	</form>
 	<a href='address_insert_form'>[주소록쓰기폼]</a>
 	<a href='address_list'>[주소록리스트]</a>
 </div>

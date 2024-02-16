@@ -19,12 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class AddressUpdateFormServlet extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("address_main");
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
 			/*
@@ -37,7 +32,7 @@ public class AddressUpdateFormServlet extends HttpServlet {
 			 0.요청객체인코딩설정 
 			 1.파라메타받기(no) 
 			 2.AddressService객체생성 
-			 3.받은파라메타로 AddressService.selectByNo()메쏘드실행 
+			 3.받은파라메타로 addressService.addressDetail()메쏘드실행 
 			 4.반환받은 Address객체를 사용해서 클라이언트로 응답(수정폼 보여주기)
 			 */
 			request.setCharacterEncoding("UTF-8");
@@ -66,7 +61,8 @@ public class AddressUpdateFormServlet extends HttpServlet {
 			out.println("		<a href='address_list'>[주소록리스트]</a>");
 			out.println("	</div>");
 			out.println("	<form method='post' action='address_update_action'>");
-			out.println("		번호----<input type='text' name='no' value='" + address.getNo() + "1'><br>");
+			out.println("		번호----" + address.getNo() + "<br>");		
+			out.println("		<input type='hidden' name='no' value='" + address.getNo() + "'> ");
 			out.println("		이름----<input type='text' name='name' value='" + address.getName() + "'><br>");
 			out.println("		전화번호<input type='text' name='phone' value='" + address.getPhone() + "'><br>");
 			out.println("		주소----<input type='text' name='address' value='" + address.getAddress() + "'><br> ");

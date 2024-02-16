@@ -21,9 +21,14 @@ public class AddressDeleteActionServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		/*
-		 요청라인  GET /addressSite/address_delete_action?no=1 HTTP/1.1
-		 요청헤더  ....
+		 요청라인 GET /addressSite/address_delete_action?no=1 HTTP/1.1
+		 요청헤더 ....
 		 요청바디 없다
+		 */
+		/*
+		 요청라인 POST /addressSite/address_delete_action HTTP/1.1
+		 요청헤더 ....
+		 요청바디 no=1 (query string)
 		 */
 		/*
 		 * 0.요청객체encoding설정
@@ -45,7 +50,7 @@ public class AddressDeleteActionServlet extends HttpServlet {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-
+			response.sendRedirect("address_list");
 		}
 	}
 
