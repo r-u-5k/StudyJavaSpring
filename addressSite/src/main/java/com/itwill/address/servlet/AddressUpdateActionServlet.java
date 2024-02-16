@@ -17,11 +17,11 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/address_update_action")
 public class AddressUpdateActionServlet extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.sendRedirect("address_list");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.sendRedirect("address_main");
 	}
-
+	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
@@ -35,10 +35,6 @@ public class AddressUpdateActionServlet extends HttpServlet {
 			 */
 			request.setCharacterEncoding("UTF-8");
 			String noStr = request.getParameter("no");
-			if (noStr == null || noStr.equals("")) {
-				response.sendRedirect("address_list");
-				return;
-			}
 			String name = request.getParameter("name");
 			String phone = request.getParameter("phone");
 			String address = request.getParameter("address");
