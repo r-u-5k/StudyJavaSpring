@@ -27,7 +27,7 @@ public class JoinServlet1 extends HttpServlet {
 		String password = request.getParameter("password");
 		String email1 = request.getParameter("email1");
 		String email2 = request.getParameter("email2");
-		String email = email1 + "@" + email2;
+		String email = email1 + "@" + email2                                             ;
 		String gender = request.getParameter("gender");
 		String[] favorites = request.getParameterValues("favorite");
 		if (favorites == null) {
