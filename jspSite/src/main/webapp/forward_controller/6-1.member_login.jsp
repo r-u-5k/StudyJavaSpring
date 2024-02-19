@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -5,7 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Hello HTML</h1>
-	<hr/>
+<h1>회원로그인[6-1.member_login.jsp]</h1>
+<hr/>
+<br/>
+<form>
+  아이디:<br/>
+  패쓰워드:<br/>
+</form>
 </body>
 </html>
