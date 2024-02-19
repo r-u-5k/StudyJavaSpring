@@ -20,7 +20,7 @@ StudentService studentService = new StudentService();
 	<h2>형태:&lt;%@page import="com.itwill.Student"&gt;</h2>
 	<hr />
 	<%=today%><br />
-	<%=student %><br />
-	<%=studentService %><br />
+	<%=student%><br />
+	<%=studentService%><br />
 </body>
 </html>
