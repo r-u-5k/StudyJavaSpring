@@ -1,3 +1,7 @@
+<%@page contentType="text/html; charset=UTF-8" %>
+<%
+String name = "김경호";
+%>
 <!DOCTYPE html>
 <html>
 
@@ -9,10 +13,10 @@
 		 함수정의
 		   - 윈도객체에소속된 함수가된다.
 		 */
-		let name = 'block scope name';
+		let name = 'block scope <%=name%>';
 		let msg = 'block scope msg';
 		function head_function() {
-			window.document.write('head_function ' + msg + '<br>');
+			window.document.write('head_function() ' + msg + '<br>');
 			return;
 		}
 		function hello1() {
