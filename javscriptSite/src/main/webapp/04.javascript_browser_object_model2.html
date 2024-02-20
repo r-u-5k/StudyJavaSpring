@@ -1,17 +1,47 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
-	
-	
-</script>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		function window_method_use() {
+			let ageStr = window.prompt("나이를 입력하세요", 30); // 30을 디폴트값으로 줌
+			let ageInt = window.parseInt(ageStr);
+			let msg = "";
+			switch (ageInt) {
+				case 20:
+					msg = "청년";
+					break;
+				case 30:
+					msg = "아저씨";
+					break;
+				case 40:
+					msg = "할아버지";
+					break;
+				default:
+					msg = "20, 30, 40 중 하나 입력";
+					break;
+			}
+			document.write("입력된 값: " + ageStr + "<br>");
+			document.write(msg + "이시네요 ㅋㅋ");
+
+			/*
+			새 창 띄우기
+			*/
+			window.open("4.login_get_form.jsp", "login", "width=500, height=400, menubar=no");
+
+		}
+
+	</script>
 </head>
+
 <body>
-<h1>BOM[window]</h1><hr>
-<script type="text/javascript">
-	
-</script>
+	<h1>BOM[window]</h1>
+	<hr>
+	<script type="text/javascript">
+		window_method_use();
+	</script>
 </body>
+
 </html>
