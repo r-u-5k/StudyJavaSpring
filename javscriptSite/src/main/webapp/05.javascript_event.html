@@ -77,6 +77,18 @@
 			document.loginForm.submit();
 		}
 		
+		function login_form_submit_validation_function() {
+			if (document.loginForm.id.value == null || document.loginForm.id.value == '') {
+				alert('아이디를 입력하세요');
+				return false;
+			}
+			if (document.loginForm.pass.value == null || document.loginForm.pass.value == '') {
+				alert('패스워드를 입력하세요');
+				return false;
+			}
+			return true;
+		}
+		
 	</script>
 </head>
 
@@ -93,7 +105,8 @@
 	</pre>
 	<h3>로그인</h3>
 	<form action="login_action.jsp" method="post" id="loginForm" name="loginForm"
-		style="border:1px solid blue; width:300px; padding:30px">
+		style="border:1px solid blue; width:300px; padding:30px"
+		onsubmit="alert('on submit'); return login_form_submit_validation_function();">
 		아이디&nbsp;&nbsp;: 
 		<input type="text" name="id" placeholder="아이디" value="" 
 		onfocusout="input_id_check_focusout_function();" onkeydown="input_text_keydown_function();"><br>
