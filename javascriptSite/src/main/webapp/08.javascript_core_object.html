@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<h1>javascript core object[String]</h1><hr />
+	<div id="resultDiv">
+		성적 보여주는 영역(div)
+	</div>
+	<script type="text/javascript">
+		/* String */
+		let str1 = new String("AbcdEfgh"); // object
+		let str2 = "AbcdEfgh";
+		let str3 = "0123456789";
+		let str4 = "guard@naver.com";
+		
+		console.log(typeof str1);
+		console.log(typeof str2);
+		console.log(str1 == str2); // true
+		console.log(str1 === str2); // false (type이 일치하지 않음)
+		console.log(str1.length);
+		console.log(str1.toUpperCase());
+		console.log(str1.toLowerCase());
+		console.log(str1.charAt(0));
+		console.log(str3.substring(5, 7)); // start, end
+		console.log(str3.substr(5, 2)); // start, length
+		console.log(str4.substr(0, str4.indexOf("@")));
+		console.log(str4.replace("@", "골뱅이"));
+		
+		/* Array */
+		let nameArray = new Array("KIM", "LEE", "PARK", "CHOI", "SIM");
+		let korArray = [89, 56, 78, 43, 67];
+		let engArray = [89, 56, 78, 43, 67];
+		let mathArray = [89, 56, 78, 43, 67];
+		let totArray = [];
+		let avgArray = [];
+		
+		for (let i = 0; i < nameArray.length; i++) {
+			totArray[i] = korArray[i] + engArray[i] + mathArray[i];
+			avgArray.push(totArray[i] / 3);
+		}
+		
+		let html = '<ul>';
+		for (let i = 0; i < nameArray.length; i++) {
+			html += "<li>" + nameArray[i] + ", " + totArray[i] + ", " + avgArray[i] + "</li>";
+		}
+		html += '</ul>';
+		
+		let resultDiv = document.getElementById("resultDiv");
+		resultDiv.innerHTML = html;
+		
+	</script>
+</body>
+
+</html>
