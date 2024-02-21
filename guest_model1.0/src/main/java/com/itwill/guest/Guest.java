@@ -30,6 +30,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class Guest {
 	private int guestNo;
 	private String guestName;
@@ -38,11 +39,4 @@ public class Guest {
 	private String guestHomepage;
 	private String guestTitle;
 	private String guestContent;
-	@Override
-	public String toString() {
-		return "Guest [guestNo=" + guestNo + ", guestName=" + guestName + ", guestDate=" + guestDate + ", guestEmail="
-				+ guestEmail + ", guestHomepage=" + guestHomepage + ", guestTitle=" + guestTitle + ", guestContent="
-				+ guestContent + "]\n";
-	}
-	
 }

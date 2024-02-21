@@ -18,81 +18,78 @@ public class GuestDao {
 	 * Connection생성,해제 객체
 	 */
 	private DataSource dataSource;
-	public GuestDao() throws Exception{
-		dataSource=new DataSource();
+
+	public GuestDao() throws Exception {
+		dataSource = new DataSource();
 	}
-	public int insert(Guest guest)throws Exception {
-		Connection con=dataSource.getConnection();
-		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_INSERT);
+
+	public int insert(Guest guest) throws Exception {
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_INSERT);
 		pstmt.setString(1, guest.getGuestName());
 		pstmt.setString(2, guest.getGuestEmail());
 		pstmt.setString(3, guest.getGuestHomepage());
 		pstmt.setString(4, guest.getGuestTitle());
 		pstmt.setString(5, guest.getGuestContent());
-		int rowCount=pstmt.executeUpdate();
+		int rowCount = pstmt.executeUpdate();
 		pstmt.close();
 		dataSource.close(con);
 		return rowCount;
 	}
-	public int update(Guest guest) throws Exception{
-		Connection con=dataSource.getConnection();
-		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_UPDATE);
+
+	public int update(Guest guest) throws Exception {
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_UPDATE);
 		pstmt.setString(1, guest.getGuestName());
 		pstmt.setString(2, guest.getGuestEmail());
 		pstmt.setString(3, guest.getGuestHomepage());
 		pstmt.setString(4, guest.getGuestTitle());
 		pstmt.setString(5, guest.getGuestContent());
 		pstmt.setInt(6, guest.getGuestNo());
-		int rowCount=pstmt.executeUpdate();
+		int rowCount = pstmt.executeUpdate();
 		pstmt.close();
 		dataSource.close(con);
 		return rowCount;
 	}
-	public int delete(int guestNo) throws Exception{
-		
-		Connection con=dataSource.getConnection();
-		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_DELETE);
+
+	public int delete(int guestNo) throws Exception {
+
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_DELETE);
 		pstmt.setInt(1, guestNo);
 		int rowCount = pstmt.executeUpdate();
 		pstmt.close();
 		dataSource.close(con);
 		return rowCount;
-		
-		
+
 	}
-	public Guest findByGuestNo(int guestNo) throws Exception{
-		Guest guest=null;
-		Connection con=dataSource.getConnection();
-		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_SELECT_BY_NO);
+
+	public Guest findByGuestNo(int guestNo) throws Exception {
+		Guest guest = null;
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_SELECT_BY_NO);
 		pstmt.setInt(1, guestNo);
-		ResultSet rs=pstmt.executeQuery();
-		if(rs.next()) {
-			guest=new Guest(rs.getInt("guest_no"),
-							rs.getString("guest_name"),
-							rs.getDate("guest_date"), 
-							rs.getString("guest_email"), 
-							rs.getString("guest_homepage"), 
-							rs.getString("guest_title"), 
-							rs.getString("guest_content"));
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next()) {
+			guest = new Guest(rs.getInt("guest_no"), rs.getString("guest_name"), rs.getDate("guest_date"),
+					rs.getString("guest_email"), rs.getString("guest_homepage"), rs.getString("guest_title"),
+					rs.getString("guest_content"));
 		}
 		rs.close();
 		pstmt.close();
 		dataSource.close(con);
 		return guest;
 	}
-	public List<Guest> findByGuestName(String guestName) throws Exception{
-		List<Guest> guestList=new ArrayList<Guest>();
-		Connection con=dataSource.getConnection();
-		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_SELECT_BY_NAME);
+
+	public List<Guest> findByGuestName(String guestName) throws Exception {
+		List<Guest> guestList = new ArrayList<Guest>();
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_SELECT_BY_NAME);
 		pstmt.setString(1, guestName);
-		ResultSet rs=pstmt.executeQuery();
-		while(rs.next()) {
-			Guest guest=new Guest(rs.getInt("guest_no"),
-					rs.getString("guest_name"),
-					rs.getDate("guest_date"), 
-					rs.getString("guest_email"), 
-					rs.getString("guest_homepage"), 
-					rs.getString("guest_title"), 
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			Guest guest = new Guest(rs.getInt("guest_no"), rs.getString("guest_name"), rs.getDate("guest_date"),
+					rs.getString("guest_email"), rs.getString("guest_homepage"), rs.getString("guest_title"),
 					rs.getString("guest_content"));
 			guestList.add(guest);
 		}
@@ -101,19 +98,16 @@ public class GuestDao {
 		dataSource.close(con);
 		return guestList;
 	}
-	public List<Guest> findByGuestTitle(String guestTitle) throws Exception{
-		List<Guest> guestList=new ArrayList<Guest>();
-		Connection con=dataSource.getConnection();
-		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_SELECT_BY_TITLE);
+
+	public List<Guest> findByGuestTitle(String guestTitle) throws Exception {
+		List<Guest> guestList = new ArrayList<Guest>();
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_SELECT_BY_TITLE);
 		pstmt.setString(1, guestTitle);
-		ResultSet rs=pstmt.executeQuery();
-		while(rs.next()) {
-			Guest guest=new Guest(rs.getInt("guest_no"),
-					rs.getString("guest_name"),
-					rs.getDate("guest_date"), 
-					rs.getString("guest_email"), 
-					rs.getString("guest_homepage"), 
-					rs.getString("guest_title"), 
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			Guest guest = new Guest(rs.getInt("guest_no"), rs.getString("guest_name"), rs.getDate("guest_date"),
+					rs.getString("guest_email"), rs.getString("guest_homepage"), rs.getString("guest_title"),
 					rs.getString("guest_content"));
 			guestList.add(guest);
 		}
@@ -122,19 +116,16 @@ public class GuestDao {
 		dataSource.close(con);
 		return guestList;
 	}
-	public List<Guest> findByGuestContent(String guestContent) throws Exception{
-		List<Guest> guestList=new ArrayList<Guest>();
-		Connection con=dataSource.getConnection();
-		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_SELECT_BY_CONTENT);
+
+	public List<Guest> findByGuestContent(String guestContent) throws Exception {
+		List<Guest> guestList = new ArrayList<Guest>();
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_SELECT_BY_CONTENT);
 		pstmt.setString(1, guestContent);
-		ResultSet rs=pstmt.executeQuery();
-		while(rs.next()) {
-			Guest guest=new Guest(rs.getInt("guest_no"),
-					rs.getString("guest_name"),
-					rs.getDate("guest_date"), 
-					rs.getString("guest_email"), 
-					rs.getString("guest_homepage"), 
-					rs.getString("guest_title"), 
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			Guest guest = new Guest(rs.getInt("guest_no"), rs.getString("guest_name"), rs.getDate("guest_date"),
+					rs.getString("guest_email"), rs.getString("guest_homepage"), rs.getString("guest_title"),
 					rs.getString("guest_content"));
 			guestList.add(guest);
 		}
@@ -143,21 +134,17 @@ public class GuestDao {
 		dataSource.close(con);
 		return guestList;
 	}
+
 	public List<Guest> findByAll() throws Exception {
-		List<Guest> guestList=new ArrayList<Guest>();
-		Connection con=dataSource.getConnection();
-		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_SELECT_ALL);
-		ResultSet rs=pstmt.executeQuery();
-		while(rs.next()) {
-			guestList.add(new Guest(rs.getInt("guest_no"),
-									rs.getString("guest_name"),
-									rs.getDate("guest_date"), 
-									rs.getString("guest_email"), 
-									rs.getString("guest_homepage"), 
-									rs.getString("guest_title"), 
-									rs.getString("guest_content"))
-					   );
-			
+		List<Guest> guestList = new ArrayList<Guest>();
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_SELECT_ALL);
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			guestList.add(new Guest(rs.getInt("guest_no"), rs.getString("guest_name"), rs.getDate("guest_date"),
+					rs.getString("guest_email"), rs.getString("guest_homepage"), rs.getString("guest_title"),
+					rs.getString("guest_content")));
+
 		}
 		rs.close();
 		pstmt.close();
@@ -166,4 +153,3 @@ public class GuestDao {
 	}
 
 }
-

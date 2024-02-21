@@ -1,5 +1,25 @@
+<%@page import="com.itwill.guest.Guest"%>
+<%@page import="com.itwill.guest.GuestService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+/*
+GET방식이면 guest_main.jsp redirection
+ 	0.요청객체encoding설정
+ 	1.guest_no 파라메타받기
+ 	2.GuestService객체생성
+ 	3.GuestService객체 selectByNo(guest_no) 메쏘드호출
+ 	4.Guest 데이타를 form의 input element의  value  속성에 출력
+*/
+if (request.getMethod().equalsIgnoreCase("GET")) {
+	response.sendRedirect("guest_main.jsp");
+}
+request.setCharacterEncoding("UTF-8");
+String guest_no = request.getParameter("guest_no");
+GuestService guestService = new GuestService();
+Guest guest = guestService.guestDetail(Integer.parseInt(guest_no));
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -29,36 +49,19 @@
 		<!-- header start -->
 		<div id="header">
 			<!-- include_common_top.jsp start-->
-
-			<h1>
-				<a href="">WEB SAMPLE SITE</a>
-			</h1>
-
+			<jsp:include page="include_common_top.jsp" />
 			<!-- include_common_top.jsp end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
 		<div id="navigation">
 			<!-- include_common_left.jsp start-->
-
-			<p>
-				<strong>메 뉴</strong>
-			</p>
-			<ul>
-				<li><a href="guest_main.jsp">방명록홈</a></li>
-				<li><a href="guest_list.jsp">방명록리스트</a></li>
-				<li><a href="guest_write_form.jsp">방명록쓰기폼</a></li>
-			</ul>
-
+			<jsp:include page="include_common_left.jsp" />
 			<!-- include_common_left.jsp end-->
 		</div>
 		<!-- navigation end-->
 		<!-- wrapper content start -->
 		<div id="wrapper">
-
-
-
-
 
 			<div id="content">
 				<table border=0 cellpadding=0 cellspacing=0>
@@ -71,39 +74,37 @@
 								</tr>
 							</table> <!-- modify Form  -->
 							<form name="f" method="post">
-								<input type="hidden" name="guest_no" value="25" />
+								<input type="hidden" name="guest_no" value="<%=guest.getGuestNo()%>" />
 								<table border="0" cellpadding="0" cellspacing="1" width="590" bgcolor="BBBBBB">
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">번호</td>
-										<td align="left" width=490 bgcolor="ffffff" style="padding-left: 10px">25</td>
+										<td align="left" width=490 bgcolor="ffffff" style="padding-left: 10px"><%=guest.getGuestNo()%></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
-										<td align="left" width=490 bgcolor="ffffff" style="padding-left: 10px"><input
-												type="text" style="width: 150" name="guest_name" value="수정"></td>
+										<td align="left" width=490 bgcolor="ffffff" style="padding-left: 10px">
+										<input type="text" style="width: 150" name="guest_name" value="<%=guest.getGuestName()%>"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">홈페이지</td>
-										<td align="left" width=490 bgcolor="ffffff" style="padding-left: 10px"><input
-												type="text" style="width: 150" name="guest_homepage" value="xzcxz"></td>
+										<td align="left" width=490 bgcolor="ffffff" style="padding-left: 10px">
+										<input type="text" style="width: 150" name="guest_homepage" value="<%=guest.getGuestHomepage()%>"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이메일</td>
-										<td align="left" width=490 bgcolor="ffffff" style="padding-left: 10px"><input
-												type="text" style="width: 240" name="guest_email" value="수정 "></td>
+										<td align="left" width=490 bgcolor="ffffff" style="padding-left: 10px">
+										<input type="text" style="width: 240" name="guest_email" value="<%=guest.getGuestEmail()%>"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">제목</td>
-										<td align="left" width=490 bgcolor="ffffff" style="padding-left: 10px"><input
-												type="text" style="width: 240" name="guest_title" value="수정 "></td>
+										<td align="left" width=490 bgcolor="ffffff" style="padding-left: 10px">
+										<input type="text" style="width: 240" name="guest_title" value="<%=guest.getGuestTitle()%>"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">내용</td>
-										<td align="left" width=490 bgcolor="ffffff" style="padding-left: 10px"><textarea
-												wrap="soft" style="width: 240px" rows="10"
-												name="guest_content">수정ㄴㅁㅇhjkjhhj</textarea>
-
-										</td>
+										<td align="left" width=490 bgcolor="ffffff" style="padding-left: 10px">
+										<textarea wrap="soft" style="width: 240px" rows="10" name="guest_content"><%=guest.getGuestContent()%>
+										</textarea></td>
 									</tr>
 								</table>
 							</form>
@@ -125,10 +126,7 @@
 		<!-- footer start-->
 		<div id="footer">
 			<!-- include_common_bottom.jsp start-->
-
-			<p align="center">Copyright (&copy;) By Kimkyoungho.[김경호] All
-				rights reserved.</p>
-
+			<jsp:include page="include_common_bottom.jsp" />
 			<!-- include_common_bottom.jsp end-->
 		</div>
 		<!-- footer end -->

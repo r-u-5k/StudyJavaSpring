@@ -17,27 +17,14 @@
 		<!-- header start -->
 		<div id="header">
 			<!-- include_common_top.jsp start-->
-
-			<h1>
-				<a href="">WEB SAMPLE SITE</a>
-			</h1>
-
+			<jsp:include page="include_common_top.jsp" />
 			<!-- include_common_top.jsp end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
 		<div id="navigation">
 			<!-- include_common_left.jsp start-->
-
-			<p>
-				<strong>메 뉴</strong>
-			</p>
-			<ul>
-				<li><a href="guest_main.jsp">방명록홈</a></li>
-				<li><a href="guest_list.jsp">방명록리스트</a></li>
-				<li><a href="guest_write_form.jsp">방명록쓰기폼</a></li>
-			</ul>
-
+			<jsp:include page="include_common_left.jsp" />
 			<!-- include_common_left.jsp end-->
 		</div>
 		<!-- navigation end-->
@@ -51,38 +38,38 @@
 							<!--contents--> <br />
 							<table style="padding-left: 10px" border=0 cellpadding=0 cellspacing=0>
 								<tr>
-									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>방명록 관리
-											- 방명록 쓰기</b></td>
+									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;
+									<b>방명록 관리 - 방명록 쓰기
+									</b>
+									</td>
 								</tr>
 							</table> <!-- guest write Form  -->
 							<form name="f" method="post">
 								<table border="0" cellpadding="0" cellspacing="1" width="590" bgcolor="BBBBBB">
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
-										<td width=490 align="left" bgcolor="ffffff" style="padding-left: 10px"><input
-												type="text" style="width: 150" name="guest_name"></td>
+										<td width=490 align="left" bgcolor="ffffff" style="padding-left: 10px">
+										<input type="text" style="width: 150" name="guest_name"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이메일</td>
-										<td width=490 align="left" bgcolor="ffffff" style="padding-left: 10px"><input
-												type="text" style="width: 150" name="guest_email"></td>
+										<td width=490 align="left" bgcolor="ffffff" style="padding-left: 10px">
+										<input type="text" style="width: 150" name="guest_email"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">홈페이지</td>
-										<td width=490 align="left" bgcolor="ffffff" style="padding-left: 10px"><input
-												type="text" style="width: 150" name="guest_homepage"></td>
+										<td width=490 align="left" bgcolor="ffffff" style="padding-left: 10px">
+										<input type="text" style="width: 150" name="guest_homepage"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">타이틀</td>
-										<td width=490 align="left" bgcolor="ffffff" style="padding-left: 10px"><input
-												type="text" style="width: 240" name="guest_title"></td>
+										<td width=490 align="left" bgcolor="ffffff" style="padding-left: 10px">
+										<input type="text" style="width: 240" name="guest_title"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">내용</td>
-										<td width=490 align="left" bgcolor="ffffff" style="padding-left: 10px"><textarea
-												wrap="soft" style="width: 240px" rows="10"
-												name="guest_content"></textarea>
-										</td>
+										<td width=490 align="left" bgcolor="ffffff" style="padding-left: 10px">
+										<textarea wrap="soft" style="width: 240px" rows="10" name="guest_content"></textarea></td>
 									</tr>
 								</table>
 							</form> <br />
@@ -102,10 +89,7 @@
 		<!-- footer start-->
 		<div id="footer">
 			<!-- include_common_bottom.jsp start-->
-
-			<p align="center">Copyright (&copy;) By Kimkyoungho.[김경호] All
-				rights reserved.</p>
-
+			<jsp:include page="include_common_bottom.jsp" />
 			<!-- include_common_bottom.jsp end-->
 		</div>
 	</div>

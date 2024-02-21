@@ -60,28 +60,28 @@ function guestRemove() {
 }
 function guestCreate() {
 	if (document.f.guest_name.value == "") {
-		alert("이름을 입력하십시요.");
+		alert("이름을 입력하십시오.");
 		document.f.guest_name.focus();
 		return false;
 	}
 	if (document.f.guest_email.value == "") {
-		alert("이메일을 입력하십시요.");
+		alert("이메일을 입력하십시오.");
 		document.f.guest_email.focus();
 		return false;
 	}
 	if (document.f.guest_homepage.value == "") {
-		alert("홈페이지를 입력하십시요.");
+		alert("홈페이지를 입력하십시오.");
 		document.f.guest_homepage.focus();
 		return false;
 	}
 
 	if (document.f.guest_title.value == "") {
-		alert("제목을 입력하십시요.");
+		alert("제목을 입력하십시오.");
 		document.f.guest_title.focus();
 		return false;
 	}
 	if (document.f.guest_content.value == "") {
-		alert("내용을 입력하십시요.");
+		alert("내용을 입력하십시오.");
 		document.f.guest_content.focus();
 		return false;
 	}

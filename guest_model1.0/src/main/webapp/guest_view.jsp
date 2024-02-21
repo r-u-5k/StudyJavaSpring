@@ -1,5 +1,22 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.itwill.guest.Guest"%>
+<%@page import="com.itwill.guest.GuestService"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+/*
+ * 0.요청객체encoding설정
+ * 1.guest_no 파라메타받기
+ * 2.GuestService객체생성
+ * 3.GuestService객체 selectByNo(guest_no) 메쏘드호출
+ * 4.Guest 출력
+ */
+request.setCharacterEncoding("UTF-8");
+String guest_no = request.getParameter("guest_no");
+GuestService guestService = new GuestService();
+Guest guest = guestService.guestDetail(Integer.parseInt(guest_no));
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -19,35 +36,19 @@
 		<!-- header start -->
 		<div id="header">
 			<!-- include_common_top.jsp start-->
-
-			<h1>
-				<a href="">WEB SAMPLE SITE</a>
-			</h1>
-
+			<jsp:include page="include_common_top.jsp" />
 			<!-- include_common_top.jsp end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
 		<div id="navigation">
 			<!-- include_common_left.jsp start-->
-
-			<p>
-				<strong>메 뉴</strong>
-			</p>
-			<ul>
-				<li><a href="guest_main.jsp">방명록홈</a></li>
-				<li><a href="guest_list.jsp">방명록리스트</a></li>
-				<li><a href="guest_write_form.jsp">방명록쓰기폼</a></li>
-			</ul>
-
+			<jsp:include page="include_common_left.jsp" />
 			<!-- include_common_left.jsp end-->
 		</div>
 		<!-- navigation end-->
 		<!-- wrapper content start -->
 		<div id="wrapper">
-
-
-
 
 			<div id="content">
 				<table border=0 cellpadding=0 cellspacing=0>
@@ -61,33 +62,30 @@
 								</tr>
 							</table> <!-- view Form  -->
 							<form name="f" method="post">
-								<input type="hidden" name="guest_no" value="25" />
+								<input type="hidden" name="guest_no" value="<%=guest.getGuestNo()%>" />
 								<table border="0" cellpadding="0" cellspacing="1" width="590" bgcolor="BBBBBB">
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">번호</td>
-										<td width=490 bgcolor="ffffff" align="left" style="padding-left: 10px">25</td>
+										<td width=490 bgcolor="ffffff" align="left" style="padding-left: 10px"><%=guest.getGuestNo()%></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
-										<td width=490 bgcolor="ffffff" align="left" style="padding-left: 10px">수정</td>
+										<td width=490 bgcolor="ffffff" align="left" style="padding-left: 10px"><%=guest.getGuestName()%></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">날짜</td>
-										<td width=490 bgcolor="ffffff" align="left" style="padding-left: 10px">
-											2015-03-18</td>
+										<td width=490 bgcolor="ffffff" align="left" style="padding-left: 10px"><%=guest.getGuestDate().toLocaleString()%></td>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">홈페이지</td>
-										<td width=490 bgcolor="ffffff" align="left" style="padding-left: 10px">xzcxz
-										</td>
+										<td width=490 bgcolor="ffffff" align="left" style="padding-left: 10px"><%=guest.getGuestHomepage()%></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">제목</td>
-										<td width=490 bgcolor="ffffff" align="left" style="padding-left: 10px">수정</td>
+										<td width=490 bgcolor="ffffff" align="left" style="padding-left: 10px"><%=guest.getGuestTitle()%></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="110">내용</td>
-										<td width=490 bgcolor="ffffff" align="left" style="padding-left: 10px">
-											수정ㄴㅁㅇhjkjhhj</td>
+										<td width=490 bgcolor="ffffff" align="left" style="padding-left: 10px"><%=guest.getGuestContent()%></td>
 									</tr>
 								</table>
 							</form> <br />
@@ -109,10 +107,7 @@
 		<!-- footer start-->
 		<div id="footer">
 			<!-- include_common_bottom.jsp start-->
-
-			<p align="center">Copyright (&copy;) By Kimkyoungho.[김경호] All
-				rights reserved.</p>
-
+			<jsp:include page="include_common_bottom.jsp" />
 			<!-- include_common_bottom.jsp end-->
 		</div>
 		<!-- footer end -->
