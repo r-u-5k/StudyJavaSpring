@@ -31,8 +31,8 @@
 	/******************** << javax.sql.DataSource >> **************************/
 	DataSource dataSource = basicDataSource;
 	Connection con = dataSource.getConnection();
-	System.out.println("1.DataSource : " + dataSource);
-	System.out.println("2.Connection : " + con);
+	System.out.println("1. DataSource: " + dataSource);
+	System.out.println("2. Connection: " + con);
 	basicDataSource.close();
 	%>
 	<ol>
