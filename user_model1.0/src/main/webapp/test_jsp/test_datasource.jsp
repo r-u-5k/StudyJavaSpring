@@ -14,8 +14,8 @@
 <body>
 	<%
 	/****************org.apache.tomcat.dbcp.dbcp2.BasicDataSource**********/
-	BasicDataSource basicDataSource=new BasicDataSource();
-	Properties properties=new Properties();
+	BasicDataSource basicDataSource = new BasicDataSource();
+	Properties properties = new Properties();
 	/***************[jdbc.properties]***********************
 	spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
 	spring.datasource.url=jdbc:oracle:thin:@124.198.47.195:1521:xe
@@ -27,11 +27,10 @@
 	basicDataSource.setUrl(properties.getProperty("spring.datasource.url"));
 	basicDataSource.setUsername(properties.getProperty("spring.datasource.username"));
 	basicDataSource.setPassword(properties.getProperty("spring.datasource.password"));
-	
-	
+
 	/******************** << javax.sql.DataSource >> **************************/
-	DataSource dataSource=basicDataSource;
-	Connection con=dataSource.getConnection();
+	DataSource dataSource = basicDataSource;
+	Connection con = dataSource.getConnection();
 	System.out.println("1.DataSource : " + dataSource);
 	System.out.println("2.Connection : " + con);
 	basicDataSource.close();
