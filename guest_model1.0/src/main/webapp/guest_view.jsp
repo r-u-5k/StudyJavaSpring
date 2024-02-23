@@ -1,4 +1,3 @@
-<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.itwill.guest.Guest"%>
 <%@page import="com.itwill.guest.GuestService"%>
 <%@page import="java.util.List"%>
@@ -16,6 +15,13 @@ request.setCharacterEncoding("UTF-8");
 String guest_no = request.getParameter("guest_no");
 GuestService guestService = new GuestService();
 Guest guest = guestService.guestDetail(Integer.parseInt(guest_no));
+if (guest == null) {
+	out.println("<script>");
+	out.println("alert('존재하지 않는 게시물입니다.');");
+	out.println("location.href='guest_list.jsp'");
+	out.println("</script>");
+	return;
+}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -57,8 +63,7 @@ Guest guest = guestService.guestDetail(Integer.parseInt(guest_no));
 							<!--contents--> <br />
 							<table style="padding-left: 10px" border=0 cellpadding=0 cellspacing=0>
 								<tr>
-									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>방명록 관리
-											- 방명록 상세보기</b></td>
+									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>방명록 관리 - 방명록 상세보기</b></td>
 								</tr>
 							</table> <!-- view Form  -->
 							<form name="f" method="post">

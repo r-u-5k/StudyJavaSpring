@@ -25,16 +25,22 @@ public class GuestDao {
 
 	public int insert(Guest guest) throws Exception {
 		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_INSERT);
-		pstmt.setString(1, guest.getGuestName());
-		pstmt.setString(2, guest.getGuestEmail());
-		pstmt.setString(3, guest.getGuestHomepage());
-		pstmt.setString(4, guest.getGuestTitle());
-		pstmt.setString(5, guest.getGuestContent());
-		int rowCount = pstmt.executeUpdate();
-		pstmt.close();
+		PreparedStatement pstmt1 = con.prepareStatement(GuestSQL.GUEST_INSERT_BEFORE_GUEST_NO);
+		ResultSet rs1 = pstmt1.executeQuery();
+		rs1.next();
+		int new_guest_no = rs1.getInt(1);
+		rs1.close();
+		pstmt1.close();
+		PreparedStatement pstmt2 = con.prepareStatement(GuestSQL.GUEST_INSERT);
+		pstmt2.setString(1, guest.getGuestName());
+		pstmt2.setString(2, guest.getGuestEmail());
+		pstmt2.setString(3, guest.getGuestHomepage());
+		pstmt2.setString(4, guest.getGuestTitle());
+		pstmt2.setString(5, guest.getGuestContent());
+		pstmt2.executeUpdate();
+		pstmt2.close();
 		dataSource.close(con);
-		return rowCount;
+		return new_guest_no;
 	}
 
 	public int update(Guest guest) throws Exception {
