@@ -13,22 +13,22 @@
 <script type="text/javascript">
 	function userCreate() {
 		if (document.f.userId.value == "") {
-			alert("사용자 아이디를 입력하십시요.");
+			alert("사용자 아이디를 입력하십시오.");
 			document.f.userId.focus();
 			return;
 		}
 		if (document.f.password.value == "") {
-			alert("비밀번호를 입력하십시요.");
+			alert("비밀번호를 입력하십시오.");
 			document.f.password.focus();
 			return;
 		}
 		if (document.f.password2.value == "") {
-			alert("비밀번호확인을 입력하십시요.");
+			alert("비밀번호 확인을 입력하십시오.");
 			f.password2.focus();
 			return;
 		}
 		if (document.f.name.value == "") {
-			alert("이름을 입력하십시요.");
+			alert("이름을 입력하십시오.");
 			f.name.focus();
 			return;
 		}
@@ -38,7 +38,7 @@
 			return;
 		}
 		if (document.f.password.value != document.f.password2.value) {
-			alert("비밀번호와 비밀번호확인은 일치하여야합니다.");
+			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 			f.password.focus();
 			f.password.select();
 			return;
@@ -86,7 +86,7 @@
 									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>사용자 관리 - 회원 가입</b></td>
 								</tr>
 							</table> <!-- write Form  -->
-							<form name="f">
+							<form name="f" method="post">
 								<table border="0" cellpadding="0" cellspacing="1" width="590"
 									bgcolor="BBBBBB">
 									<tr>

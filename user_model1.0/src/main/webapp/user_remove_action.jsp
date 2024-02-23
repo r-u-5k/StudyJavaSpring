@@ -18,8 +18,7 @@ if (request.getMethod().equalsIgnoreCase("GET")) {
 String userId = (String) session.getAttribute("sUserId");
 int result = new UserService().remove(userId);
 if (result == 1) {
-	session.invalidate();
-	response.sendRedirect("user_main.jsp");
+	response.sendRedirect("user_logout_action.jsp");
 } else {
 	response.sendRedirect("user_error.jsp");
 }

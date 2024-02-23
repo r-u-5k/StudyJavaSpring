@@ -19,8 +19,7 @@ String userId = request.getParameter("userId");
 String password = request.getParameter("password");
 String name = request.getParameter("name");
 String email = request.getParameter("email");
-UserService userService = new UserService();
-int result = userService.login(userId, password);
+int result = new UserService().login(userId, password);
 
 /*
  * 회원로그인

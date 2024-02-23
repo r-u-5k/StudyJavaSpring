@@ -37,6 +37,7 @@ if (result == -1) { // 아이디 중복
 	out.println("alert('" + msg + "');");
 	out.println("location.href='user_write_form.jsp';");	
 	out.println("</script>");
+	return;
 	
 	// case 2 (redirect)
 	
