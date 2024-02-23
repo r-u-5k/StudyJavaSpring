@@ -1,4 +1,5 @@
 <%@page import="java.util.Collections"%>
+<%@page import="java.util.Comparator"%>
 <%@page import="com.itwill.guest.Guest"%>
 <%@page import="java.util.List"%>
 <%@page import="com.itwill.guest.GuestService"%>
@@ -15,6 +16,15 @@
 request.setCharacterEncoding("UTF-8");
 GuestService guestService = new GuestService();
 List<Guest> guestList = guestService.guestList();
+Collections.sort(guestList, new Comparator<Guest>() {
+
+	@Override
+	public int compare(Guest o1, Guest o2) {
+		return o1.getGuestNo() - o2.getGuestNo();
+	}
+	
+});
+Collections.reverse(guestList);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -52,8 +62,7 @@ List<Guest> guestList = guestService.guestList();
 						<td><br />
 							<table style="padding-left: 10px" border=0 cellpadding=0 cellspacing=0>
 								<tr>
-									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>방명록 관리
-											- 리스트</b></td>
+									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>방명록 관리 - 리스트</b></td>
 								</tr>
 							</table>
 							<form name="f" method="post">
@@ -69,11 +78,11 @@ List<Guest> guestList = guestService.guestList();
 									<tr>
 										<td width=50 align=center bgcolor="ffffff" height="20"><%=guest.getGuestNo()%></td>
 										<td width=300 bgcolor="ffffff" style="padding-left: 10">
-										<a href="guest_view.jsp?guest_no=<%=guest.getGuestNo()%>" class="user"> <%=guest.getGuestTitle()%> </a></td>
+										<a href="guest_view.jsp?guest_no=<%=guest.getGuestNo()%>" class="user"><%=guest.getGuestTitle()%></a></td>
 										<td width=120 align=center bgcolor="ffffff"><%=guest.getGuestName()%></td>
 										<td width=120 align=center bgcolor="ffffff"><%=guest.getGuestDate()%></td>
 									</tr>
-									<%} %>
+									<%}%>
 								</table>
 							</form> <br> <!-- button -->
 							<table border="0" cellpadding="0" cellspacing="1" width="590">

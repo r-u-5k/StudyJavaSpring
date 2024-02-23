@@ -27,18 +27,8 @@ Guest guest = guestService.guestDetail(Integer.parseInt(guest_no));
 	<title>방명록 관리</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-
-
-
-
-
 	<link rel="stylesheet" href="css/styles.css">
 	<link rel="stylesheet" href="css/guest.css">
-
-
-
-
-
 
 	<script src="js/guest.js"></script>
 </head>
@@ -111,7 +101,7 @@ Guest guest = guestService.guestDetail(Integer.parseInt(guest_no));
 
 							<table width=590 border=0 cellpadding=0 cellspacing=0>
 								<tr>
-									<td align=center><input type="button" value="수정" onClick="guestModify()"> &nbsp;
+									<td align=center><input type="button" value="수정" onClick="guestModify()">&nbsp;
 										<input type="button" value="목록" onClick="guestList()">
 									</td>
 								</tr>

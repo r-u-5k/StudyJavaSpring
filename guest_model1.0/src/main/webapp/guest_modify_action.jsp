@@ -15,6 +15,7 @@ GET방식이면 guest_main.jsp redirection
 */
 if (request.getMethod().equalsIgnoreCase("GET")) {
 	response.sendRedirect("guest_main.jsp");
+	return;
 }
 request.setCharacterEncoding("UTF-8");
 String guest_no = request.getParameter("guest_no");

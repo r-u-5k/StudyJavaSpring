@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,8 +9,8 @@
 
 <body>
 
-<hr/>
-<!-- 
+	<hr />
+	<!-- 
 form tag
  - 요청시 전송되는 데이타를 묶어주는 단위
  - form 안에 있는 데이타들은 요청시 쿼리스트링으로 만들어져서 서버로 전송된다.
@@ -18,12 +18,13 @@ form tag
  - action:요청할 URL(서블릿URL)
  - method:요청방법(GET or POST)
  -->
-<h3 align="center">◆◆◆ 회원 로그인[session] ◆◆◆</h3>
-<form  method="post" style="width: 300px;margin:0 auto 0 auto" 
-	   action="7-2.default_session_login_action.jsp">
-	아이디&nbsp;&nbsp;&nbsp; <input type="text" name="id"><br/>
-	패쓰워드 <input type="password" name="pass"><br/><br/>
-	<!-- 
+	<h3 align="center">◆◆◆ 회원 로그인[session] ◆◆◆</h3>
+	<form method="post" style="width: 300px; margin: 0 auto 0 auto"
+		action="7-2.default_session_login_action.jsp">
+		아이디&nbsp;&nbsp;&nbsp; <input type="text" name="id"><br />
+		패쓰워드 <input type="password" name="pass"><br />
+		<br />
+		<!-- 
 		<< submit button >>
 			- form안에 존재해야하며
 			- submit 버튼클릭시에 자기가 속해있는 폼의 데이타모두를 쿼리스트링형태로변경해서 
@@ -36,9 +37,8 @@ form tag
 		ex> http://localhost/servletSite/4.login_post_result.jsp
 			 
 	 -->
-	<input type="submit" value="로그인">
-	<input type="reset" value="취소">
-</form>
+		<input type="submit" value="로그인"> <input type="reset" value="취소">
+	</form>
 </body>
 </html>
 
