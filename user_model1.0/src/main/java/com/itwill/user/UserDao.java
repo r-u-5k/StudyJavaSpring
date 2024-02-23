@@ -34,6 +34,8 @@ public class UserDao {
 		basicDataSource.setUrl(properties.getProperty("spring.datasource.url"));
 		basicDataSource.setUsername(properties.getProperty("spring.datasource.username"));
 		basicDataSource.setPassword(properties.getProperty("spring.datasource.password"));
+		basicDataSource.setInitialSize(1);
+		basicDataSource.setMaxTotal(2);
 		this.dataSource = basicDataSource;
 
 	}

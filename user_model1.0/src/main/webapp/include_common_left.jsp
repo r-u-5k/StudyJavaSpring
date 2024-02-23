@@ -10,7 +10,7 @@ String sUserId = (String) session.getAttribute("sUserId");
 <ul>
 	<%if (sUserId != null) {%>
 	<!-- 로그인 후 -->
-	<li><a href=""><%=sUserId%>님</a></li>
+	<li><%=sUserId%>님</li>
 	<li><a href="user_view.jsp">내정보</a></li>
 	<li><a href="user_logout_action.jsp">로그아웃</a></li>
 	<%} else {%>
