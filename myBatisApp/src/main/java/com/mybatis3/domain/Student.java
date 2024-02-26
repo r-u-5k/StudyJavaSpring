@@ -27,18 +27,16 @@ PIC              BLOB
 ADDR_ID          NUMBER(11)   
 
 */
-
-
+@ToString
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 
 public class Student {
-	
 	private Integer studId;
-	
 	private String name;
-	
 	private String email;
-	
+	private String phone;
 	private Date dob;
-
-
 }

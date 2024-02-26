@@ -6,6 +6,7 @@
 	<properties resource="jdbc.properties" />
 
 	<settings>
+		<setting name="logImpl" value="LOG4J"/>
 		<!-- 카멜 케이스 VO 매핑 -->
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 		<!-- 쿼리 결과 필드가 null인 경우, 누락이 되서 나오지 않게 설정 -->
@@ -28,15 +29,15 @@
 			</dataSource>
 			<!-- <dataSource type="POOLED">
 				<property name="driver" value="oracle.jdbc.OracleDriver" />
-				<property name="url" value="jdbc:oracle:thin:@1124.198.47.195:1521:XE" />
+				<property name="url" value="jdbc:oracle:thin:@124.198.47.195:1521:XE" />
 				<property name="username" value="jdeveloper43" />
 				<property name="password" value="jdeveloper43" />
 			</dataSource> -->
 		</environment>
 	</environments>
 	<mappers>
-		<!-- <mapper resource="com/mybatis3/dao/mapper/StudentBasicMapper.xml" /> 
-		<mapper resource="com/mybatis3/dao/mapper/StudentMapper.xml" /> 
+		<mapper resource="com/mybatis3/dao/mapper/StudentBasicMapper.xml" /> 
+		<!-- <mapper resource="com/mybatis3/dao/mapper/StudentMapper.xml" /> 
 		<mapper resource="com/mybatis3/dao/mapper/TutorMapper.xml" /> 
 		<mapper resource="com/mybatis3/dao/mapper/CourseMapper.xml" /> 
 		<mapper resource="com/mybatis3/dao/mapper/AddressMapper.xml" /> -->
