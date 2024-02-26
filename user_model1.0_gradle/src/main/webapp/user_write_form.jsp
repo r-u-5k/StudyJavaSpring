@@ -1,63 +1,55 @@
 <%@page import="com.itwill.user.User"%>
-<%@page import="com.itwill.user.UserService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="user_login_check.jspf"%>
-
-<%
-/*
-1. UserService객체생성
-2. 세션의 sUserId를 사용해서 UserService.findUser()메쏘드호출
-3. 반환된 User객체를 form  element  value 값으로 출력
-*/
-UserService userService = new UserService();
-String userId = (String) session.getAttribute("sUserId");
-User user = userService.findUser(userId);
-
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>내정보 관리</title>
+<title>사용자 관리</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel=stylesheet href="css/styles.css" type="text/css">
 <link rel=stylesheet href="css/user.css" type="text/css">
+<style type="text/css" media="screen">
+</style>
 <script type="text/javascript">
-	function userModify() {
+	function userCreate() {
+		if (document.f.userId.value == "") {
+			alert("사용자 아이디를 입력하십시오.");
+			document.f.userId.focus();
+			return;
+		}
 		if (document.f.password.value == "") {
 			alert("비밀번호를 입력하십시오.");
 			document.f.password.focus();
-			return false;
+			return;
 		}
 		if (document.f.password2.value == "") {
 			alert("비밀번호 확인을 입력하십시오.");
-			document.f.password2.focus();
-			return false;
+			f.password2.focus();
+			return;
 		}
 		if (document.f.name.value == "") {
 			alert("이름을 입력하십시오.");
-			document.f.name.focus();
-			return false;
+			f.name.focus();
+			return;
 		}
 		if (document.f.email.value == "") {
-			alert("이메일 주소를 입력하십시오.");
-			document.f.email.focus();
-			return false;
+			alert("이메일 주소를 입력하십시요.");
+			f.email.focus();
+			return;
 		}
-		if (document.f.password.value != f.password2.value) {
+		if (document.f.password.value != document.f.password2.value) {
 			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-			document.f.password.focus();
-			document.f.password.select();
-			return false;
+			f.password.focus();
+			f.password.select();
+			return;
 		}
-
-		document.f.action = "user_modify_action.jsp";
-		document.f.method = "POST";
+		document.f.action = "user_write_action.jsp";
+		document.f.method = 'POST';
 		document.f.submit();
 	}
+
 	function userMain() {
-		document.f.action = "user_main.jsp";
-		document.f.submit();
+		location.href = 'user_main.jsp';
 	}
 </script>
 </head>
@@ -82,26 +74,25 @@ User user = userService.findUser(userId);
 		<!-- wrapper start -->
 		<div id="wrapper">
 			<!-- content start -->
-
 			<!-- include_content.jsp start-->
 			<div id="content">
-
-				<table border=0 cellpadding=0 cellspacing=0>
+				<table width=0 border=0 cellpadding=0 cellspacing=0>
 					<tr>
 						<td>
 							<!--contents--> <br />
 							<table style="padding-left: 10px" border=0 cellpadding=0
 								cellspacing=0>
 								<tr>
-									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>내정보 관리 - 내정보수정</b></td>
+									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>사용자 관리 - 회원 가입</b></td>
 								</tr>
-							</table> <!-- update Form  -->
+							</table> <!-- write Form  -->
 							<form name="f" method="post">
-
-								<table border="0" cellpadding="0" cellspacing="1" width="590" bgcolor="BBBBBB">
+								<table border="0" cellpadding="0" cellspacing="1" width="590"
+									bgcolor="BBBBBB">
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">아이디</td>
-										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left"><%=user.getUserid()%></td>
+										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
+										<input type="text" style="width: 150px" name="userId" value="">&nbsp;&nbsp;<font color="red"></font></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호</td>
@@ -116,19 +107,19 @@ User user = userService.findUser(userId);
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
-										<input type="text" style="width: 150px" name="name" value="<%=user.getName()%>"></td>
+										<input type="text" style="width: 150px" name="name" value=""></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이메일</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
-										<input type="text" style="width: 150px" name="email" value="<%=user.getEmail()%>"></td>
+										<input type="text" style="width: 150px" name="email" value=""></td>
 									</tr>
 								</table>
-							</form> <br>
+							</form> <br />
 
-							<table width=590 border=0 cellpadding=0 cellspacing=0>
+							<table border=0 cellpadding=0 cellspacing=1>
 								<tr>
-									<td align=center><input type="button" value="내정보수정" onClick="userModify()">&nbsp;
+									<td align=center><input type="button" value="회원 가입" onclick="userCreate();"> &nbsp; 
 									<input type="button" value="메인" onClick="userMain()"></td>
 								</tr>
 							</table>
