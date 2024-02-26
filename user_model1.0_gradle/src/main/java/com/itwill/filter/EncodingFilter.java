@@ -13,7 +13,7 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.annotation.WebInitParam;
 import jakarta.servlet.http.HttpServletRequest;
 
-//@WebFilter(value = "/*",initParams = @WebInitParam(name = "encoding", value = "UTF-8"))
+@WebFilter(value = "/*",initParams = @WebInitParam(name = "encoding", value = "UTF-8"))
 public class EncodingFilter implements Filter {
 	private String encoding = null;
 
@@ -29,7 +29,7 @@ public class EncodingFilter implements Filter {
 	 ********************************************************/
 	public void init(FilterConfig filterConfig) throws ServletException {
 		this.encoding = filterConfig.getInitParameter("encoding");
-		System.out.println("생성직후 단한번호출 init(): encoding parameter-->" + encoding);
+		System.out.println("생성 직후 단 한 번 호출 init(): encoding parameter --> " + encoding);
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class EncodingFilter implements Filter {
 			throws IOException, ServletException {
 
 		HttpServletRequest req = (HttpServletRequest) request;
-		System.out.println("요청시마다 호출 doFilter():" + req.getRequestURI());
+		System.out.println("요청 시마다 호출 doFilter(): " + req.getRequestURI());
 		
 		if (request.getCharacterEncoding() == null) {
 			if (encoding != null) {
