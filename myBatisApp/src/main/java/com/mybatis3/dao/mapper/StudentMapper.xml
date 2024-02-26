@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis3.dao.mapper.StudentMapper">
+	<!-- ############################## resultMap정의 ############################# -->
+	<resultMap  id="studentResultMap" type="x">
+		
+	</resultMap>
+		
+	<resultMap  id="studentWithAddressResultMap" type="x">
+		
+	</resultMap>	
+	
+	<resultMap id="studentWithCoursesResultMap"  type="x">
+		
+	
+	</resultMap>
+	
+	<resultMap id="studentWithAddressAndCoursesResultMap" type="x" >
+		
+	</resultMap>	
+	
+	<!-- ########################################################################### -->
+	
+	
+	
+	<!-- 
+	/**************************************************
+						INSERT
+	***************************************************/
+		parameterType: DTO,VO,Domain
+	 -->
+	<insert id="insertStudentBySequence" >
+		
+	</insert>
+	<insert id="insertStudentBySequenceReturnPrimaryKey" >
+		
+	</insert>
+	<!-- 
+	/**************************************************
+						UPDATE
+	***************************************************/
+		parameterType: DTO,VO,Domain
+	 -->
+	<update id="updateStudentById" >
+		
+	</update>
+	
+	<!-- 
+	/**************************************************
+						DELETE
+	***************************************************/
+		parameterType: java.lang.Integer,java.lang.String
+	-->
+	<delete id="deleteStudentById" parameterType="x">
+	</delete>
+	<delete id="deleteStudentByName" parameterType="x">
+	</delete>
+	<delete id="deleteStudentByNameLike" parameterType="x">
+	</delete>
+	
+	<!-- 
+	/**************************************************
+	 5. SELECT[students + address + courses[course_enrollment] JOIN( 1 : 1 : N )
+	**************************************************/
+	/*
+	 * resultMap : studentWithAddressAndCoursesResultMap
+	 */
+	-->
+	<select id="findStudentByIdWithAddressAndCourses" parameterType="x" >
+			
+	</select>
+	
+	<!-- 
+	/********************************************************************
+	 4. SELECT[students + courses[course_enrollment]+course] JOIN( 1 : N )
+	 ********************************************************************/
+	/*
+	 * resultMap : studentWithCoursesResultMap
+	 */
+	 -->
+	<select id="findStudentByIdWithCourses" parameterType="x">
+	</select> 
+	
+	<!-- 
+	/**************************************************
+	 3. SELECT[student + address JOIN]( 1 : 1 )
+	 **************************************************/
+	/*
+	 * resultMap : studentWithAddressResultMap
+	 */
+	 -->
+	<select id="findStudentByIdWithAddress" parameterType="x" 
+			>
+		select stud_id, name, email,dob, a.addr_id, street, city, state, zip, country
+		FROM students s 
+		left outer join addresses a 
+		on s.addr_id=a.addr_id where stud_id=#{studId}
+	</select>
+	
+	<!-- 
+	/**************************************************
+	1. SELECT[결과타입이 DTO[DTO List] 객체인경우] 
+	**************************************************/
+	-->
+	<!-- 
+		resultType :  Dto
+	 -->
+	<select id="findStudentById"  	parameterType="java.lang.Integer" 
+									resultType="com.mybatis3.domain.Student">
+		select stud_id as studid ,name,email,dob from students where stud_id=#{studId}
+	</select>
+	<select id="findAllStudents" resultType="com.mybatis3.domain.Student">
+		select stud_id as studid,name,email,dob from students
+	</select>
+	<!-- 
+	  resultMap :  DTO
+	 -->
+	<select id="findStudentByIdResultMap" parameterType="java.lang.Integer"
+										 resultMap="studentResultMap">
+		select stud_id,name,email,dob from students where stud_id=#{studId}
+	</select>
+	<select id="findAllStudentsResultMap" resultMap="studentResultMap">
+		select stud_id,name,email,dob from students
+	</select>
+	<!-- 
+	/**********************************************************************
+	 2. SELECT[결과타입이 Wrapper(String)[Wrapper(String) List]객체인경우] 
+	*******************************************************************/
+	/*
+	 * resultType :  String,Wrapper,List<Wrapper>,List<String>
+	 */
+	  -->
+	 <select id="findStudentNameById" >
+	 	
+	 </select> 
+	 <select id="findStudentNameList" >
+	 	
+	 </select> 
+	 
+	 <!-- 
+	/**************************************************
+	 결과데이타를 Map(HashMap)에 담아서 반환할수있다
+	***************************************************/
+		resultType:Map,HashMap	
+	-->
+	<select id="findStudentByIdMap">
+		
+	</select>
+	<select id="findAllStudentsMapList" >
+		
+	</select>
+</mapper>
