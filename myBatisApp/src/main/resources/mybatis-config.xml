@@ -15,8 +15,11 @@
 
 	</settings>
 	<typeAliases>
-		<typeAlias alias="Student"
-			type="com.mybatis3.domain.Student" />
+		<typeAlias alias="Student" type="com.mybatis3.domain.Student" />
+		<typeAlias type="com.mybatis3.domain.Address" alias="Address"/>		
+		<typeAlias type="com.mybatis3.domain.Tutor" alias="Tutor"/>
+		<typeAlias type="com.mybatis3.domain.Course" alias="Course"/>
+		<!-- <package name="com.mybatis3.domain"/> -->
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">

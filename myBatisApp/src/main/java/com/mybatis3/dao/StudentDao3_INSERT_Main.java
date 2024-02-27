@@ -7,24 +7,24 @@ import com.mybatis3.domain.Student;
 public class StudentDao3_INSERT_Main {
 
 	public static void main(String[] args) {
-		
+
 		StudentDao studentDao = new StudentDao();
 		/**************************************************
-		INSERT
-		***************************************************/
+		 * INSERT
+		 ***************************************************/
 		/*
 		parameterType: DTO,VO,Domain
 		*/
 		System.out.println("---------insertStudentBySequence(Dto)--------------------------");
-	
-		System.out.println(">>> dao return insertRowCount:"+0);
+		int insertRowCount = studentDao.insertStudentBySequence(
+				Student.builder().name("SEQ1").phone("123-456-7890").email("kim1@gmail.com").dob(new Date()).build());
+		System.out.println(">>> Dao return insertRowCount:" + insertRowCount);
+		
 		System.out.println("---------insertStudentBySequenceReturnPrimaryKey---------------");
-		
-		System.out.println(">>> dao return  insertPrimaryKey:"+0);
-		System.out.println(">>> Student[Dto]     primary key:"+0);
-		
-		
-		
-		
+		Student insertStudent = Student.builder().name("SEQ2").phone("222-333-4444").email("kim2@gmail.com").dob(new Date()).build();
+		insertRowCount = studentDao.insertStudentBySequenceReturnPrimaryKey(insertStudent);
+		System.out.println(">>> insertRowCount: " + insertRowCount);
+		System.out.println(">>> Student[Dto] primary key: " + insertStudent.getStudId());
+
 	}
 }

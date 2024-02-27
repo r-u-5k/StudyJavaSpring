@@ -120,16 +120,17 @@ public class StudentDao {
 	parameterType: DTO,VO,Domain
 	*/
 	public int insertStudentBySequence(Student student) {
-
-		int rowCount = 0;
-
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		int rowCount = sqlSession.insert(NAMESPACE + "insertStudentBySequence", student);
+		sqlSession.close();
 		return rowCount;
 	}
 
 	public int insertStudentBySequenceReturnPrimaryKey(Student student) {
-
-		int rowCount = 0;
-		return 0;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		int pk = sqlSession.insert(NAMESPACE + "insertStudentBySequenceReturnPrimaryKey", student);
+		sqlSession.close();
+		return pk;
 	}
 
 	/**************************************************
@@ -139,9 +140,9 @@ public class StudentDao {
 	  parameterType: DTO,VO,Domain
 	 */
 	public int updateStudentById(Student updateStudent) {
-
-		int rowCount = 0;
-
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		int rowCount = sqlSession.update(NAMESPACE + "insertStudentBySequence", updateStudent);
+		sqlSession.close();
 		return rowCount;
 	}
 
@@ -152,8 +153,10 @@ public class StudentDao {
 	 parameterType: java.lang.Integer,java.lang.String
 	 */
 	public int deleteStudentById(Integer studId) {
-
-		return 0;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		int rowCount = sqlSession.delete(NAMESPACE + "deleteStudentById", studId);
+		sqlSession.close();
+		return rowCount;
 	}
 
 }

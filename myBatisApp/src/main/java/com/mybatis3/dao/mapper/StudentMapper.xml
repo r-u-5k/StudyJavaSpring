@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis3.dao.mapper.StudentMapper">
-	<!-- ############################## resultMap정의 ############################# -->
+	<!-- 
+	############################## 
+	resultMap정의 
+	############################# 
+	-->
 	<resultMap type="Student" id="studentResultMap">
 		<id column="STUD_ID" property="studId"/>
 		<result column="NAME" property="name"/>
@@ -9,51 +13,86 @@
 		<result column="PHONE" property="phone"/>
 		<result column="DOB" property="dob"/>		
 	</resultMap>
-	<!-- /************************************************** INSERT ***************************************************/ 
-		parameterType: DTO,VO,Domain -->
-	<insert id="insertStudentBySequence">
-
+	<!-- 
+	/************************************************** 
+	INSERT 
+	***************************************************/ 
+	parameterType: DTO,VO,Domain 
+	-->
+	<insert id="insertStudentBySequence" parameterType="com.mybatis3.domain.Student">
+		INSERT INTO STUDENTS (STUD_ID, NAME, PHONE, EMAIL, DOB) 
+		VALUES (STUDENTS_STUD_ID_SEQ.NEXTVAL, #{name}, #{phone}, #{email}, #{dob})
 	</insert>
-	<insert id="insertStudentBySequenceReturnPrimaryKey">
-
+	<insert id="insertStudentBySequenceReturnPrimaryKey" parameterType="com.mybatis3.domain.Student">
+		<selectKey order="BEFORE" resultType="int" keyProperty="studId">
+			SELECT STUDENTS_STUD_ID_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO STUDENTS (STUD_ID, NAME, PHONE, EMAIL, DOB) 
+		VALUES (#{studId}, #{name}, #{phone}, #{email}, #{dob})
 	</insert>
-	<!-- /************************************************** UPDATE ***************************************************/ 
-		parameterType: DTO,VO,Domain -->
-	<update id="updateStudentById">
-
+	
+	<!-- 
+	/************************************************** 
+	UPDATE 
+	***************************************************/ 
+	parameterType: DTO,VO,Domain 
+	-->
+	<update id="updateStudentById" parameterType="com.mybatis3.domain.Student">
+		UPDATE STUDENTS SET NAME = #{NAME}, EMAIL = #{EMAIL}, PHONE = #{PHONE}, DOB = #{DOB}
+		WHERE STUD_ID = #{STUDID}
 	</update>
 
-	<!-- /************************************************** DELETE ***************************************************/ 
-		parameterType: java.lang.Integer,java.lang.String -->
-	<delete id="deleteStudentById">
+	<!-- 
+	/************************************************** 
+	DELETE 
+	***************************************************/ 
+	parameterType: java.lang.Integer,java.lang.String 
+	-->
+	<delete id="deleteStudentById" parameterType="int">
+		DELETE FROM STUDENTS WHERE STUD_ID = #{STUD_ID}
 	</delete>
-	<delete id="deleteStudentByName">
+	<delete id="deleteStudentByName" parameterType="String">
+		DELETE FROM STUDENTS WHERE NAME = #{NAME}
 	</delete>
 	<delete id="deleteStudentByNameLike">
 	</delete>
 
-	<!-- /************************************************** 5. SELECT[students 
-		+ address + courses[course_enrollment] JOIN( 1 : 1 : N ) **************************************************/ 
-		/* * resultMap : studentWithAddressAndCoursesResultMap */ -->
+	<!-- 
+	/************************************************** 
+	5. SELECT[students + address + courses[course_enrollment] JOIN( 1 : 1 : N ) 
+	**************************************************/ 
+	/*
+	 * resultMap : studentWithAddressAndCoursesResultMap
+	 */ 
+	-->
 	<select id="findStudentByIdWithAddressAndCourses">
 
 	</select>
 
-	<!-- /******************************************************************** 
-		4. SELECT[students + courses[course_enrollment]+course] JOIN( 1 : N ) ********************************************************************/ 
-		/* * resultMap : studentWithCoursesResultMap */ -->
+	<!-- 
+	/******************************************************************** 
+	4. SELECT[students + courses[course_enrollment]+course] JOIN( 1 : N ) ********************************************************************/ 
+	/*
+	 * resultMap : studentWithCoursesResultMap 
+	 */ 
+	-->
 	<select id="findStudentByIdWithCourses">
+	
 	</select>
 
-	<!-- /************************************************** 3. SELECT[student 
-		+ address JOIN]( 1 : 1 ) **************************************************/ 
-		/* * resultMap : studentWithAddressResultMap */ -->
+	<!-- 
+	/************************************************** 
+	3. SELECT[student + address JOIN]( 1 : 1 ) 
+	**************************************************/ 
+	/*
+	 * resultMap : studentWithAddressResultMap 
+	 */ 
+	 -->
 	<select id="findStudentByIdWithAddress">
-		select stud_id, name,
-		email,dob, a.addr_id, street, city, state, zip, country
-		FROM students s
-		left outer join addresses a
-		on s.addr_id=a.addr_id where stud_id=#{studId}
+		SELECT STUD_ID, NAME, EMAIL, DOB, A.ADDR_ID, STREET, CITY, STATE, ZIP, COUNTRY
+  		FROM STUDENTS S
+ 		LEFT OUTER JOIN ADDRESSES A ON S.ADDR_ID = A.ADDR_ID
+ 		WHERE STUD_ID = #{STUDID}
 	</select>
 
 	<!-- 
