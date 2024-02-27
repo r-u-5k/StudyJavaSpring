@@ -25,13 +25,13 @@ DOB              DATE
 BIO              CLOB         
 PIC              BLOB         
 ADDR_ID          NUMBER(11)   
-
 */
 @ToString
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 
 public class Student {
 	private Integer studId;
@@ -39,4 +39,6 @@ public class Student {
 	private String email;
 	private String phone;
 	private Date dob;
+	
+	private Address address;
 }
