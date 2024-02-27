@@ -13,96 +13,106 @@ import com.mybatis3.domain.Student;
 
 public class StudentDao {
 	private SqlSessionFactory sqlSessionFactory;
-	public static final String NAMESPACE=
-			"com.mybatis3.dao.mapper.StudentMapper.";
+	public static final String NAMESPACE = "com.mybatis3.dao.mapper.StudentMapper.";
+
 	public StudentDao() {
 		try {
-			sqlSessionFactory=
-					new SqlSessionFactoryBuilder()
-					.build(Resources.getResourceAsStream("mybatis-config.xml")); 
-		}catch (Exception e) {
+			sqlSessionFactory = new SqlSessionFactoryBuilder()
+					.build(Resources.getResourceAsStream("mybatis-config.xml"));
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	/**************************************************
-	1. SELECT[결과타입이 DTO[DTO List] 객체인경우] 
-	**************************************************/
+	 * 1. SELECT[결과 타입이 DTO[DTO List] 객체인 경우]
+	 **************************************************/
 	/*
-	 resultType :  DTO
+	 resultType : DTO
 	*/
 	public Student findStudentById(Integer studId) {
-		Student student=null;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		Student student = sqlSession.selectOne(NAMESPACE + "findStudentById", studId);
+		sqlSession.close();
 		return student;
 	}
 
 	public List<Student> findAllStudents() {
-		
-		List<Student> studentList=null;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		List<Student> studentList = sqlSession.selectList(NAMESPACE + "findAllStudents");
+		sqlSession.close();
 		return studentList;
 	}
 
 	/*
-	 * resultMap :  DTO
+	 * resultMap : DTO
 	 */
 	public Student findStudentByIdResultMap(Integer studId) {
-		Student student=null;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		Student student = sqlSession.selectOne(NAMESPACE + "findStudentByIdResultMap", studId);
+		sqlSession.close();
 		return student;
 	}
 
 	public List<Student> findAllStudentsResultMap() {
-		List<Student> studentList=null;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		List<Student> studentList = sqlSession.selectList(NAMESPACE + "findAllStudentsResultMap");
+		sqlSession.close();
 		return studentList;
 	}
+
 	/*******************************************************************
-	 2. SELECT[결과타입이 Wrapper(String)[Wrapper(String) List]객체인경우] 
-	*******************************************************************/
+	 * 2. SELECT[결과타입이 Wrapper(String)[Wrapper(String) List]객체인경우]
+	 *******************************************************************/
 	/*
 	 * resultType :  String,Wrapper,List<Wrapper>,List<String>
 	 */
-	public String  findStudentNameById(Integer studId) {
-		String name="";
+	public String findStudentNameById(Integer studId) {
+		String name = "";
 		return name;
 	}
-	public List<String> findStudentNameList(){
-		List<String> nameList=null;
+
+	public List<String> findStudentNameList() {
+		List<String> nameList = null;
 		return nameList;
 	}
+
 	/**************************************************
-	 3. SELECT[student + address JOIN]( 1 : 1 )
+	 * 3. SELECT[student + address JOIN]( 1 : 1 )
 	 **************************************************/
 	/*
 	 * resultMap : studentWithAddressResultMap
 	 */
 	public Student findStudentByIdWithAddress(Integer studId) {
-		Student student=null;
+		Student student = null;
 		return student;
 	}
 
 	/*********************************************************
-	 4. SELECT[students + courses[course_enrollment]+course] JOIN( 1 : N )
+	 * 4. SELECT[students + courses[course_enrollment]+course] JOIN( 1 : N )
 	 ********************************************************/
 	/*
 	 * resultMap : studentWithCoursesResultMap
 	 */
 	public Student findStudentByIdWithCourses(Integer studId) {
-		Student student =null;
-		
+		Student student = null;
+
 		return student;
 	}
+
 	/**************************************************
-	 5. SELECT[students + address + courses[course_enrollment] JOIN( 1 : 1 : N )
-	**************************************************/
+	 * 5. SELECT[students + address + courses[course_enrollment] JOIN( 1 : 1 : N )
+	 **************************************************/
 	/*
 	 * resultMap : studentWithAddressWithCoursesResultMap
 	 */
 	public Student findStudentByIdWithAddressAndCourses(Integer studId) {
-		
-		Student student =null;
+
+		Student student = null;
 		return student;
 	}
-	
+
 	/**************************************************
 	 * INSERT
 	 ***************************************************/
@@ -110,18 +120,17 @@ public class StudentDao {
 	parameterType: DTO,VO,Domain
 	*/
 	public int insertStudentBySequence(Student student) {
-		
-		int rowCount=0;
-				
+
+		int rowCount = 0;
+
 		return rowCount;
 	}
+
 	public int insertStudentBySequenceReturnPrimaryKey(Student student) {
-		
-		int rowCount=0;
+
+		int rowCount = 0;
 		return 0;
 	}
-
-
 
 	/**************************************************
 	 * UPDATE
@@ -130,9 +139,9 @@ public class StudentDao {
 	  parameterType: DTO,VO,Domain
 	 */
 	public int updateStudentById(Student updateStudent) {
-		
-		int rowCount=0;
-	
+
+		int rowCount = 0;
+
 		return rowCount;
 	}
 
@@ -143,20 +152,8 @@ public class StudentDao {
 	 parameterType: java.lang.Integer,java.lang.String
 	 */
 	public int deleteStudentById(Integer studId) {
-		
+
 		return 0;
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
