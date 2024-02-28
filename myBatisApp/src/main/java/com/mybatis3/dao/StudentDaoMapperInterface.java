@@ -13,29 +13,36 @@ import com.mybatis3.domain.Student;
 
 public class StudentDaoMapperInterface {
 	private SqlSessionFactory sqlSessionFactory;
-	public static final String NAMESPACE="com.mybatis3.dao.mapper.StudentMapper.";
-	
+	public static final String NAMESPACE = "com.mybatis3.dao.mapper.StudentMapper.";
+
 	public StudentDaoMapperInterface() {
 		try {
-			InputStream mybatisConfigInputStream = 
-					Resources.getResourceAsStream("mybatis-config-mapper-interface.xml");
-			SqlSessionFactoryBuilder sqlSessionFactoryBuilder=new SqlSessionFactoryBuilder();
-			this.sqlSessionFactory = 
-					sqlSessionFactoryBuilder.build(mybatisConfigInputStream);
-		}catch (Exception e) {
+			InputStream mybatisConfigInputStream = Resources.getResourceAsStream("mybatis-config-mapper-interface.xml");
+			SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
+			this.sqlSessionFactory = sqlSessionFactoryBuilder.build(mybatisConfigInputStream);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	/**************************************************
+	1. SELECT[결과타입이 DTO[DTO List] 객체인경우] 
+	**************************************************/
 	/*
 	 resultType Dto 
 	*/
 	public Student findStudentById(Integer studId) {
-		return null;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		Student student = sqlSession.getMapper(StudentMapper.class).findStudentById(studId);
+		sqlSession.close();
+		return student;
 	}
+
 	public List<Student> findAllStudents() {
-		return null;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+		List<Student> studentList = studentMapper.findAllStudents();
+		sqlSession.close();
+		return studentList;
 	}
-	
-	
-	
+
 }

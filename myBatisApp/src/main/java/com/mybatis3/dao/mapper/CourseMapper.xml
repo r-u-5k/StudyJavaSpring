@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis3.dao.mapper.CourseMapper">
 	<!-- ####################### resultMao정의 ####################### -->	
-	<resultMap  id="courseWithStudentsResultMap" type="x">
-		
-	</resultMap>
-	<resultMap  id="courseWithTutorResultMap" type="x">
-		
+	<resultMap  id="courseResultMap" type="Course" autoMapping="true">
+		<id column="COURSE_ID" property="courseId"/>
+		<collection property="studentList" ofType="Student" autoMapping="true">
+		</collection>
 	</resultMap>		
 		
 	<!-- 
 	/**************************************************
-	 	SELECT[courses + students[course_enrollment] JOIN( 1 : N )
+	 	SELECT[courses + course_enrollment (+ students)] JOIN( 1 : N )
 	**************************************************/
 	/*
-	 * resultMap : courseWithStudentsResultMap
+	 * resultMap : courseResultMap
 	 */
 	 -->	
-	<select id="findCourseByIdWithStudents">
+	<select id="findCourseByIdWithStudents" parameterType="int" 
+			resultMap="courseResultMap">
+		SELECT C.*, S.*, C.NAME AS COURSE_NAME FROM COURSES C 
+		JOIN COURSE_ENROLLMENT CE ON C.COURSE_ID = CE.COURSE_ID
+		JOIN STUDENTS S ON CE.STUD_ID = S.STUD_ID
+		WHERE C.COURSE_ID=#{COURSEID}
 	</select>
 	<select id="findCourseByIdWithTutor">
+		
 	</select>
 	
 </mapper>
