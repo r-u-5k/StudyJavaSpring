@@ -22,21 +22,24 @@ public class CourseDao {
 			e.printStackTrace();
 		}
 	}
+
 	/**************************************************
- 	SELECT[courses + students[course_enrollment] JOIN( 1 : N )
+	 * SELECT[courses + students[course_enrollment] JOIN( 1 : N )
 	 **************************************************/
 	public Course findCourseByIdWithStudents(Integer courseId) {
-		
-		Course course=null;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		Course course = sqlSession.selectOne(NAMESPACE + "findCourseByIdWithStudents", courseId);
+		sqlSession.close();
 		return course;
 	}
+
 	/**************************************************
- 	SELECT[courses + tutor JOIN( 1 : 1 )]
+	 * SELECT[courses + tutor JOIN( 1 : 1 )]
 	 **************************************************/
 	public Course findCourseByIdWithTutor(Integer courseId) {
-		
-		Course course=null;
-	
+
+		Course course = null;
+
 		return course;
 	}
 

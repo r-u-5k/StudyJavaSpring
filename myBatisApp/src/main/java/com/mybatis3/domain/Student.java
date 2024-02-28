@@ -1,18 +1,26 @@
 package com.mybatis3.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.SuperBuilder;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Builder
+@RequiredArgsConstructor
 
 /*
 이름      널?       유형           
@@ -26,19 +34,15 @@ BIO              CLOB
 PIC              BLOB         
 ADDR_ID          NUMBER(11)   
 */
-@ToString
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 
 public class Student {
+	@NonNull
 	private Integer studId;
 	private String name;
 	private String email;
 	private String phone;
 	private Date dob;
-	
-	private Address address;
+	private Address address; // FK
+	@Default
+	private List<Course> courseList = new ArrayList<>();
 }

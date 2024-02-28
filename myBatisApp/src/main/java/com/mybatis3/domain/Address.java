@@ -1,18 +1,22 @@
 package com.mybatis3.domain;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.Builder.Default;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Builder
 
 /*
 이름      널?       유형           
@@ -24,14 +28,8 @@ STATE   NOT NULL VARCHAR2(50)
 ZIP              VARCHAR2(10) 
 COUNTRY NOT NULL VARCHAR2(50)
 */
-@ToString
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 
-public class Address implements Serializable {
+public class Address {
 	private Integer addrId;
 	private String street;
 	private String city;
@@ -40,5 +38,6 @@ public class Address implements Serializable {
 	private String country;
 	@Default
 	private List<Student> studentList = new ArrayList<Student>();
-
+	@Default
+	private List<Tutor> tutorList = new ArrayList<Tutor>();
 }

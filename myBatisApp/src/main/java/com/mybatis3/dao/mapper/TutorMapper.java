@@ -17,6 +17,7 @@ public interface TutorMapper {
 	      where t.tutor_id=#{tutorId}
 	</select>
 	 */
+	/*
 	@ResultMap("tutorWithCoursesResultMap")
 	@Select("SELECT t.tutor_id, t.name as tutor_name, email,course_id, c.name, description, start_date, end_date\r\n"
 			+ "	      FROM tutors t \r\n"
@@ -24,4 +25,5 @@ public interface TutorMapper {
 			+ "	      on t.tutor_id=c.tutor_id\r\n"
 			+ "	      where t.tutor_id=#{tutorId}")
 	public Tutor findTutorByIdWithCourses(Integer studId);
+	*/
 }

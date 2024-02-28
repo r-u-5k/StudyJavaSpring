@@ -12,15 +12,19 @@ public class StudentDao2_SELECT_JOIN_Main {
 		 * resultMap : studentWithAddressResultMap
 		 */
 		System.out.println("---------findStudentByIdWithAddress------------------");
+		System.out.println(studentDao.findStudentByIdWithAddress(1));
+		
 		/*********************************************************
-		 4. SELECT[students + courses[course_enrollment] JOIN( 1 : N )
+		 4. SELECT[students + course_enrollment (+ course) JOIN( 1 : N )
 		 ********************************************************/
 		/*
 		 * resultMap : studentWithCoursesResultMap
 		 */
 		System.out.println("---------findStudentByIdWithCourses------------------");
+		System.out.println(studentDao.findStudentByIdWithCourses(1));
+		
 		/**************************************************
-		 5. SELECT[students + address + courses[course_enrollment] JOIN( 1 : 1 : N )
+		 5. SELECT[students + address + course_enrollment (+ courses) JOIN( 1 : 1 : N )
 		**************************************************/
 		/*
 		 * resultMap : studentWithAddressAndCoursesResultMap

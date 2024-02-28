@@ -45,14 +45,24 @@ WHERE S.STUD_ID=1;
  
 --findStudentByIdWithCourses 
 /*
-students + courses  join
+students + course_enrollment join
 */     
-SELECT S.*,C.* 
+SELECT S.*, CE.* 
+FROM STUDENTS S 
+JOIN COURSE_ENROLLMENT CE
+ON S.STUD_ID = CE.STUD_ID
+WHERE S.STUD_ID=1;
+
+/*
+students + course_enrollment (+ courses join)
+*/
+SELECT S.*, C.* 
 FROM STUDENTS S 
 JOIN COURSE_ENROLLMENT CE
 ON S.STUD_ID = CE.STUD_ID
 JOIN COURSES C
 ON CE.COURSE_ID=C.COURSE_ID WHERE S.STUD_ID=1;
+
 /*
 students + courses join
 */
@@ -65,13 +75,14 @@ SELECT  S.STUD_ID,S.NAME AS STUDENT_NAME ,S.EMAIL,S.PHONE,S.DOB ,
 		ON CE.COURSE_ID=C.COURSE_ID WHERE S.STUD_ID=1;
        
 --findCourseByIdWithStudents 
+/*
+courses + course_enrollment (+ students) join 
+*/
 SELECT C.*,S.* FROM COURSES C 
 		JOIN COURSE_ENROLLMENT CE ON C.COURSE_ID=CE.COURSE_ID
 		JOIN STUDENTS S ON CE.STUD_ID=S.STUD_ID
 		WHERE C.COURSE_ID=1;
 
-
-       
 /*
 tutor + courses join
 */

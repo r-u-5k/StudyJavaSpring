@@ -69,13 +69,35 @@ public class StudentDao {
 	 * resultType :  String,Wrapper,List<Wrapper>,List<String>
 	 */
 	public String findStudentNameById(Integer studId) {
-		String name = "";
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		String name = sqlSession.selectOne(NAMESPACE + "findStudentNameById", studId);
+		sqlSession.close();
 		return name;
 	}
 
 	public List<String> findStudentNameList() {
-		List<String> nameList = null;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		List<String> nameList = sqlSession.selectList(NAMESPACE + "findStudentNameList");
+		sqlSession.close();
 		return nameList;
+	}
+
+	/*
+	 * resultType : Map
+	 */
+	public HashMap findStudentByIdMap(Integer studId) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		HashMap findStudentMap = sqlSession.selectOne(NAMESPACE + "findStudentByIdMap", studId);
+		sqlSession.commit();
+		sqlSession.close();
+		return findStudentMap;
+	}
+
+	public List<HashMap> findAllStudentsMapList() {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		List<HashMap> studentMapList = sqlSession.selectList(NAMESPACE + "findAllStudentsMapList");
+		sqlSession.close();
+		return studentMapList;
 	}
 
 	/**************************************************
@@ -85,24 +107,27 @@ public class StudentDao {
 	 * resultMap : studentWithAddressResultMap
 	 */
 	public Student findStudentByIdWithAddress(Integer studId) {
-		Student student = null;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		Student student = sqlSession.selectOne(NAMESPACE + "findStudentByIdWithAddress", studId);
+		sqlSession.close();
 		return student;
 	}
 
 	/*********************************************************
-	 * 4. SELECT[students + courses[course_enrollment]+course] JOIN( 1 : N )
+	 * 4. SELECT[students + course_enrollment (+ courses) JOIN( 1 : N )
 	 ********************************************************/
 	/*
 	 * resultMap : studentWithCoursesResultMap
 	 */
 	public Student findStudentByIdWithCourses(Integer studId) {
-		Student student = null;
-
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		Student student = sqlSession.selectOne(NAMESPACE + "findStudentByIdWithCourses", studId);
+		sqlSession.close();
 		return student;
 	}
 
 	/**************************************************
-	 * 5. SELECT[students + address + courses[course_enrollment] JOIN( 1 : 1 : N )
+	 * 5. SELECT[students + address + course_enrollment (+ courses) JOIN( 1 : 1 : N)
 	 **************************************************/
 	/*
 	 * resultMap : studentWithAddressWithCoursesResultMap
@@ -157,6 +182,41 @@ public class StudentDao {
 		int rowCount = sqlSession.delete(NAMESPACE + "deleteStudentById", studId);
 		sqlSession.close();
 		return rowCount;
+	}
+
+	public int deleteStudentByName(String name) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		int rowCount = sqlSession.delete(NAMESPACE + "deleteStudentByName", name);
+		sqlSession.close();
+		return rowCount;
+	}
+
+	public int deleteStudentByNameLike(String name) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		int rowCount = sqlSession.delete(NAMESPACE + "deleteStudentByNameLike", name);
+		sqlSession.close();
+		return rowCount;
+	}
+
+	public List<Student> findStudentByIdRangeParamMap(Map rangeMap) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		List<Student> studentList = sqlSession.selectList(NAMESPACE + "findStudentByIdRangeParamMap", rangeMap);
+		sqlSession.close();
+		return studentList;
+	}
+
+	public int updateStudentParamMap(Map studentMap) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		int rowCount = sqlSession.update(NAMESPACE + "updateStudentParamMap", studentMap);
+		sqlSession.close();
+		return rowCount;
+	}
+
+	public List<Student> findStudentsThreeParamMap(Map threeStudentMap) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		List<Student> studentList = sqlSession.selectList(NAMESPACE + "findStudentsThreeParamMap", threeStudentMap);
+		sqlSession.close();
+		return studentList;
 	}
 
 }

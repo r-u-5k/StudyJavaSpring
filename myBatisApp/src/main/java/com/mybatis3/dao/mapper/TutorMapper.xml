@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis3.dao.mapper.TutorMapper">
-	
+	<resultMap type="com.mybatis3.domain.Tutor" id="tutorResultMap" autoMapping="true">
+		<id column="TUTOR_ID" property="tutorId" />
+		<collection property="courseList" ofType="com.mybatis3.domain.Course" autoMapping="true">
+			<result column="COURSE_NAME" property="name"/>
+		</collection>
+	</resultMap>
 	<!-- 
 	/*****************************************
 	SELECT  TUTOR + COURSE JOIN [ 1 : N ]
 	*****************************************/
 	 -->
-	<select id="findTutorByIdWithCourses" >
-			
+	<select id="findTutorByIdWithCourses" parameterType="int" resultMap="tutorResultMap">	
+	SELECT T.TUTOR_ID, T.NAME AS TUTOR_NAME, EMAIL, DOB, COURSE_ID, C.NAME AS COURSE_NAME, DESCRIPTION, START_DATE, END_DATE
+    FROM TUTORS T 
+    LEFT OUTER JOIN COURSES C 
+    ON T.TUTOR_ID = C.TUTOR_ID
+    WHERE T.TUTOR_ID = #{TUTORID} 
 	</select>
-	
 </mapper>

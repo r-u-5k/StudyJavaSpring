@@ -9,40 +9,26 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.mybatis3.domain.Tutor;
 
-public class TutorDao 
-{
+public class TutorDao {
 	private SqlSessionFactory sqlSessionFactory;
-	public static final String NAMESPACE="com.mybatis3.dao.mapper.TutorMapper.";
+	public static final String NAMESPACE = "com.mybatis3.dao.mapper.TutorMapper.";
+
 	public TutorDao() {
 		try {
-			InputStream mybatisConfigInputStream = 
-					Resources.getResourceAsStream("mybatis-config.xml");
-			SqlSessionFactoryBuilder sqlSessionFactoryBuilder=new SqlSessionFactoryBuilder();
-			this.sqlSessionFactory = 
-					sqlSessionFactoryBuilder.build(mybatisConfigInputStream);
-		}catch (Exception e) {
+			InputStream mybatisConfigInputStream = Resources.getResourceAsStream("mybatis-config.xml");
+			SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
+			this.sqlSessionFactory = sqlSessionFactoryBuilder.build(mybatisConfigInputStream);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	/*****************************************
-	SELECT  TUTOR + COURSES JOIN [ 1 : N ]
-	*****************************************/
+	 * SELECT TUTOR + COURSES JOIN [ 1 : N ]
+	 *****************************************/
 	public Tutor findTutorByIdWithCourses(Integer tutorId) {
-		
-		Tutor tutor=null;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		Tutor tutor = sqlSession.selectOne(NAMESPACE + "findTutorByIdWithCourses", tutorId);
 		return tutor;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
