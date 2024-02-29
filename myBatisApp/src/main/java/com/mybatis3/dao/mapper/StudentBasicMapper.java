@@ -15,8 +15,9 @@ public interface StudentBasicMapper {
 	 * 메쏘드인자타입은 StudentBasicMapper.xml 파일의 parameterType 와일치
 	 * 메쏘드리턴타입은 StudentBasicMapper.xml 파일의 resultType 와일치(ResultSet이 1개이상일경우는 List)
 	 */
-//	@Select("select stud_id as studid,name,email,dob from students where stud_id = #{studId}")
-	public Student findStudentById(Integer studId);
+	@Select("SELECT STUD_ID, NAME, EMAIL, PHONE, DOB FROM STUDENTS WHERE STUD_ID = #{STUDID}")
+	public Student findStudentById(@Param("STUDID") Integer studId);
+	@Select("SELECT STUD_ID, NAME, EMAIL, PHONE, DOB FROM STUDENTS")
 	public List<Student> findAllStudents();
 	
 	/******************StudentBasicMapper.xml*******************

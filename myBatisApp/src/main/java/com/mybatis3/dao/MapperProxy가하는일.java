@@ -8,7 +8,7 @@ import com.mybatis3.dao.mapper.StudentBasicMapper;
 import com.mybatis3.dao.mapper.StudentMapper;
 import com.mybatis3.domain.Student;
 
-public class MapperProxy /* implements StudentBasicMapper */ {
+public class MapperProxy가하는일 {
 	private SqlSession sqlSession;
 
 	//@Override

@@ -9,10 +9,10 @@
 		<setting name="logImpl" value="LOG4J"/>
 		<!-- 카멜 케이스 VO 매핑 -->
 		<setting name="mapUnderscoreToCamelCase" value="true" />
-		<!-- 쿼리 결과 필드가 null인 경우, 누락이 되어 나오지 않게 설정 -->
-
+		<!-- 쿼리 결과 필드가 null인 경우, 누락되어 나오지 않게 설정 -->
+		
 		<!-- 쿼리에 보내는 파라미터가 null인 경우, 오류가 발생하는 것 방지 -->
-
+		
 	</settings>
 	<typeAliases>
 		<typeAlias alias="Student" type="com.mybatis3.domain.Student" />
@@ -41,6 +41,7 @@
 	<mappers>
 		<mapper class="com.mybatis3.dao.mapper.StudentBasicMapper"/>
 		<mapper class="com.mybatis3.dao.mapper.StudentMapper"/>
+		<mapper resource="com/mybatis3/dao/mapper/AddressMapper.xml"/>
 	</mappers>
 </configuration>
 

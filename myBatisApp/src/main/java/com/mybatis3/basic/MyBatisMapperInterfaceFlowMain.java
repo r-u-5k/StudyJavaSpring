@@ -50,7 +50,7 @@ public class MyBatisMapperInterfaceFlowMain {
 		 * 4. StudentBasicMapper[MapperInterface]사용(CRUD)
 		 */
 		System.out.println("Student List: " + studentBasicMapper.findAllStudents());
-		System.out.println("Student: " + studentBasicMapper.findStudentById(1));
+		System.out.println("Student: " + studentBasicMapper.findStudentById(2));
 		
 		/*
 		 * 5. SqlSession close
