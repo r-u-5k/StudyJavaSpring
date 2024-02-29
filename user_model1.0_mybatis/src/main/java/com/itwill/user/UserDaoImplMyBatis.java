@@ -21,9 +21,9 @@ public class UserDaoImplMyBatis implements UserDao {
 	@Override
 	public int update(User user) throws Exception {
 		System.out.println("#### UserDaoImplMyBatis : update() 호출  ");
-		SqlSession sqlSession= sqlSessionFactory.openSession(true);
-		UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
-		int rowCount=0;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		int rowCount = userMapper.update(user);
 		sqlSession.close();
 		return rowCount;
 	}
@@ -31,9 +31,9 @@ public class UserDaoImplMyBatis implements UserDao {
 	@Override
 	public User findUser(String userId) throws Exception {
 		System.out.println("#### UserDaoImplMyBatis : findUser() 호출  ");
-		SqlSession sqlSession= sqlSessionFactory.openSession(true);
-		UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
-		User user=null;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		User user = userMapper.findUser(userId);
 		sqlSession.close();
 		return user;
 	}
@@ -41,9 +41,9 @@ public class UserDaoImplMyBatis implements UserDao {
 	@Override
 	public List<User> findUserList() throws Exception {
 		System.out.println("#### UserDaoImplMyBatis : findUserList 호출  ");
-		SqlSession sqlSession= sqlSessionFactory.openSession(true);
-		UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
-		List<User> userList=null;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		List<User> userList = userMapper.findUserList();
 		sqlSession.close();
 		return userList;
 	}
@@ -51,9 +51,9 @@ public class UserDaoImplMyBatis implements UserDao {
 	@Override
 	public int insert(User user) throws Exception {
 		System.out.println("#### UserDaoImplMyBatis : insert() 호출  ");
-		SqlSession sqlSession= sqlSessionFactory.openSession(true);
-		UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
-		int rowCount=0;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		int rowCount = userMapper.insert(user);
 		sqlSession.close();
 		return rowCount;
 	}
@@ -61,9 +61,9 @@ public class UserDaoImplMyBatis implements UserDao {
 	@Override
 	public int delete(String userId) throws Exception {
 		System.out.println("#### UserDaoImplMyBatis : delete() 호출  ");
-		SqlSession sqlSession= sqlSessionFactory.openSession(true);
-		UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
-		int rowCount=0;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		int rowCount = userMapper.delete(userId);
 		sqlSession.close();
 		return rowCount;
 	}
@@ -71,9 +71,9 @@ public class UserDaoImplMyBatis implements UserDao {
 	@Override
 	public int countByUserId(String userId) throws Exception {
 		System.out.println("#### UserDaoImplMyBatis : countByUserId 호출  ");
-		SqlSession sqlSession= sqlSessionFactory.openSession(true);
-		UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
-		int rowCount=0;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		int rowCount = userMapper.countByUserId(userId);
 		sqlSession.close();
 		return rowCount;
 	}

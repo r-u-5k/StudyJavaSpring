@@ -102,18 +102,16 @@ a.m2:hover {
 		</tr>
 
 		<tr>
-			<td height="100" class="t1"><br> HTTP에서는 POST 방식으로 파일을 업로드
-				할 수 있는 방법을 제공하는데 다음과 같이 설정하여야 한다.<br>
-			<br> <font color="#0000ff"> ▶ &lt;FORM&gt; 태그에서 method를
-					POST방식으로 설정한다.<br>
-				<br> ▶ action="upload.jsp" : 파일 업로드를 위한 JSP를 지정한다.<br>
-				<br> ▶ enctype="multipart/form-data" : 업로드할 파일의 형식을 지정하는 것으로
-					반드시 설정한다.<br>
-				<br> ▶ &lt;input type="file" name="upfile"&gt; : 파일을 업로드하기 위해
-					input type의 형식을<br> &nbsp;&nbsp;&nbsp;&nbsp;"file"로 지정해 주어야
-					한다. 이는 브라우저가 파일을 선택할 수 있는 버튼을 자동으로 제공함으로써,<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;사용자가 보내고자 하는 파일을 선택할 수 있도록 하는 것이다.
-			</font></td>
+			<td height="100" class="t1"><br> 
+				HTTP에서는 POST 방식으로 파일을 업로드할 수 있는 방법을 제공하는데 다음과 같이 설정하여야 한다.<br> <br> 
+				<font color="#0000ff"> 
+				▶ &lt;FORM&gt; 태그에서 method를 POST방식으로 설정한다.<br><br> 
+				▶ action="upload.jsp" : 파일 업로드를 위한 JSP를 지정한다.<br> <br>
+				▶ enctype="multipart/form-data" : 업로드할 파일의 형식을 지정하는 것으로 반드시 설정한다.<br><br> 
+				▶ &lt;input type="file" name="upfile"&gt; : 파일을 업로드하기 위해 input type의 형식을<br>&nbsp;&nbsp;&nbsp;&nbsp;
+				"file"로 지정해 주어야 한다. 이는 브라우저가 파일을 선택할 수 있는 버튼을 자동으로 제공함으로써,<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;사용자가 보내고자 하는 파일을 선택할 수 있도록 하는 것이다.
+				</font></td>
 		</tr>
 	</table>
 
@@ -144,14 +142,14 @@ a.m2:hover {
 					</tr>
 
 					<tr bgcolor=#f4f4f4>
-						<td align=center colspan=2><input type=submit value=올라가거라...
+						<td align=center colspan=2><input type="submit" value="올라가거라..."
 							style="background-color: #bbdb76; border: 1 solid #556b2f; color: #4B0082;"></td>
 					</tr>
 				</table>
 			</td>
 		</table>
 	</form>
-	
+
 
 
 	<br>
@@ -160,8 +158,7 @@ a.m2:hover {
 	<br>
 
 
-	<form method="POST" action="A.upload.jsp"
-		enctype="multipart/form-data">
+	<form method="POST" action="A.upload.jsp" enctype="multipart/form-data">
 
 		<table border=0 cellpadding=0 cellspacing=0 width=500 align=center>
 			<td valign=top bgcolor=#000000 align=center>
@@ -205,7 +202,7 @@ a.m2:hover {
 
 	</form>
 
-	
+
 
 </body>
 </html>
