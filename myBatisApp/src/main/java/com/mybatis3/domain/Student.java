@@ -18,7 +18,6 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Builder
 @RequiredArgsConstructor
 
@@ -45,4 +44,11 @@ public class Student {
 	private Address address; // FK
 	@Default
 	private List<Course> courseList = new ArrayList<>();
+	@Override
+	public String toString() {
+		return "Student [studId=" + studId + ", name=" + name + ", email=" + email + ", phone=" + phone + ", dob=" + dob
+				+ ", address=" + address + ", courseList=" + courseList + "]\n";
+	}
+	
+	
 }
