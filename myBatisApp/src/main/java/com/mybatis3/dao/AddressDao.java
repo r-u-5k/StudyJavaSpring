@@ -11,6 +11,8 @@ import com.mybatis3.domain.Address;
 
 public class AddressDao {
 	private SqlSessionFactory sqlSessionFactory;
+	public static final String NAMESPACE = "com.mybatis3.dao.mapper.AddressMapper.";
+
 	public AddressDao() {
 		try {
 			InputStream myBatisConfigInputStream = Resources.getResourceAsStream("mybatis-config.xml");
@@ -20,23 +22,29 @@ public class AddressDao {
 			e.printStackTrace();
 		}
 	}
-	
-	/*************************************************
-	 SELECT ( addresses + students JOIN)[ 1 : n ]
-	 *************************************************/
-	public Address findAddressByIdWithStudents(Integer addrId) {
-		
-		Address address=null;
+
+	public Address findAddressById(Integer addrId) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		Address address = sqlSession.selectOne(NAMESPACE + "findAddressById", addrId);
 		return address;
 	}
+
 	/*************************************************
-	 SELECT ( addresses + tutors JOIN)[ 1 : n ]
+	 * SELECT ( addresses + students JOIN)[ 1 : n ]
+	 *************************************************/
+	public Address findAddressByIdWithStudents(Integer addrId) {
+
+		Address address = null;
+		return address;
+	}
+
+	/*************************************************
+	 * SELECT ( addresses + tutors JOIN)[ 1 : n ]
 	 *************************************************/
 	public Address findAddressByIdWithTutors(Integer addrId) {
-		
-		Address address=null;
-				
+
+		Address address = null;
+
 		return address;
 	}
 }
-

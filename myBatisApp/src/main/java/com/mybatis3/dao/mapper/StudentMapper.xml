@@ -8,13 +8,12 @@
 	############################# 
 	-->
 	<resultMap type="com.mybatis3.domain.Student" id="studentResultMap" autoMapping="true">
-		<id column="STUD_ID" property="studId"/>
-		<!-- 
+		<id column="STUD_ID" property="studId"/> 
 		<result column="NAME" property="name"/>
 		<result column="EMAIL" property="email"/>
 		<result column="PHONE" property="phone"/>
-		<result column="DOB" property="dob"/> -->		
-		<association property="address" 
+		<result column="DOB" property="dob"/>		
+		<association column="ADDR_ID" property="address" 
 					 resultMap="com.mybatis3.dao.mapper.AddressMapper.addressResultMap">
 		</association>
 		<collection property="courseList" ofType="com.mybatis3.domain.Course" 
@@ -29,18 +28,18 @@
 	***************************************************/ 
 	parameterType: DTO,VO,Domain 
 	-->
-	<insert id="insertStudentBySequence" parameterType="com.mybatis3.domain.Student">
+	<!-- <insert id="insertStudentBySequence" parameterType="com.mybatis3.domain.Student">
 		INSERT INTO STUDENTS (STUD_ID, NAME, PHONE, EMAIL, DOB) 
 		VALUES (STUDENTS_STUD_ID_SEQ.NEXTVAL, #{name}, #{phone}, #{email}, #{dob})
 	</insert>
-	<insert id="insertStudentBySequenceReturnPrimaryKey" 
-			parameterType="com.mybatis3.domain.Student">
+	
+	<insert id="insertStudentBySequenceReturnPrimaryKey" parameterType="com.mybatis3.domain.Student">
 		<selectKey order="BEFORE" resultType="int" keyProperty="studId">
 			SELECT STUDENTS_STUD_ID_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO STUDENTS (STUD_ID, NAME, PHONE, EMAIL, DOB) 
 		VALUES (#{studId}, #{name}, #{phone}, #{email}, #{dob})
-	</insert>
+	</insert> -->
 	
 	<!-- 
 	/************************************************** 
@@ -107,13 +106,12 @@
 	 * resultMap : studentWithAddressResultMap 
 	 */ 
 	 -->
-	<select id="findStudentByIdWithAddress" parameterType="int" 
-			resultMap="studentResultMap">
+	<!-- <select id="findStudentByIdWithAddress" parameterType="int" resultMap="studentResultMap">
 		SELECT STUD_ID, NAME, EMAIL, DOB, A.ADDR_ID, STREET, CITY, STATE, ZIP, COUNTRY
   		FROM STUDENTS S
  		LEFT OUTER JOIN ADDRESSES A ON S.ADDR_ID = A.ADDR_ID
  		WHERE STUD_ID = #{STUDID}
-	</select>
+	</select> -->
 
 	<!-- 
 	/************************************************** 
@@ -123,21 +121,21 @@
 	<!-- 
 	resultType : Dto 
 	-->
-	<select id="findStudentById" parameterType="int" resultType="com.mybatis3.domain.Student">
+	<!-- <select id="findStudentById" parameterType="int" resultType="com.mybatis3.domain.Student">
 		select stud_id,name,phone,email,dob from students where stud_id=#{studId}
 	</select>
 	<select id="findAllStudents" resultType="com.mybatis3.domain.Student">
 		select stud_id,name,phone,email,dob from students
-	</select>
+	</select> -->
 	<!-- 
 	resultMap : DTO 
 	-->
-	<select id="findStudentByIdResultMap" parameterType="int" resultMap="studentResultMap">
+	<!-- <select id="findStudentByIdResultMap" parameterType="int" resultMap="studentResultMap">
 		select stud_id,name,phone,email,dob from students where stud_id=#{studId}
 	</select>
 	<select id="findAllStudentsResultMap" resultMap="studentResultMap">
 		select stud_id,name,phone,email,dob from students
-	</select>
+	</select> -->
 	<!-- 
 	/********************************************************************** 
 	2. SELECT[결과타입이 Wrapper(String)[Wrapper(String) List]객체인경우]
@@ -146,8 +144,7 @@
 	resultType : String,Wrapper,List<Wrapper>,List<String> 
 	*/ 
 	-->
-	<select id="findStudentNameById" parameterType="java.lang.Integer" 
-									 resultType="java.lang.String">
+	<select id="findStudentNameById" parameterType="java.lang.Integer" resultType="java.lang.String">
 		select name from students where stud_id=#{studId}
 	</select>
 	<select id="findStudentNameList" resultType="java.lang.String">
@@ -161,9 +158,7 @@
 		resultType:Map,HashMap	
 	-->
 	<!-- resultType Map -->
-	<select id="findStudentByIdMap" 
-			parameterType="java.lang.Integer"
-			resultType="java.util.Map">
+	<select id="findStudentByIdMap" parameterType="java.lang.Integer" resultType="java.util.Map">
 		select stud_id as studid ,name,email,phone,dob 
 		from students
 		where stud_id = #{studId}
@@ -171,14 +166,12 @@
 	
 	
 	<!-- resultType List<Map> -->
-	<select id="findAllStudentsMapList" 
-		resultType="java.util.Map">
+	<select id="findAllStudentsMapList" resultType="java.util.Map">
 		select stud_id as studid ,name,email,dob,phone
 		from students
 	</select>
 	
-	<update id="updateStudentParamMap"   
-			parameterType="java.util.Map">
+	<update id="updateStudentParamMap" parameterType="java.util.Map">
 		update students set name=#{name},email=#{email},dob=#{dob}
 		where stud_id=#{studId}
 	</update>
