@@ -7,9 +7,9 @@
     pageEncoding="UTF-8"%>
 <%@include file="login_check.jspf"%>        
 <%
-      CartService cartService=new CartService();
-      List<Cart> cartList = cartService.getCartItemByUserId(sUserId);
-%>    
+        CartService cartService=new CartService();
+              List<Cart> cartList = cartService.getCartItemByUserId(sUserId);
+        %>    
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
