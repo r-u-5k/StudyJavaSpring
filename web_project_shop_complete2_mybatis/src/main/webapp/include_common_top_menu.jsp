@@ -3,7 +3,7 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	int cart_item_count=0;
+int cart_item_count=0;
 	String sUserId=(String)session.getAttribute("sUserId");
 	if(sUserId!=null){
 		CartService cartService=new CartService();

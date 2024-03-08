@@ -26,10 +26,10 @@
 			<li><a href=""></a></li>
 			<li><a href="javascript:login_message();">장바구니</a></li>
 	<%
-		}else{ 
-			User sUser=new UserService().findUser(sUserId);
-		    CartService cartService=new CartService();
-		  	int cart_item_count = cartService.getCartItemByUserId(sUserId).size();
+	}else{ 
+		User sUser=new UserService().findUser(sUserId);
+			    CartService cartService=new CartService();
+			  	int cart_item_count = cartService.getCartItemByUserId(sUserId).size();
 	%>	
 		<li><a href="user_view.jsp"><%=sUser.getName()+"님"%></a></li>
 		<li><a href="user_logout_action.jsp">로그아웃</a></li>
