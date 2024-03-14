@@ -25,31 +25,31 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import com.itwill.user.UserDao;
-
 public class BasicDataSourceExample {
 	public static void main(String[] args) throws Exception {
-		/**************** org.apache.tomcat.dbcp.dbcp2.BasicDataSource **********/
-		BasicDataSource basicDataSource = new BasicDataSource();
-		Properties properties = new Properties();
-		/*********************[jdbc.properties]************************
-		 spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
-		 spring.datasource.url=jdbc:oracle:thin:@124.198.47.195:1521:xe
-		 spring.datasource.username=jdeveloper30
-		 spring.datasource.password=jdeveloper30
-		 **************************************************************/
+		/****************org.apache.tomcat.dbcp.dbcp2.BasicDataSource**********/
+		BasicDataSource basicDataSource=new BasicDataSource();
+		Properties properties=new Properties();
+		/***************[jdbc.properties]***********************
+		spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
+		spring.datasource.url=jdbc:oracle:thin:@124.198.47.195:1521:xe
+		spring.datasource.username=jdeveloper30
+		spring.datasource.password=jdeveloper30
+		**************************************************************/
 		properties.load(UserDao.class.getResourceAsStream("/jdbc.properties"));
 		basicDataSource.setDriverClassName(properties.getProperty("spring.datasource.driver-class-name"));
 		basicDataSource.setUrl(properties.getProperty("spring.datasource.url"));
 		basicDataSource.setUsername(properties.getProperty("spring.datasource.username"));
 		basicDataSource.setPassword(properties.getProperty("spring.datasource.password"));
-
+		
+		
 		/******************** << javax.sql.DataSource >> **************************/
-		DataSource dataSource = basicDataSource;
-		Connection con = dataSource.getConnection();
+		DataSource dataSource=basicDataSource;
+		Connection con=dataSource.getConnection();
 		System.out.println(con);
 		con.close();
 		/************************************************************************/
-
+		
 	}
 
 }

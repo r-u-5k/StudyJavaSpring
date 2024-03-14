@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Hello Gradle JSP! <%=new Date().toLocaleString()%></h1>
+<h1>Hello Gradle JSP !!  <%=new Date() %></h1>
 </body>
 </html>

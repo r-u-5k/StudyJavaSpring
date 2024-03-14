@@ -1,5 +1,4 @@
 ﻿package com.itwill.filter;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -17,19 +16,24 @@ import jakarta.servlet.http.HttpServletRequest;
 public class EncodingFilter implements Filter {
 	private String encoding = null;
 
-	/**
-	 * web.xml에서 전달된 인코딩 값을 초기화하는 메써드. <filter> <filter-name>Encoding
-	 * Filter</filter-name>
-	 * <filter-class>com.itwill.filter.EncodingFilter</filter-class> <init-param>
-	 * <param-name>encoding</param-name> <param-value>UTF-8</param-value>
-	 * </init-param> </filter>
-	 * 
-	 * <filter-mapping> <filter-name>Encoding Filter</filter-name>
-	 * <url-pattern>/*</url-pattern> </filter-mapping>
+	/**web.xml에서 전달된 인코딩 값을 초기화하는 메써드.
+		<filter>
+			<filter-name>Encoding Filter</filter-name>
+			<filter-class>com.itwill.filter.EncodingFilter</filter-class>
+			<init-param>
+				<param-name>encoding</param-name>
+				<param-value>UTF-8</param-value>
+			</init-param>
+		</filter>
+		
+		<filter-mapping>
+			<filter-name>Encoding Filter</filter-name>
+			<url-pattern>/*</url-pattern>
+		</filter-mapping>
 	 ********************************************************/
 	public void init(FilterConfig filterConfig) throws ServletException {
 		this.encoding = filterConfig.getInitParameter("encoding");
-		System.out.println("생성 직후 단 한 번 호출 init(): encoding parameter --> " + encoding);
+		System.out.println("생성직후 단한번호출 init(): encoding parameter-->" + encoding);
 	}
 
 	/**
@@ -39,8 +43,8 @@ public class EncodingFilter implements Filter {
 			throws IOException, ServletException {
 
 		HttpServletRequest req = (HttpServletRequest) request;
-		System.out.println("요청 시마다 호출 doFilter(): " + req.getRequestURI());
-		
+		//System.out.println("요청시마다 호출 doFilter():" + req.getRequestURI());
+
 		if (request.getCharacterEncoding() == null) {
 			if (encoding != null) {
 				request.setCharacterEncoding(this.encoding);
@@ -49,11 +53,14 @@ public class EncodingFilter implements Filter {
 		
 		// 클라이언트 요청리소스로의요청
 		chain.doFilter(request, response);
+		
 		/*
 		response.setContentType("text/plain;charset=UTF-8");
-		PrintWriter out = response.getWriter();
+		PrintWriter out=response.getWriter();
 		out.print("난 필터!! 넌 누구!!!");
 		*/
+		
+
 	}
 
 	public void destroy() {
