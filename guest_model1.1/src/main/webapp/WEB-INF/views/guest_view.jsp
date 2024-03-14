@@ -14,15 +14,15 @@
   request.setCharacterEncoding("UTF-8");
   String guest_noStr=request.getParameter("guest_no");
   if(guest_noStr==null||guest_noStr.equals("")){
-	  response.sendRedirect("guest_list.jsp");
+	  response.sendRedirect("guest_list.do");
 	  return;
   }
   GuestService guestService=new GuestService();
   Guest guest=guestService.guestDetail(Integer.parseInt(guest_noStr));
   if(guest==null){
 	  out.println("<script>");
-	  out.println("alert('존재하지않는 게시물입니다.');");
-	  out.println("location.href='guest_list.jsp';");
+	  out.println("alert('존재하지 않는 게시물입니다.');");
+	  out.println("location.href='guest_list.do';");
 	  out.println("</script>");
 	  
 	  return;
