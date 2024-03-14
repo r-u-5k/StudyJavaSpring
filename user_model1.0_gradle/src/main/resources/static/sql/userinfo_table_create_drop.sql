@@ -1,6 +1,9 @@
-DROP TABLE USERINFO;
-CREATE TABLE USERINFO(USERID VARCHAR2(100) PRIMARY KEY,
-			 PASSWORD VARCHAR2(100),
-			 NAME VARCHAR2(200),
-			 EMAIL VARCHAR2(300));
-COMMIT;
+drop table userinfo;
+create table userinfo(
+    userid varchar2(100) primary key,
+    password varchar2(100),
+    name varchar2(200) ,
+    email varchar2(300));
+
+
+commit;

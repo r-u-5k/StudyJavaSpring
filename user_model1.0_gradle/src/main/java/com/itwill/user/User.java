@@ -33,15 +33,24 @@ public class User {
 	private String name;
 	private String email;
 
+	
 	/*
 	 *패쓰워드 일치여부 검사 
 	 */
-	public boolean isMatchPassword(String password) {
-		boolean isMatch = false;
-		if (this.password.equals(password)) {
-			isMatch = true;
+	public boolean isMatchPassword(String password){
+		boolean isMatch=false;
+		if(this.password.equals(password)){
+			isMatch=true;
 		}
 		return isMatch;
 	}
+	
 
 }
+
+
+
+
+
+
+

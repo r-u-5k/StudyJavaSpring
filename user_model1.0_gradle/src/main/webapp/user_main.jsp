@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" session="true"%>
 <%
-
-%>
+	
+%>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,10 +36,8 @@
 		<div id="wrapper">
 			<!-- content start -->
 			<!-- include_content.jsp start-->
+
 			<div id="content">
-				<img src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fmedia1.tenor.com%2Fm%2FwOlC5m7NikkAAAAd%2F%25EC%25A0%259C%25EB%25A6%25AC%25EC%259D%25B8%25EC%2582%25AC-%25EC%25A1%25B4%25EC%25A4%2591.gif&type=sc960_832_gif" width="540px" height="350px" style="margin: 10px;">
-			</div>
-			<!-- <div id="content">
 				<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
 					codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0"
 					width="540px" height="350px">
@@ -52,7 +50,7 @@
 						pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
 						width="540px" height="350px"></embed>
 				</object>
-			</div> -->
+			</div>
 			<!-- include_content.jsp end-->
 			<!-- content end -->
 		</div>

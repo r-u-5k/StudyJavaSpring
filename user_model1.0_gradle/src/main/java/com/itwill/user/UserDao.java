@@ -11,24 +11,25 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
+
 /*
- 사용자관리에서 데이터베이스와의 작업을 전담하는 클래스
- USERINFO 테이블에 사용자를 추가,삭제,검색,수정 등의 작업을 한다.
+ 사용자관리에서 데이타베이스와의 작업을 전담하는 클래스
+ USERINFO 테이블에 사용자를 추가,삭제,검색,수정등의 작업을한다.
  */
-public class UserDao {
+public class UserDao{
 	/*
-	 * - DataSource객체 : Connection을 반환해주는 객체
-	 * - 톰캣에서 제공하는 DataSource 객체사용
+	 * - DataSource객체 : Connection을 반환해주는객체
+	 * - 톰캣에서제공하는 DataSource 객체사용
 	 */
 	private DataSource dataSource;
 
 	public UserDao() throws Exception {
-		/****** Apache BasicDataSource *****/
+		/******Apache BasicDataSource*****/
 		/*
-		 * jdbc.properties 파일을 Properties객체로 생성
+		 * jdbc.properties 파일을 Properties객체로생성
 		 */
-		BasicDataSource basicDataSource = new BasicDataSource();
-		Properties properties = new Properties();
+		BasicDataSource basicDataSource=new BasicDataSource();
+		Properties properties=new Properties();
 		properties.load(UserDao.class.getResourceAsStream("/jdbc.properties"));
 		basicDataSource.setDriverClassName(properties.getProperty("spring.datasource.driver-class-name"));
 		basicDataSource.setUrl(properties.getProperty("spring.datasource.url"));
@@ -36,8 +37,8 @@ public class UserDao {
 		basicDataSource.setPassword(properties.getProperty("spring.datasource.password"));
 		basicDataSource.setInitialSize(1);
 		basicDataSource.setMaxTotal(2);
-		this.dataSource = basicDataSource;
-
+		this.dataSource=basicDataSource;
+		
 	}
 
 	/*
@@ -58,9 +59,9 @@ public class UserDao {
 			pstmt.setString(2, user.getPassword());
 			pstmt.setString(3, user.getName());
 			pstmt.setString(4, user.getEmail());
-
+			
 			insertRowCount = pstmt.executeUpdate();
-		} finally {
+		}finally {
 			/*
 			 * 예외발생과 관계없이 반드시 실행되는 코드
 			 */
@@ -77,7 +78,7 @@ public class UserDao {
 	/*
 	 * 기존의 사용자정보를 수정
 	 */
-
+	
 	public int update(User user) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -110,7 +111,7 @@ public class UserDao {
 	/*
 	 * 사용자아이디에해당하는 사용자를 삭제
 	 */
-
+	
 	public int delete(String userId) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -139,6 +140,7 @@ public class UserDao {
 	 */
 
 	public User findUser(String userId) throws Exception {
+		//System.out.println("idle connection number:"+((BasicDataSource)dataSource).getMaxIdle());
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -149,8 +151,10 @@ public class UserDao {
 			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				findUser = new User(rs.getString("userid"), rs.getString("password"), rs.getString("name"),
-						rs.getString("email"));
+				findUser = new User(rs.getString("userid"), 
+									rs.getString("password"), 
+									rs.getString("name"),
+									rs.getString("email"));
 
 			}
 		} finally {
@@ -170,7 +174,7 @@ public class UserDao {
 	/*
 	 * 모든사용자 정보를 데이타베이스에서 찾아서 List<User> 콜렉션 에 저장하여 반환
 	 */
-
+	
 	public List<User> findUserList() throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -181,8 +185,10 @@ public class UserDao {
 			pstmt = con.prepareStatement(UserSQL.USER_SELECT_ALL);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				findUserList.add(new User(rs.getString("userid"), rs.getString("password"), rs.getString("name"),
-						rs.getString("email")));
+				findUserList.add(new User(	rs.getString("userid"),
+											rs.getString("password"), 
+											rs.getString("name"),
+											rs.getString("email")));
 
 			}
 		} finally {
@@ -202,12 +208,13 @@ public class UserDao {
 	/*
 	 * 인자로 전달되는 아이디를 가지는 사용자가 존재하는지의 여부를판별
 	 */
-
+	
 	public int countByUserId(String userId) throws Exception {
+		//System.out.println("idle connection number:"+((BasicDataSource)dataSource).getMaxIdle());
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(UserSQL.USER_SELECT_BY_ID_COUNT);
