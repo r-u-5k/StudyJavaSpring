@@ -71,7 +71,7 @@
 									<tr>
 										<td width=50 align=center bgcolor="ffffff" height="20"><%=guest.getGuestNo()%></td>
 										<td width=300 bgcolor="ffffff" style="padding-left: 10"><a
-											href="guest_view.jsp?guest_no=<%=guest.getGuestNo()%>" class="user"><%=guest.getGuestTitle()%></a></td>
+											href="guest_view.do?guest_no=<%=guest.getGuestNo()%>" class="user"><%=guest.getGuestTitle()%></a></td>
 										<td width=120 align=center bgcolor="ffffff"><%=guest.getGuestName()%></td>
 										<td width=120 align=center bgcolor="ffffff"><%=guest.getGuestDate().toLocaleString().substring(0,11)%></td>
 									</tr>
