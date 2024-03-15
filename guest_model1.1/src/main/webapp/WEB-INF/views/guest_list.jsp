@@ -1,3 +1,5 @@
+<%@page import="java.util.Comparator"%>
+<%@page import="java.util.Collections"%>
 <%@page import="com.itwill.guest.Guest"%>
 <%@page import="java.util.List"%>
 <%@page import="com.itwill.guest.GuestService"%>
@@ -6,6 +8,13 @@
 <%
 /* 4.List<Guest> 리스트 출력 */
 List<Guest> guestList = (List<Guest>) request.getAttribute("guestList");
+Collections.sort(guestList, new Comparator<Guest>() {
+	@Override
+	public int compare(Guest o1, Guest o2) {
+		return o2.getGuestNo() - o1.getGuestNo();
+	}
+});
+	
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

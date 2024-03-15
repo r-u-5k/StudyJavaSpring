@@ -1,7 +1,7 @@
 <%@page import="com.itwill.guest.Guest"%>
 <%@page import="com.itwill.guest.GuestService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	errorPage="error_500.jsp" pageEncoding="UTF-8"%>
+	errorPage="guest_error.jsp" pageEncoding="UTF-8"%>
 <%
 /* 5. request로부터 속성객체 얻기 -> Guest 출력 */
 Guest guest = (Guest) request.getAttribute("guest");

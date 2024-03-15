@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/guest_write_form.do")
 public class GuestWriteFormServlet extends HttpServlet {
 	@Override
-	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*
 		 * forward 시 상대 경로는 context root(/guest_model1.1) 이후 모든 디렉토리가 가능함
 		 */

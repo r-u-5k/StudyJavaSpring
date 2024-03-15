@@ -22,7 +22,7 @@ public class GuestListServlet extends HttpServlet {
 	}
 	
 	@Override
-	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*
 		 * forward 시 상대 경로는 context root(/guest_model1.1) 이후 모든 디렉토리가 가능함
 		 */
@@ -37,13 +37,27 @@ public class GuestListServlet extends HttpServlet {
 		try {
 			List<Guest> guestList = guestService.guestList();
 			request.setAttribute("guestList", guestList);
-			forwardPath = "/WEB-INF/views/guest_list.jsp";
+			forwardPath = "forward:/WEB-INF/views/guest_list.jsp";
 		} catch (Exception e) {
-			forwardPath = "/WEB-INF/views/guest_error.jsp";
+			forwardPath = "forward:/WEB-INF/views/guest_error.jsp";
 			e.printStackTrace();
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher(forwardPath);
-		rd.forward(request, response);
+		/********** Forward or Redirect **********/
+		/*
+		 * forward -> forward:/WEB-INF/views/guest_view.jsp
+		 * redirect -> redirect:guest_xxx.do
+		 */
+		String[] pathArray = forwardPath.split(":");
+		String forwardOrRedirect = pathArray[0];
+		String path = pathArray[1];
+		if (forwardOrRedirect.equals("forward")) {
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+		} else {
+			response.sendRedirect(path);
+		}
+
+		/*****************************************/
 	}
 }
