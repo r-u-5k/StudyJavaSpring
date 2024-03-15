@@ -21,7 +21,7 @@ public class GuestViewServlet extends HttpServlet {
 	}
 
 	@Override
-	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*
 		 * 0.요청객체encoding설정
 		 * 1.gust_no 파라메타받기
@@ -45,7 +45,7 @@ public class GuestViewServlet extends HttpServlet {
 			forwardPath = "forward:/WEB-INF/views/guest_error.jsp";
 		}
 		
-		/* Forward or Redirect */
+		/********** Forward or Redirect **********/
 		/*
 		 * forward -> forward:/WEB-INF/views/guest_view.jsp
 		 * redirect -> redirect:guest_xxx.do
@@ -54,11 +54,12 @@ public class GuestViewServlet extends HttpServlet {
 		String forwardOrRedirect = pathArray[0];
 		String path = pathArray[1];
 		if (forwardOrRedirect.equals("forward")) {
-			RequestDispatcher rd = request.getRequestDispatcher(forwardPath);
+			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		} else {
 			response.sendRedirect(path);
 		}
 
+		/*****************************************/
 	}
 }
