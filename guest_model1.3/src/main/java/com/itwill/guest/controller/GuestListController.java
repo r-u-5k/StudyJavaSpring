@@ -9,19 +9,20 @@ import com.itwill.spring.mvc.Controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class GuestListController implements Controller {
+public class GuestListController implements Controller{
 	private GuestService guestService;
-
-	public GuestListController() {
+	public GuestListController(){
 		try {
-			guestService = new GuestService();
+			guestService=new GuestService();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
-	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-		String forwardPath = "";
+	
+	
+	public String handleRequest(HttpServletRequest request,
+								HttpServletResponse response) {
+		String forwardPath ="";
 		try {
 			List<Guest> guestList = guestService.guestList();
 			request.setAttribute("guestList", guestList);
@@ -30,8 +31,9 @@ public class GuestListController implements Controller {
 			e.printStackTrace();
 			forwardPath = "forward:/WEB-INF/views/guest_error.jsp";
 		}
-
+		
 		return forwardPath;
 	}
-
+	
+	
 }

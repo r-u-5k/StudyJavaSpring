@@ -9,16 +9,14 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class GuestModifyActionController implements Controller {
 	private GuestService guestService;
-
 	public GuestModifyActionController() {
 		try {
-			guestService = new GuestService();
+			guestService=new GuestService();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		String forwardPath = "";
