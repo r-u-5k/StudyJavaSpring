@@ -8,19 +8,18 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class GuestRemoveActionController implements Controller {
 	private GuestService guestService;
-
 	public GuestRemoveActionController() {
 		try {
-			guestService = new GuestService();
+			guestService=new GuestService();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
+		
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-		String forwardPath = "";
+		String forwardPath="";
 		try {
 			if (request.getMethod().equalsIgnoreCase("GET")) {
 				forwardPath = "redirect:guest_main.do";

@@ -8,9 +8,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class GuestViewController implements Controller {
-
-	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-		String forwardPath = "";
+	
+	public String handleRequest(HttpServletRequest request,
+								HttpServletResponse response) {
+		String forwardPath ="";
 		try {
 			String guest_noStr = request.getParameter("guest_no");
 			if (guest_noStr == null || guest_noStr.equals("")) {
@@ -25,8 +26,9 @@ public class GuestViewController implements Controller {
 			e.printStackTrace();
 			forwardPath = "forward:/WEB-INF/views/guest_error.jsp";
 		}
-
+				
 		return forwardPath;
 	}
-
+	
+	
 }
