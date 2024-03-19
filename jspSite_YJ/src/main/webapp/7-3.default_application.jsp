@@ -1,6 +1,6 @@
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,15 +8,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>기본객체 application(ServletContect)</h1>
-<hr/>
-<ol>
-<li>서버정보<%=application.getServerInfo()%></li>
-<li>major version : <%=application.getMajorVersion()%></li>
-<li>minor version : <%=application.getMinorVersion()%></li>
-<li>context real path : <%=application.getRealPath("")%></li>
-<li>log : <% application.log(">>>>>>>> 현재날짜:"+new Date().toString()); %></li>
-<li>context path(parameter):<%=application.getInitParameter("contextPath")%>
-</ol>
+	<h1>기본객체 application(ServletContect)</h1>
+	<hr />
+	<ol>
+		<li>서버 정보: <%=application.getServerInfo()%></li>
+		<li>Major Version: <%=application.getMajorVersion()%></li>
+		<li>Minor Version: <%=application.getMinorVersion()%></li>
+		<li>Context Real Path : <%=application.getRealPath("")%></li>
+		<li>log: 
+		<%
+		application.log(">> 현재 날짜: " + new Date().toString());
+		%>
+		</li>
+		<li>Context Path(parameter): <%=application.getInitParameter("contextPath")%>
+	</ol>
 </body>
 </html>
