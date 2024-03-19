@@ -2,9 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-  
+String msg = (String) request.getAttribute("msg");
+User fuser = (User) request.getAttribute("fuser");
+if (msg == null) msg = "";
+if (fuser == null) fuser = new User("","","","");
 %>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <title>사용자 관리</title>
@@ -46,13 +49,13 @@
 			f.password.select();
 			return;
 		}
-		document.f.action = "user_write_action.jsp";
+		document.f.action = "user_write_action.do";
 		document.f.method='POST';
 		document.f.submit();
 	}
 
 	function userMain() {
-		location.href='user_main.jsp';
+		location.href='user_main.do';
 	}
 </script>
 </head>
@@ -99,7 +102,7 @@
 											아이디</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
 											<input type="text" style="width: 150px" name="userId"
-											value="">&nbsp;&nbsp;<font color="red"></font>
+											value="<%=fuser.getUserId()%>">&nbsp;&nbsp;<font color="red"><%=msg%></font>
 										</td>
 									</tr>
 									<tr>
@@ -121,7 +124,7 @@
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
 											<input type="text" style="width: 150px" name="name"
-											value="">
+											value="<%=fuser.getName()%>">
 										</td>
 									</tr>
 									<tr>
@@ -129,7 +132,7 @@
 											주소</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
 											<input type="text" style="width: 150px" name="email"
-											value="">
+											value="<%=fuser.getEmail()%>">
 										</td>
 									</tr>
 								</table>
