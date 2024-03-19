@@ -34,10 +34,6 @@ dependencies {
 	
 	/***** BasicDataSource설정 *****/
 	implementation 'org.apache.commons:commons-dbcp2:2.9.0'
-    /***** mybatis설정 *****/
-    implementation 'org.mybatis:mybatis:3.5.15'
-	/***** log4j설정 *****/
-    implementation 'log4j:log4j:1.2.17'
 	 /***JSP사용설정*****/
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     implementation 'jakarta.servlet:jakarta.servlet-api' //스프링부트 3.0 이상
