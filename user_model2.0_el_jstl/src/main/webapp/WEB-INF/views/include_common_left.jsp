@@ -1,20 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="true"%>	
-<%
-	String sUserId = (String)session.getAttribute("sUserId");
-%>    		
+	pageEncoding="UTF-8" session="true"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${pageContext.request.locale}"/>
+<fmt:setBundle basename="messages/user" />
 <p>
-	<strong>메 뉴</strong>
+	<strong><fmt:message key="menu.title"></fmt:message></strong>
 </p>
 <ul>
-	<%if(sUserId!=null){ %>
-		<!-- 로그인후 -->
-		<li><a href=""><%=sUserId %> 님</a></li>
-		<li><a href="user_view.do">내정보</a></li>
-		<li><a href="user_logout_action.do">로그아웃</a></li>
-	<%}else{ %>
-		<!-- 로그인전 -->
-		<li><a href="user_login_form.do">로그인</a></li>
-		<li><a href="user_write_form.do">회원가입</a></li>
- 	<%} %>
+	<c:choose>
+		<c:when test="${!empty sUserId}">
+			<!-- 로그인후 -->
+			<li><a href="">${sUserId}NIM</a></li>
+			<li><a href="user_view.do"><fmt:message key="menu.title"></fmt:message></a></li>
+			<li><a href="user_logout_action.do"><fmt:message key="menu.logout"></fmt:message></a></li>
+		</c:when>
+		<c:otherwise>
+			<!-- 로그인전 -->
+			<li><a href="user_login_form.do"><fmt:message key="menu.login"></fmt:message></a></li>
+			<li><a href="user_write_form.do"><fmt:message key="menu.join"></fmt:message></a></li>
+		</c:otherwise>
+	</c:choose>
 </ul>

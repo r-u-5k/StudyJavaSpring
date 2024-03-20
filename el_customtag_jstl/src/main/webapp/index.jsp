@@ -28,6 +28,8 @@
 		<li><a href='7-1.jstl_core_if_tag.jsp'>7-1.jstl_core_if_tag.jsp</a></li>
 		<li><a href='7-2.jstl_core_choose_tag.jsp'>7-2.jstl_core_choose_tag.jsp</a></li>
 		<li><a href='7-3.jstl_core_forEach_tag.jsp'>7-3.jstl_core_forEach_tag.jsp</a></li>
+		<li><a href='8.jstl_functions.jsp'>8.jstl_functions.jsp</a></li>
+		<li><a href='9.jstl_fmt_i18n.jsp'>9.jstl_fmt_i18n.jsp</a></li>
 
 	</ul>
 </body>
