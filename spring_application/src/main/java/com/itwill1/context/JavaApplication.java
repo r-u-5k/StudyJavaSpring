@@ -1,4 +1,4 @@
-package com.itwill;
+package com.itwill1.context;
 
 import com.itwill.guest.GuestDao;
 import com.itwill.guest.GuestDaoImpl;
