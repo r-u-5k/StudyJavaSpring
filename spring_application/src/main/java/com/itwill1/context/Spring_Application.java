@@ -1,4 +1,4 @@
-package com.itwill;
+package com.itwill1.context;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -8,7 +8,7 @@ import com.itwill.guest.GuestService;
 public class Spring_Application {
 
 	public static void main(String[] args) throws Exception {
-		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("com/itwill/0.application_context.xml");
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("com/itwill1/context/0.application_context.xml");
 		
 		GuestService guestService = (GuestService) applicationContext.getBean("guestService");
 		
