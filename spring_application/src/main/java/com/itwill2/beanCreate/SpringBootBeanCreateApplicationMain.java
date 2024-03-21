@@ -17,7 +17,7 @@ import com.itwill.product.ProductService;
 public class SpringBootBeanCreateApplicationMain {
 
 	public static void main(String[] args) {
-		System.out.println("----------Spring Container 초기화 시작[ApplicationContext 객체 생성 시작]--------");
+		System.out.println("----------Spring Container 초기화 시작 [ApplicationContext 객체 생성 시작]--------");
 		ApplicationContext applicationContext = SpringApplication.run(SpringBootBeanCreateApplicationMain.class, args);
 		System.out.println("-----------Spring Container 초기화 끝 [ApplicationContext 객체 생성 끝]----------");
 		
