@@ -9,7 +9,7 @@
 <body>
 	<h1>Spring Controller에서 JSP로 데이타전달[Spring Model]</h1>
 	<hr />
-	<a href='./'>메인메뉴</a>
+	<a href='./index.jsp'>메인메뉴</a>
 
 	<ol>
 		<li><a href="model_request">model_request</a></li>

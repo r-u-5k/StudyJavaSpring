@@ -9,7 +9,7 @@
 <body>
 	<h1>요청매핑[@RequestMapping]</h1>
 	<hr />
-	<a href='./'>메인메뉴</a>
+	<a href='./index.jsp'>메인메뉴</a>
 	<ol>
 		<li><a href='login'>로그인폼[GET,POST]</a></li>
 		<li><a href='parameter_guest_write_form'>방명록쓰기폼</a></li>

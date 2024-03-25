@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>Spring CustomTag SPEL</h1><hr/>
-	<a href='./'>메인메뉴</a>
+	<a href='./index.jsp'>메인메뉴</a>
 	<ol>
 		<li><a href='jstl_fmt_i18n'>JSTL 국제화[I18N]</a></li>
 		<li><a href='spring_customtag_spel'>Sping CustomTag SPEL</a></li>
