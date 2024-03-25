@@ -10,9 +10,11 @@ import com.itwill.user.dao.mybatis.SpringBootUserDaoImplMyBatisMain;
 public class SpringBootUserDaoApplication {
 
 	public static void main(String[] args) throws Exception {
-		System.out.println("----Spring Container초기화시작[ApplicationContext객체생성시작]");
+		System.out.println("----Spring Container 초기화 시작 [ApplicationContext 객체 생성 시작]");
 		ApplicationContext applicationContext = SpringApplication.run(SpringBootUserDaoApplication.class, args);
-		System.out.println("----Spring Container초기화끝[ApplicationContext객체생성끝]");
+		System.out.println("----Spring Container 초기화 끝 [ApplicationContext 객체 생성 끝]");
+		UserDao userDao = applicationContext.getBean(UserDao.class);
+		System.out.println(userDao.findUserList());
 
 	}
 

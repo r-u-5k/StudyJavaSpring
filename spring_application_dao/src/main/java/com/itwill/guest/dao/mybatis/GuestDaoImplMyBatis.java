@@ -11,11 +11,11 @@ import oracle.net.aso.f;
 
 @Repository
 public class GuestDaoImplMyBatis implements GuestDao {
-	@Autowired(required = true)
+	@Autowired
 	private GuestMapper guestMapper;
 
 	public GuestDaoImplMyBatis() {
-		System.out.println("### GuestDaoImplMyBatis()생성자");
+		System.out.println("### GuestDaoImplMyBatis() 생성자");
 	}
 
 	@Override

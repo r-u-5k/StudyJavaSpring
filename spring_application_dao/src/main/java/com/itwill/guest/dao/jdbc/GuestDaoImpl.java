@@ -28,8 +28,8 @@ public class GuestDaoImpl implements GuestDao {
 		ResultSet rs = pstmt.executeQuery();
 		while (rs.next()) {
 			guestList.add(new Guest(rs.getInt("guest_no"), rs.getString("guest_name"), rs.getString("guest_date"),
-					rs.getString("guest_email"), rs.getString("guest_homepage"), rs.getString("guest_title"),
-					rs.getString("guest_content")));
+									rs.getString("guest_email"), rs.getString("guest_homepage"), rs.getString("guest_title"),
+									rs.getString("guest_content")));
 		}
 		con.close();
 		return guestList;
