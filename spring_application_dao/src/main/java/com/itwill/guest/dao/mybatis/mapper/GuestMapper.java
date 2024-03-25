@@ -2,8 +2,11 @@ package com.itwill.guest.dao.mybatis.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.itwill.guest.dao.mybatis.Guest;
 
+@Mapper
 public interface GuestMapper {
 	
 	List<Guest> selectAll() throws Exception;

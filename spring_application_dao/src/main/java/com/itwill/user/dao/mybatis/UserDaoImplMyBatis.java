@@ -10,6 +10,11 @@ import com.itwill.user.dao.mybatis.mapper.UserMapper;
 public class UserDaoImplMyBatis implements UserDao {
 	@Autowired
 	private UserMapper userMapper;
+	
+	public UserDaoImplMyBatis() {
+		System.out.println("#### UserDaoImplMyBatisMapperInterface : 생성자 호출  ");
+	}
+	
 	@Override
 	public int create(User user) throws Exception {
 		System.out.println("#### UserDaoImplMyBatisMapperInterface : create() 호출  ");
