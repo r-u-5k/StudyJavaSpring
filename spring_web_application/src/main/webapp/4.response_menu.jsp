@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>스프링응답[View , @ResponseBody]</h1><hr/>
-	<a href='./'>메인메뉴</a>
+	<a href='./index.jsp'>메인메뉴</a>
 	<ol>
 		<li><a href='response_forward_view_name'>Controller가 view name(String) 을반환 [forward]</a></li>
 		<li><a href='response_forward_view_object'>Controller가 view 객체[InternalResourceView]를반환 [forward]</a></li>

@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>스프링예외처리</h1><hr/>
-	<a href='./'>메인메뉴</a>
+	<a href='./index.jsp'>메인메뉴</a>
 	<ol>
 		<li><a href='business1'>Controller에서 BusinessException1발생</a></li>
 		<li><a href='business2'>Controller에서 BusinessException2발생</a></li>

@@ -12,7 +12,7 @@
 <body>
 	<h1>스프링Controller[@Controller]</h1>
 	<hr />
-	<a href='./'>메인메뉴</a>
+	<a href='./index.jsp'>메인메뉴</a>
 	<ol>
 		<li><a href='hello'>hello[annotation]</a></li>
 		<li><a href='hello1'>hello1[annotation]</a></li>
@@ -21,12 +21,9 @@
 		<li><a href='hello3'>hello3[annotation]</a></li>
 		<li><a href='hello4'>hello4[annotation]</a></li>
 		<li><a href='hello5'>hello5[annotation]</a></li>
-		<li><a href='hello_redirect_jsp'>hello_redirect_jsp[jsp
-				redirect]( X )</a></li>
-		<li><a href='hello_redirect_servlet'>
-				hello_redirect_servlet[servlet redirect] </a></li>
-		<li><a href='hello_servlet_forward'>
-				hello_servlet_forward[servlet forward] </a></li>
+		<li><a href='hello_redirect_jsp'>hello_redirect_jsp[jsp redirect]( X )</a></li>
+		<li><a href='hello_redirect_servlet'>hello_redirect_servlet[servlet redirect] </a></li>
+		<li><a href='hello_servlet_forward'>hello_servlet_forward[servlet forward] </a></li>
 	</ol>
 </body>
 </html>
