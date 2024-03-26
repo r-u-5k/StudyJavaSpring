@@ -13,10 +13,10 @@ public class RequestMappingGETPOSTController {
 	public String getLoginForm() {
 		return "forward:/WEB-INF/views/get_login_form.jsp";
 	}
+
 	@PostMapping("/login")
-	public String postLoginAction(@RequestParam(name="id") String id, 
-								  @RequestParam(name="password") String password,
-								  HttpSession session) {
+	public String postLoginAction(@RequestParam(name = "id") String id,
+			@RequestParam(name = "password") String password, HttpSession session) {
 		System.out.println("id: " + id);
 		System.out.println("password: " + password);
 		boolean isLogin = true;
@@ -25,5 +25,5 @@ public class RequestMappingGETPOSTController {
 		}
 		return "forward:/WEB-INF/views/post_login_result.jsp";
 	}
-	
+
 }
