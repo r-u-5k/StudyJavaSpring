@@ -20,7 +20,8 @@ public class HelloAnnotationController1 {
 	public String hello(HttpServletRequest request) {
 		System.out.println("HelloAnnotationController1().hello() 메서드 호출");
 		request.setAttribute("msg", "Hello HelloAnnotationController1!");
-		return "forward:/WEB-INF/views/hello1.jsp";
+		//return "forward:/WEB-INF/views/hello1.jsp";
+		return "hello1"; // prefix, suffix 설정해둠
 	}
 	
 }

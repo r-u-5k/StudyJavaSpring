@@ -1,36 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <title>방명록 관리</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script type="text/javascript">
-	function guest_write(actionUrl){
+	function guest_write(actionUrl) {
 		/*
 		왼쪽버튼   actionUrl--> 'parameter_guest_write_action'
 		오른쪽버튼 actionUrl--> 'model_attribute_guest_write_action'
-		*/
-		window.document.f.action=actionUrl;
-		window.document.f.method='POST';
+		 */
+		window.document.f.action = actionUrl;
+		window.document.f.method = 'POST';
 		window.document.f.submit();
 	}
-
 </script>
 </head>
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
 	marginwidth=0 marginheight=0>
 	<!-- container start-->
 	<div id="container">
-		
-		<div id="header">
-		
-		</div>
-		
-		<div id="navigation">
-		
-		</div>
-	
+
+		<div id="header"></div>
+
+		<div id="navigation"></div>
+
 		<div id="wrapper">
 
 			<div id="content">
@@ -80,17 +75,16 @@
 										</td>
 									</tr>
 								</table>
-								
+
 							</form> <br />
 							<table width=590 border=0 cellpadding=0 cellspacing=0>
 								<tr>
-									<td align=center>
-									<input type="button" 
-									onclick="guest_write('parameter_guest_write_action')" 
-									value="방명록쓰기[@RequestParam]"> &nbsp; 
-								    <input type="button" 
-								    onclick="guest_write('model_attribute_guest_write_action')" 
-								    value="방명록쓰기[@ModelAttribute]"></td>
+									<td align=center><input type="button"
+										onclick="guest_write('parameter_guest_write_action')"
+										value="방명록쓰기[@RequestParam]"> &nbsp; <input
+										type="button"
+										onclick="guest_write('model_attribute_guest_write_action')"
+										value="방명록쓰기[@ModelAttribute]"></td>
 								</tr>
 							</table>
 						</td>
@@ -101,9 +95,7 @@
 		</div>
 		<!-- wrapper content end-->
 		<!-- footer start-->
-		<div id="footer">
-		
-		</div>
+		<div id="footer"></div>
 	</div>
 	<!--container end-->
 </body>

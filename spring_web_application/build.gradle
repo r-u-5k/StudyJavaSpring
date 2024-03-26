@@ -32,6 +32,11 @@ dependencies {
     implementation 'jakarta.servlet:jakarta.servlet-api' 					
     implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api' 	
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+
+
+    
 }
 
 tasks.named('test') {
