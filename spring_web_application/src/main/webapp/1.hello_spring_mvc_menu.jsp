@@ -21,7 +21,6 @@
 		<li><a href='hello3'>hello3[annotation]</a></li>
 		<li><a href='hello4'>hello4[annotation]</a></li>
 		<li><a href='hello5'>hello5[annotation]</a></li>
-		<li><a href='hello_redirect_jsp'>hello_redirect_jsp[jsp redirect]( X )</a></li>
 		<li><a href='hello_redirect_servlet'>hello_redirect_servlet[servlet redirect] </a></li>
 		<li><a href='hello_servlet_forward'>hello_servlet_forward[servlet forward] </a></li>
 	</ol>
