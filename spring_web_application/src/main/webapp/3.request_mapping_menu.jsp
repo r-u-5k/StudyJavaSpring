@@ -15,8 +15,7 @@
 		<li><a href='parameter_guest_write_form'>방명록쓰기폼</a></li>
 		<li><a href='user/list'>Controller mapping[user/list]</a></li>
 		<li><a href='user/view'>Controller mapping[user/view]</a></li>
-		<li><a href='controller_servletapi'>Controller에서 Servlet
-				API사용</a></li>
+		<li><a href='controller_servletapi'>Controller에서 Servlet API사용</a></li>
 	</ol>
 </body>
 </html>
