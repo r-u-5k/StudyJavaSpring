@@ -3,8 +3,8 @@
 <%@page import="com.itwill.user.UserService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%	
-	/*
+<%
+/*
 		0  . GET방식요청일때 user_main.jsp로 redirection
 		1  . 요청객체 인코딩설정
 	    2  . 파라메타 받기
@@ -23,11 +23,11 @@
 	String email = request.getParameter("email");
 	
 	User user=User.builder()
-				.userid(userid)
-				.name(name)
-				.password(password)
-				.email(email)
-				.build();
+		.userid(userid)
+		.name(name)
+		.password(password)
+		.email(email)
+		.build();
 	UserService userService=new UserService();
 	int result=userService.create(user);
 	if(result==-1){

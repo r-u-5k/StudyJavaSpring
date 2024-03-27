@@ -10,14 +10,14 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-
-
+import org.springframework.stereotype.Repository;
 
 /*
  사용자관리에서 데이타베이스와의 작업을 전담하는 클래스
  USERINFO 테이블에 사용자를 추가,삭제,검색,수정등의 작업을한다.
  */
-public class UserDaoImplJDBC implements UserDao{
+@Repository
+public class UserDaoImplJDBC implements UserDao {
 	/*
 	 * - DataSource객체 : Connection을 반환해주는객체
 	 * - 톰캣에서제공하는 DataSource 객체사용
@@ -25,7 +25,7 @@ public class UserDaoImplJDBC implements UserDao{
 	private DataSource dataSource;
 
 	public UserDaoImplJDBC() throws Exception {
-		
+
 	}
 
 	/*
@@ -46,9 +46,9 @@ public class UserDaoImplJDBC implements UserDao{
 			pstmt.setString(2, user.getPassword());
 			pstmt.setString(3, user.getName());
 			pstmt.setString(4, user.getEmail());
-			
+
 			insertRowCount = pstmt.executeUpdate();
-		}finally {
+		} finally {
 			/*
 			 * 예외발생과 관계없이 반드시 실행되는 코드
 			 */
@@ -65,7 +65,7 @@ public class UserDaoImplJDBC implements UserDao{
 	/*
 	 * 기존의 사용자정보를 수정
 	 */
-	
+
 	public int update(User user) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -98,7 +98,7 @@ public class UserDaoImplJDBC implements UserDao{
 	/*
 	 * 사용자아이디에해당하는 사용자를 삭제
 	 */
-	
+
 	public int delete(String userId) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -138,10 +138,8 @@ public class UserDaoImplJDBC implements UserDao{
 			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				findUser = new User(rs.getString("userid"), 
-									rs.getString("password"), 
-									rs.getString("name"),
-									rs.getString("email"));
+				findUser = new User(rs.getString("userid"), rs.getString("password"), rs.getString("name"),
+						rs.getString("email"));
 
 			}
 		} finally {
@@ -161,7 +159,7 @@ public class UserDaoImplJDBC implements UserDao{
 	/*
 	 * 모든사용자 정보를 데이타베이스에서 찾아서 List<User> 콜렉션 에 저장하여 반환
 	 */
-	
+
 	public List<User> findUserList() throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -172,10 +170,8 @@ public class UserDaoImplJDBC implements UserDao{
 			pstmt = con.prepareStatement(UserSQL.USER_SELECT_ALL);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				findUserList.add(new User(	rs.getString("userid"),
-											rs.getString("password"), 
-											rs.getString("name"),
-											rs.getString("email")));
+				findUserList.add(new User(rs.getString("userid"), rs.getString("password"), rs.getString("name"),
+						rs.getString("email")));
 
 			}
 		} finally {
@@ -195,13 +191,13 @@ public class UserDaoImplJDBC implements UserDao{
 	/*
 	 * 인자로 전달되는 아이디를 가지는 사용자가 존재하는지의 여부를판별
 	 */
-	
+
 	public int countByUserId(String userId) throws Exception {
 		//System.out.println("idle connection number:"+((BasicDataSource)dataSource).getMaxIdle());
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(UserSQL.USER_SELECT_BY_ID_COUNT);

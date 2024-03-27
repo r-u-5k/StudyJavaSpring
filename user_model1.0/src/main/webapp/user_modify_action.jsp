@@ -28,5 +28,4 @@ if (result == 1) {
 } else {
 	response.sendRedirect("user_error.jsp");
 }
-
 %>

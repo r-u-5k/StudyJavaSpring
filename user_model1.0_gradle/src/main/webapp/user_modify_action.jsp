@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="user_login_check.jspf" %>
 <%
-	/*
+/*
 		0.login 여부체크
 		1.GET방식이면 user_main.jsp redirection
 		2.요청객체인코딩설정
@@ -22,5 +22,4 @@
 	String email=request.getParameter("email");
 	int rowCount = new UserService().update(new User(sUserId,password,name,email));
 	response.sendRedirect("user_view.jsp");
-	
 %>
