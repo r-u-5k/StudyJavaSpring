@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwill.guest.Guest;
 import com.itwill.guest.GuestService;
@@ -25,7 +26,7 @@ public class GuestController {
 
 	@GetMapping("/guest_main")
 	public String guest_main() {
-		return "forward:/WEB-INF/views/guest_main.jsp";
+		return "guest_main";
 	}
 
 	@GetMapping("/guest_list")
@@ -34,81 +35,103 @@ public class GuestController {
 		try {
 			List<Guest> guestList = guestService.guestList();
 			model.addAttribute("guestList", guestList);
-			forwardPath = "forward:/WEB-INF/views/guest_list.jsp";
+			forwardPath = "guest_list";
 		} catch (Exception e) {
 			e.printStackTrace();
-			forwardPath = "forward:/WEB-INF/views/guest_error.jsp";
-		}
-		return forwardPath;
-	}
-
-	@GetMapping("/guest_view")
-	public String guest_view(@RequestParam(name = "guest_no") String no, Model model) {
-		String forwardPath = "";
-		try {
-			Guest guest = guestService.guestDetail(Integer.parseInt(no));
-			model.addAttribute("guest", guest);
-			forwardPath = "forward:/WEB-INF/views/guest_view.jsp?guest_no=" + no;
-		} catch (Exception e) {
-			e.printStackTrace();
-			forwardPath = "forward:/WEB-INF/views/guest_error.jsp";
+			forwardPath = "guest_error";
 		}
 		return forwardPath;
 	}
 
 	@GetMapping("/guest_write_form")
 	public String guest_write_form() {
-		return "forward:/WEB-INF/views/guest_write_form.jsp";
+		return "guest_write_form";
 	}
 
 	@PostMapping("/guest_write_action")
 	public String guest_write_action(@RequestParam(name = "guest_name") String name,
 			@RequestParam(name = "guest_email") String email, @RequestParam(name = "guest_homepage") String homepage,
-			@RequestParam(name = "guest_title") String title, @RequestParam(name = "guest_content") String content) {
+			@RequestParam(name = "guest_title") String title, @RequestParam(name = "guest_content") String content,
+			RedirectAttributes redirectAttributes) {
 		Guest writeGuest = Guest.builder().guestContent(content).guestEmail(email).guestHomepage(homepage)
 				.guestName(name).guestTitle(title).build();
 		try {
-			guestService.guestWrite(writeGuest);
+			int no = guestService.guestWrite(writeGuest);
+			redirectAttributes.addAttribute("guest_no", no);
+			return "redirect:guest_view";
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "guest_error";
 		}
-		return "redirect:/guest_list";
+	}
+
+	/*
+	 * parameter에 guest_no가 존재하면
+	 */
+	@GetMapping("/guest_view")
+	public String guest_view(@RequestParam(name = "guest_no") int no, Model model) {
+		try {
+			Guest guest = guestService.guestDetail(no);
+			model.addAttribute("guest", guest);
+			return "guest_view";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "guest_error";
+		}
+	}
+
+	/*
+	 * parameter에 guest_no가 존재하지 않으면
+	 */
+	@GetMapping(value = "/guest_view", params = "!guest_no")
+	public String guest_view() {
+		return "redirect:guest_list";
 	}
 
 	@PostMapping("/guest_modify_form")
-	public String guest_modify_form(@RequestParam(name = "guest_no") String no, Model model) {
+	public String guest_modify_form(@RequestParam(name = "guest_no") int no, Model model) {
 		try {
-			Guest guest = guestService.guestDetail(Integer.parseInt(no));
+			Guest guest = guestService.guestDetail(no);
 			model.addAttribute("guest", guest);
+			return "guest_modify_form";
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "guest_error";
 		}
-		return "forward:/WEB-INF/views/guest_modify_form.jsp";
 	}
 
 	@PostMapping("/guest_modify_action")
-	public String guest_modify_action(@RequestParam(name = "guest_no") String no,
+	public String guest_modify_action(@RequestParam(name = "guest_no") int no,
 			@RequestParam(name = "guest_name") String name, @RequestParam(name = "guest_email") String email,
 			@RequestParam(name = "guest_homepage") String homepage, @RequestParam(name = "guest_title") String title,
-			@RequestParam(name = "guest_content") String content) {
+			@RequestParam(name = "guest_content") String content, RedirectAttributes redirectAttributes) {
 		Guest modifyGuest = Guest.builder().guestContent(content).guestEmail(email).guestHomepage(homepage)
-				.guestName(name).guestNo(Integer.parseInt(no)).guestTitle(title).build();
+				.guestName(name).guestNo(no).guestTitle(title).build();
 		try {
 			guestService.guestUpdate(modifyGuest);
+			redirectAttributes.addAttribute("guest_no", no);
+			return "redirect:guest_view";
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "guest_error";
 		}
-		return "redirect:/guest_view?guest_no=" + no;
+
 	}
-	
+
 	@PostMapping("/guest_remove_action")
-	public String guest_remove_action(@RequestParam(name = "guest_no") String no, Model model) {
+	public String guest_remove_action(@RequestParam(name = "guest_no") int no, Model model) {
 		try {
-			guestService.guestDelete(Integer.parseInt(no));
+			guestService.guestDelete(no);
+			return "redirect:guest_list";
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "guest_error";
 		}
-		return "redirect:/guest_list";
+	}
+
+	@GetMapping(value = { "/guest_modify_form", "/guest_modify_action", "/guest_remove_action", "/guest_write_action" })
+	public String guest_get() {
+		return "redirect:guest_main";
 	}
 
 	/*
