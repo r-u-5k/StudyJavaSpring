@@ -7,7 +7,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 
 @Configuration
 public class ApplicationConfig {
-	/***************MessageSource객체등록******************
+	/***************MessageSource객체등록******************/
 	@Bean("messageSource")
 	public MessageSource messageSource() {
 		ResourceBundleMessageSource resourceBundleMessageSource=
@@ -15,7 +15,7 @@ public class ApplicationConfig {
 		resourceBundleMessageSource.setBasenames("messages/messages","messages/user");
 		return resourceBundleMessageSource;
 	}
-	*/
+	
 	
 	/*
 	 application.properties파일의 값얻기위한객체
