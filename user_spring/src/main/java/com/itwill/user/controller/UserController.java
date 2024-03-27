@@ -29,7 +29,7 @@ import jakarta.servlet.http.HttpSession;
 public class UserController {
 	@Autowired
 	private UserService userService;
-
+	//httpsession 사용?
 	@GetMapping("/user_main")
 	public String user_main() {
 		return "user_main";
@@ -43,17 +43,18 @@ public class UserController {
 	@PostMapping("/user_write_action")
 	public String user_write_action(@RequestParam(name = "userId") String id,
 			@RequestParam(name = "password") String password, @RequestParam(name = "name") String name,
-			@RequestParam(name = "email") String email) throws Exception {
+			@RequestParam(name = "email") String email, RedirectAttributes redirectAttributes) throws Exception {
 		int result = userService
 				.create(User.builder().userId(id).email(email).name(name).password(password).email(email).build());
 		if (result == 1) {
+			redirectAttributes.addAttribute("msg", "Asdf");
 			return "redirect:user_login_form";
 		} else if (result == 0) {
-			//msg
-			return "";
+			//msg? return은 어디로?
+			return "user_write_form";
 		} else {
-			//msg
-			return "";
+			//msg? return은 어디로?
+			return "user_write_form";
 		}
 	}
 
@@ -74,6 +75,7 @@ public class UserController {
 	public String user_view(@RequestParam(name = "userId") String id, Model model,
 			RedirectAttributes redirectAttributes) throws Exception {
 		/******* login check ******/
+		
 		User user = userService.findUser(id);
 		model.addAttribute("user", user);
 		redirectAttributes.addAttribute("sUserId", id);
@@ -83,6 +85,7 @@ public class UserController {
 	@PostMapping("/user_modify_form")
 	public String user_modify_form(@RequestParam(name = "userId") String id, Model model) throws Exception {
 		/******* login check ******/
+		
 		User user = userService.findUser(id);
 		model.addAttribute("user", user);
 		return "user_modify_form";
@@ -93,6 +96,7 @@ public class UserController {
 			@RequestParam(name = "password") String password, @RequestParam(name = "name") String name,
 			@RequestParam(name = "email") String email, RedirectAttributes redirectAttributes) throws Exception {
 		/******* login check ******/
+		
 		userService.update(User.builder().userId(userId).email(email).password(password).name(name).build());
 		redirectAttributes.addAttribute("userId", userId);
 		return "user_view";
@@ -101,6 +105,7 @@ public class UserController {
 	@PostMapping("/user_remove_action")
 	public String user_remove_action(@RequestParam(name = "userId") String id) throws Exception {
 		/******* login check ******/
+		
 		userService.remove(id);
 		return "redirect:user_main";
 	}
