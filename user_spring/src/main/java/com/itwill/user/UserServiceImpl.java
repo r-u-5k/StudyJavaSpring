@@ -4,6 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.itwill.user.exception.ExistedUserException;
+import com.itwill.user.exception.PasswordMismatchException;
+import com.itwill.user.exception.UserNotFoundException;
+
 /*
  * - 회원관리 업무(비즈니스로직,예외처리,트랜젝션,보안,로깅)을 수행하는 클래스
  * - 웹컴포넌트(서블릿,JSP)에서 직접접근(메쏘드호출)하는 클래스(객체)
@@ -24,47 +28,31 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public int create(User user) throws Exception {
-		/*
-		 * -1:아이디중복
-		 *  1:회원가입성공
-		 */
-
 		if (userDao.countByUserId(user.getUserId()) == 1) {
-			//아이디중복
-			return -1;
-		} else {
-			//아이디안중복
-			//회원가입
-			userDao.insert(user);
-			return 1;
+			//아이디 중복
+			throw new ExistedUserException(user.getUserId() + "는 이미 존재하는 아이디입니다.");
 		}
+		//아이디 중복X -> 회원가입 진행
+		return userDao.insert(user);
 	}
 
 	/*
-	 * 회원로그인
-	 *  0:아이디존재안함
-	 * 	1:패쓰워드 불일치
-	 * 	2:로그인성공(세션)
+	 * 로그인
+	 *   - 아이디 존재 X -> throw UserNotFoundException
+	 * 	 - 패스워드 불일치 -> throw PasswordMismatchException
+	 * 	 - 로그인 성공(세션) -> return
 	 */
 	@Override
 	public int login(String userId, String password) throws Exception {
-		int result = -1;
-		//1.아이디존재여부
 		User user = userDao.findUser(userId);
-		if (user == null) {
-			//아이디존재안함
-			result = 0;
-		} else {
-			//아이디존재함
-			if (user.getPassword().equals(password)) {
-				//패쓰워드일치
-				result = 2;
-			} else {
-				//패쓰워드불일치
-				result = 1;
-			}
+		if (user == null) { // 아이디 존재 X
+			throw new UserNotFoundException(userId + "는 존재하지 않는 아이디입니다.");
 		}
-		return result;
+		if (!user.getPassword().equals(password)) { // 패스워드 불일치
+			throw new PasswordMismatchException("패스워드가 일치하지 않습니다.");
+		}
+		
+		return 0;
 	}
 
 	/*
