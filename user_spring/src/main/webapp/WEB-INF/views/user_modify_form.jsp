@@ -43,8 +43,7 @@
 		document.f.submit();
 	}
 	function userMain() {
-		document.f.action = "user_main";
-		document.f.submit();
+		location.href = "user_main";
 	}
 </script>
 </head>

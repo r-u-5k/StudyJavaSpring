@@ -1,17 +1,19 @@
 package com.itwill.user;
 
+import com.itwill.user.exception.ExistedUserException;
+
 public interface UserService {
 
 	/*
 	 * 회원가입
 	 */
-	int create(User user) throws Exception;
+	int create(User user) throws ExistedUserException, Exception;
 
 	/*
 	 * 회원로그인
-	 *  0:아이디존재안함
-	 * 	1:패쓰워드 불일치
-	 * 	2:로그인성공(세션)
+	 *   - 아이디존재안함
+	 * 	 - 패쓰워드 불일치
+	 * 	 - 로그인성공(세션)
 	 */
 	int login(String userId, String password) throws Exception;
 

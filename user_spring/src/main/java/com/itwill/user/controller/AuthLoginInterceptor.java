@@ -25,15 +25,13 @@ public class AuthLoginInterceptor implements HandlerInterceptor {
 	public AuthLoginInterceptor() {
 		System.out.println("### AuthLoginInterceptor()생성자");
 	}
-	
+
 	// preHandle() : 컨트롤러보다 먼저 수행되는 메서드
 	@Override
-	public boolean preHandle(HttpServletRequest request, 
-							HttpServletResponse response, 
-							Object handler)
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("### AuthLoginInterceptor.preHandle()메써드");
-		
+		System.out.println("--> AuthLoginInterceptor.preHandle() 메서드");
+
 		/*
 		[ 핸들러 메소드(HandlerMethod)란? ]
 			HandlerMethod는 @RequestMapping이 붙은 메소드의 정보를 추상화한 객체이다. 
@@ -44,17 +42,16 @@ public class AuthLoginInterceptor implements HandlerInterceptor {
 				- @RequestMapping이 붙은 메소드 파라미터 메타정보
 				- @RequestMapping이 붙은 메소드 어노테이션 메타정보
 				- @RequestMapping이 붙은 메소드 리턴 값 메타정보
- 
+		 
 			디스패처 서블릿은 애플리케이션이 실행될 때 모든 컨트롤러 빈의 메소드를 살펴서 
 			매핑 후보가 되는 메소드들을 추출한 뒤, 이를 HandlerMethod 형태로 저장해둔다. 
 			그리고 실제 요청이 들어오면 저장해 둔 목록에서 요청 조건에 맞는 
 			HandlerMethod를 참조해서 매핑되는 메소드를 실행한다.
 		 */
 		/***********************************************************************************
-		1. handler객체 종류 확인
-		    우리가 관심 있는 것은 @Controller객체에 있는 매핑된(@RequestMapping이 붙은) 메서드이므로 
-		    HandlerMethod 타입인지 체크
-		*************************************************************************************/   
+		 * 1. handler객체 종류 확인 우리가 관심 있는 것은 @Controller객체에 있는 매핑된(@RequestMapping이 붙은)
+		 * 메서드이므로 HandlerMethod 타입인지 체크
+		 *************************************************************************************/
 		if (handler instanceof HandlerMethod == false) {
 			/*
 			 * @ Controller객체에 @RequestMapping이 붙은메쏘드 :  HandlerMethod
@@ -62,7 +59,7 @@ public class AuthLoginInterceptor implements HandlerInterceptor {
 			//return true이면 그대로 컨트롤러로 진행
 			return true;
 		}
-		
+
 		//HttpSession 객체를 가져옴
 		HttpSession session = request.getSession();
 		//login처리를 담당하는 사용자 정보를 담고 있는 객체를 가져옴
@@ -76,7 +73,7 @@ public class AuthLoginInterceptor implements HandlerInterceptor {
 
 		// preHandle의 return은 컨트롤러 요청 uri로 가도 되냐 안되냐를 허가하는 의미임
 		// 따라서 true로하면 컨트롤러 uri로 가게 됨.
-		System.out.println("### AuthLoginInterceptor.preHandle() sUserId = "+sUserId);
+		System.out.println("--> AuthLoginInterceptor.preHandle() sUserId = " + sUserId);
 		return true;
 	}
 
