@@ -158,9 +158,8 @@
 		</ul>
 		<h3>링크[@]</h3>
 		<div th:with="no=1,name='lee',addr='jeju'">
-			<img src='image/thymeleaf.png' th:src="@{image/ball.png}" width="30"
-				height="30" /><br> <a href='view.html'
-				th:href="@{view(no=${no},name=${name},addr=${addr})}">상세보기</a>
+			<img src='image/thymeleaf.png' th:src="@{image/ball.png}" width="30" height="30" /><br> 
+			<a href='view.html' th:href="@{view(no=${no},name=${name},addr=${addr})}">상세보기</a>
 		</div>
 	</div>
 	<h3>레이아웃[~ , :: ]</h3>
