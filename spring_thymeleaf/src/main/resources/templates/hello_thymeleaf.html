@@ -117,10 +117,10 @@
 						<td th:text="${guest.guest_title}">제목</td>
 						<td th:text="${guest.guest_content}">내용</td>
 					</tr>
-				</table>
-				<br>
+				</table> <br>
 				<ul th:each="guest:${guestList}">
-					<li th:text="|${guest.guest_no}, ${guest.guest_name}, ${guest.guest_email}, ${guest.guest_homepage}, 
+					<li
+						th:text="|${guest.guest_no}, ${guest.guest_name}, ${guest.guest_email}, ${guest.guest_homepage}, 
 								  ${guest.guest_title}, ${guest.guest_content}|">1,KIM,guard@naver.com,제목,내용</li>
 				</ul>
 			</li>
@@ -138,7 +138,9 @@
 				</ul>
 			</li>
 			<li>***********Thymeleaf 로칼변수출력****************************
-				<ul th:with="str1='Local Thymeleaf Variable 1', str2='Local Thymeleaf Variable 2', int1=9928, localUser=${user}"> <!-- 변수 선언 -->
+				<ul
+					th:with="str1='Local Thymeleaf Variable 1', str2='Local Thymeleaf Variable 2', int1=9928, localUser=${user}">
+					<!-- 변수 선언 -->
 					<li th:text="${str1}">난 Thymeleaf 로칼변수</li>
 					<li th:text="${str2}">난 Thymeleaf 로칼변수</li>
 					<li th:text="${int1}">1234</li>
@@ -155,13 +157,18 @@
 
 		</ul>
 		<h3>링크[@]</h3>
-		<div></div>
-		<h3>레이아웃[~ , :: ]</h3>
-		<div>
-			<div>~{html파일이름 :: 템플릿조각 이름}</div>
-			<div>~{html파일이름 :: 템플릿조각 이름}</div>
+		<div th:with="no=1,name='lee',addr='jeju'">
+			<img src='image/thymeleaf.png' th:src="@{image/ball.png}" width="30"
+				height="30" /><br> <a href='view.html'
+				th:href="@{view(no=${no},name=${name},addr=${addr})}">상세보기</a>
 		</div>
-
+	</div>
+	<h3>레이아웃[~ , :: ]</h3>
+	<div>
+		<div th:insert="~{layout/include_common::top}" >~{html파일이름 :: 템플릿조각 이름}</div>
+		<div th:replace="~{layout/include_common::top}" >~{html파일이름 :: 템플릿조각 이름}</div>
+		<div th:insert="~{layout/include_common::bottom}" >~{html파일이름 :: 템플릿조각 이름}</div>
+		<div th:replace="~{layout/include_common::bottom}" >~{html파일이름 :: 템플릿조각 이름}</div>
 	</div>
 </body>
 </html>
