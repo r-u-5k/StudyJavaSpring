@@ -24,13 +24,13 @@
 	<!-- container start-->
 	<div id="container">
 		<!-- header start -->
-		<div id="header">
+		<div id="header" th:insert="~{include_common::top}">
 			<!-- include_common_top.html start-->
 			<!-- include_common_top.html end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
-		<div id="navigation">
+		<div id="navigation" th:insert="~{include_common::left}">
 			<!-- include_common_left.html start-->
 			<!-- include_common_left.html end-->
 		</div>
@@ -52,31 +52,30 @@
 											- 사용자 정보보기</b></td>
 								</tr>
 							</table> <!-- view Form  -->
-							<form name="f" method="post">
-								<input type="hidden" name="userId" value="guard" />
+							<form name="f" method="post" th:object="${loginUser}">
+								<input type="hidden" name="userId" value="guard" th:value="*{userId}"/>
 								<table border="0" cellpadding="0" cellspacing="1" width="590"
 									bgcolor="BBBBBB">
 									<tr>
-										<td width=100 align=center bgcolor="E6ECDE" height="22">사용자
-											아이디</td>
-										<td width=490 bgcolor="ffffff" style="padding-left: 10">guard</td>
+										<td width=100 align=center bgcolor="E6ECDE" height="22">아이디</td>
+										<td width=490 bgcolor="ffffff" style="padding-left: 10" th:text="*{userId}">guard</td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
-										<td width=490 bgcolor="ffffff" style="padding-left: 10">김가드</td>
+										<td width=490 bgcolor="ffffff" style="padding-left: 10" th:text="*{name}">김가드</td>
 									</tr>
 									<tr>
-										<td width=100 align=center bgcolor="E6ECDE" height="22">이메일
-											주소</td>
-										<td width=490 bgcolor="ffffff" style="padding-left: 10">guard@naver.com</td>
+										<td width=100 align=center bgcolor="E6ECDE" height="22">이메일</td>
+										<td width=490 bgcolor="ffffff" style="padding-left: 10" th:text="*{email}">guard@naver.com</td>
 									</tr>
 								</table>
 							</form> <br />
 							<table border="0" cellpadding="0" cellspacing="1">
 								<tr>
-									<td align=center><input type="button" value="수정"
-										onClick="userModify()"> &nbsp; <input type="button"
-										value="탈퇴" onClick="userRemove()"> &nbsp;</td>
+									<td align=center>
+									<input type="button" value="수정" onClick="userModify()"> &nbsp; 
+									<input type="button" value="탈퇴" onClick="userRemove()"> &nbsp;
+									</td>
 								</tr>
 							</table>
 						</td>
@@ -88,7 +87,7 @@
 			<!-- content end -->
 		</div>
 		<!--wrapper end-->
-		<div id="footer">
+		<div id="footer" th:insert="~{include_common::bottom}">
 			<!-- include_common_bottom.html start-->
 			<!-- include_common_bottom.html end-->
 		</div>
