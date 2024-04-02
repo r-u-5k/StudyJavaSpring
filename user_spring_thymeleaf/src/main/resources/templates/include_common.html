@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="httpL//www.thymeleaf.com">
+<body>
+	<h1 th:fragment="top">
+		<a href="">user spring thymeleaf</a>
+	</h1>
+
+	<p>
+		<strong>메뉴</strong>
+	</p>
+	<div th:fragment="left">
+		<ul th:if="${session.sUserId==null}">
+			<li><a href="user_login_form">로그인</a></li>
+			<li><a href="user_write_form">회원가입</a></li>
+		</ul>
+
+		<ul th:if="${session.sUserId!=null}">
+			<li th:text="${session.sUserId} + '님'"><a href=''>guard님</a></li>
+			<li><a href='user_view'>내정보</a></li>
+			<li><a href="user_logout_action">로그아웃</a></li>
+		</ul>
+	</div>
+	<p th:fragment="bottom" align="center">Copyright (&copy;) By
+		Kimkyoungho.[김경호] All rights reserved.</p>
+</body>
+</html>
