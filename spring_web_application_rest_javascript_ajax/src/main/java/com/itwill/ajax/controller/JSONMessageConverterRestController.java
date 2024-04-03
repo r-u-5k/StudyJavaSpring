@@ -5,16 +5,66 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.ajax.domain.News;
 
-import io.swagger.v3.oas.annotations.Operation;
+import jakarta.websocket.server.PathParam;
 
+@RestController
 public class JSONMessageConverterRestController {
+	/*
+	 << @ResponseBody >> 
+	  - ViewResolver --> View를 사용하지 않는다 
+	  - MessageConverter(text,xml,json)가 변경한데이타를 
+	    	HttpResponse객체가 클라이언트로 응답한다. 
+	  - @RestController 어노테이션을 사용하면
+	    생략가능하다.
+	 */
+	@GetMapping(value = "/news", produces = "application/json;charset=UTF-8")
+	public List<News> newsTitlesListJson() {
+		return this.getNewsList();
+	}
 	
+	@GetMapping(value = "/news/{no}")
+	public News newsTitleJson(@PathVariable(name = "no") int no) {
+		News news = getNewsList().get(no);
+		return news;
+	}
+	
+	@GetMapping(value = "/map/news")
+	public Map<String, Object> newsTitlesMapJson() {
+		int status = 1;
+		String msg = "";
+		Object data = getNewsList(); // 뉴스 리스트를 데이터로 가져옴
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("status", status);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
+		
+		return resultMap;
+	}
+	
+	@GetMapping(value = "/map/news/{no}")
+	public Map<String, Object> newsTitleMapJson(@PathVariable(name = "no") int no) {
+		int status = 1;
+		String msg = "success";
+		Object data = getNewsList().get(no); // 뉴스 하나를 데이터로 가져옴
+//		List<News> data = new ArrayList<>();
+//		data.add(getNewsList().get(no));
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("status", status);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
+		return resultMap;
+	}
 	
 	private List<News> getNewsList() {
 		List<News> newsList = new ArrayList<News>();
