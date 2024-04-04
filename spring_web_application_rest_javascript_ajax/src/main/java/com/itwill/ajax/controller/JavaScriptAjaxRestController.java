@@ -2,10 +2,14 @@ package com.itwill.ajax.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.ajax.domain.News;
@@ -20,16 +24,69 @@ public class JavaScriptAjaxRestController {
 	  - @RestController 어노테이션을 사용하면
 	    생략가능하다.
 	 */
-	
+	/*
 	@GetMapping(value = "/01.ajaxRequestGET/{id}", produces = "text/plain;charset=UTF-8")
-	public String ajaxRequestGET(@PathVariable(name = "id") String id) {
+	public String ajaxRequestGET(@PathVariable(name = "id") String id) throws Exception {
 		String msg = "";
 		if (id.startsWith("guard")) {
-			msg = "가드";
+			msg = "사용 가능";
 		} else {
-			msg = "사용 가능한 아이디";
+			msg = "사용 불가능";
 		}
+		Thread.sleep(1000);
 		return msg;
+	}
+	
+	@PostMapping(value = "/02.ajaxRequestPOST", produces = "text/plain;charset=UTF-8")
+	public String ajaxRequestPOST(@RequestParam(name = "id") String id) throws Exception {
+		String msg = "";
+		if (id.startsWith("guard")) {
+			msg = "사용 가능";
+		} else {
+			msg = "사용 불가능";
+		}
+		Thread.sleep(1000);
+		return msg;
+	}
+	*/
+	@GetMapping(value = "/01.ajaxRequestGET/{id}", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> ajaxRequestGET(@PathVariable(name = "id") String id) throws Exception {
+		int status = 0;
+		String msg = "";
+		Object data = new ArrayList<>();
+		if (id.startsWith("guard")) {
+			status = 1;
+			msg = "사용 가능";
+		} else {
+			status = 2;
+			msg = "사용 불가능";
+		}
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("status", status);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
+//		Thread.sleep(1000);
+		return resultMap;
+	}
+	
+	@PostMapping(value = "/02.ajaxRequestPOST", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> ajaxRequestPOST(@RequestParam(name = "id") String id) throws Exception {
+		int status = 0;
+		String msg = "";
+		Object data = new ArrayList<>();
+		if (id.startsWith("guard")) {
+			status = 1;
+			msg = "사용 가능";
+		} else {
+			status = 2;
+			msg = "사용 불가능";
+		}
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("status", status);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
+//		Thread.sleep(1000);
+		return resultMap;
 	}
 	
 	private List<News> getNewsList() {
