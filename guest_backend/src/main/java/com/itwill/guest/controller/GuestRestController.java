@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ import io.swagger.v3.oas.annotations.Parameter;
  * 4. PUT /guests/{guest_no} : 방명록 수정 (guest_no 데이터 수정)
  * 5. DELETE /guests/{guest_no} : 방명록 삭제 (guest_no 데이터 삭제)
  */
+@CrossOrigin(origins = "*")
 @RestController
 public class GuestRestController {
 	@Autowired
