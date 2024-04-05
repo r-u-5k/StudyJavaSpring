@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.JsonObject;
 import com.itwill.ajax.domain.News;
 
 @RestController
@@ -65,10 +66,10 @@ public class JavaScriptAjaxRestController {
 		resultMap.put("status", status);
 		resultMap.put("msg", msg);
 		resultMap.put("data", data);
-//		Thread.sleep(1000);
+		//		Thread.sleep(1000);
 		return resultMap;
 	}
-	
+
 	@PostMapping(value = "/02.ajaxRequestPOST", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> ajaxRequestPOST(@RequestParam(name = "id") String id) throws Exception {
 		int status = 0;
@@ -85,22 +86,80 @@ public class JavaScriptAjaxRestController {
 		resultMap.put("status", status);
 		resultMap.put("msg", msg);
 		resultMap.put("data", data);
-//		Thread.sleep(1000);
+		//		Thread.sleep(1000);
 		return resultMap;
 	}
-	
+
+	@GetMapping(value = "/03.server_clock", produces = "text/plain;charset=UTF-8;")
+	public String server_clock() {
+		return new Date().toLocaleString();
+	}
+
 	private List<News> getNewsList() {
 		List<News> newsList = new ArrayList<News>();
-		newsList.add(new News(1, "김순옥vs남궁민, 빅매치 성사…'연인'파트2, '소옆경' 이어 '7인의 탈출'도 꺾을까?", "MD포커스", new Date().toLocaleString()));
-		newsList.add(new News(2, "MBC가 금토드라마 '연인' 파트2를 10월 13일 방송 편성 확정했다고 13일 공식 발표했다.", "MBC뉴스", new Date().toLocaleString()));
+		newsList.add(
+				new News(1, "김순옥vs남궁민, 빅매치 성사…'연인'파트2, '소옆경' 이어 '7인의 탈출'도 꺾을까?", "MD포커스", new Date().toLocaleString()));
+		newsList.add(new News(2, "MBC가 금토드라마 '연인' 파트2를 10월 13일 방송 편성 확정했다고 13일 공식 발표했다.", "MBC뉴스",
+				new Date().toLocaleString()));
 		newsList.add(new News(3, "BTS 정국 \"헬스장 오고 배달음식 보내는 팬 有…부적절한 말 무시도 내 선택\"", "종합", new Date().toLocaleString()));
-		newsList.add(new News(4, "방탄소년단 정국이 사생 피해를 고백하며 아미와의 적절한 관계를 유지하는 법을 공개했다.", "TBC뉴스", new Date().toLocaleString()));
+		newsList.add(
+				new News(4, "방탄소년단 정국이 사생 피해를 고백하며 아미와의 적절한 관계를 유지하는 법을 공개했다.", "TBC뉴스", new Date().toLocaleString()));
 		newsList.add(new News(5, "폭행 피해자 3명에 사과?…김히어라 측 고소장 준비 중, 추가입장 無", "OMY뉴스", new Date().toLocaleString()));
 		newsList.add(new News(6, "'현빈♥' 손예진, 2년만 공개 골프나들이 \"결혼도 하고, 아이도 낳고\" ", "조선뉴스", new Date().toLocaleString()));
 		newsList.add(new News(7, "배우 손예진(본명 손언진·41)이 2년 만의 공개 골프 나들이를 예고했다.", "YTN뉴스", new Date().toLocaleString()));
 		newsList.add(new News(8, "남태현·서민재 필로폰 투약 혐의 10월 19일 첫 공판", "CBS뉴스", new Date().toLocaleString()));
 		newsList.add(new News(9, "'소년판타지' 제작사, '팀 이탈' 유준원에 30억 손배소", "ITWILL뉴스", new Date().toLocaleString()));
 		return newsList;
+	}
+
+	/*
+	<< 서버로부터받은데이타[JSON] >>
+	{
+		"status": 1,
+		"msg": "성공",
+		"data": [
+		{
+			"title":"뉴스1",
+			"company":"한국일보",
+			"date":"2023-11-15"
+		 },
+		 {
+			"title":"뉴스2",
+			"company":"대한일보",
+			"date":"2023-11-15"
+		 }
+					 
+				 ]
+	}
+	 */
+	@GetMapping(value = "/04.newsTitlesJSON")
+	public Map<String, Object> newsTitlesJSON() {
+		Map<String, Object> resultMap = new HashMap<>();
+		int status = 1;
+		String msg = "";
+		Object data = this.getNewsList();
+
+		resultMap.put("status", status);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
+		return resultMap;
+	}
+
+	@GetMapping(value = "/suggest", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> suggest(@RequestParam(value = "keyword", defaultValue = "") String keyword) {
+		int status = 0;
+		String msg = "";
+		List<String> data = new ArrayList<>();
+
+		data = this.search(keyword);
+		msg = "";
+		status = data.size();
+
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("status", status);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
+		return resultMap;
 	}
 
 	private String[] keywords = { "AJAX", "AJAX 실전 프로그래밍", "AJA", "AZERA", "자라자", "자라", "자바 프로그래밍", "자바 서버 페이지",

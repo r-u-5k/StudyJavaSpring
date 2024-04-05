@@ -1,64 +1,104 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-	a{
-		text-decoration: none;
-		cursor: pointer;
-		display: block;
-	}
-	a:hover{
-		background: rgb(245,245,245);
-	}
-	.suggest{
-		position: absolute;
-		left: 80px;
-		top:118px;
-		width: 150px;
-		display: block;
-	}
-</style>
-<script type="text/javascript" src="ajaxRequest.js"></script>
-<script type="text/javascript">
-	function sendKeyword(){
-		
-	}
-	function responseKeyword(xhr){
-		
-		
-	}
-	function select(keyword){
-		
-	}
-	function showSuggestDiv(show){
-		
-	}
-	
-	window.onload=function(){
-		
-		
-	}
-	
-</script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
+	<style type="text/css">
+		a {
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+		a:hover {
+			background: rgb(245, 245, 245);
+		}
+
+		.suggest {
+			position: absolute;
+			left: 80px;
+			top: 118px;
+			width: 150px;
+		}
+	</style>
+
+	<script type="text/javascript">
+		const showSuggestDiv = (show) => {
+			if (show) {
+				document.querySelector('#suggest').style.display = 'block';
+			} else {
+				document.querySelector('#suggest').style.display = 'none';
+			}
+		}
+
+		const select = (keyword) => {
+			document.forms['search'].elements['keyword'].value = keyword;
+			showSuggestDiv(false);
+		};
+
+		const sendKeyword = async () => {
+			let keyword = document.search.keyword.value;
+			if (keyword == null || keyword.trim() == '') {
+				showSuggestDiv(false);
+				return;
+			}
+			const params = {keyword: keyword};
+			const queryString = new URLSearchParams(params).toString();
+			const requestURI = `suggest?${queryString}`;
+			const response = await fetch(requestURI);
+			const responseJsonObject = await response.json();
+			if (responseJsonObject.status == 0) return;
+			/*
+			{
+				"msg": "",
+				"data": [
+					"자라자",
+					"자라",
+					"자바 프로그래밍",
+					"자바 서버 페이지",
+					"자바스터디",
+					"자바서비스",
+					"자바캔"
+				],
+				"status": 7
+			}
+			*/
+			const template = `${responseJsonObject.data.map((keyword) => {
+				return `<a style='display:block' href="javascript:select('${keyword}');">${keyword}</a>`;
+			}).join('')}`;
+
+			document.querySelector('#suggestList').innerHTML = template;
+			showSuggestDiv(true);
+		};
+
+		window.onload = () => {
+			showSuggestDiv(false);
+			document.search.keyword.addEventListener('focusout', () => {
+				setTimeout(() => {
+					showSuggestDiv(false);
+				}, 200);
+			});
+			document.search.keyword.addEventListener('focusin', () => sendKeyword());
+		}
+	</script>
 </head>
+
 <body>
-<h1>제시어</h1>
-<hr/>
-<form action="server_search.jsp" name="search">
-	<img src="http://sstatic.naver.net/search/2015/h_logo.png" height="12px" align="bottom">
-	<input 	type="text" name="keyword" onkeyup="sendKeyword();"> &nbsp;
-	<input type="submit" value="검색">
-	<div id="suggest" class="suggest">
-		<div id="suggestList" style="font-size: smaller;">
-			<!-- 
-			<a href="">자바라</a>	
-			<a href="">자바바</a>	
-			<a href="">자바</a>	
-			 -->
+	<h1>제시어</h1>
+	<hr />
+	<form action="server_search.jsp" name="search">
+		<img src="http://sstatic.naver.net/search/2015/h_logo.png" height="12px" align="bottom">
+		<input type="text" name="keyword" onkeyup="sendKeyword();"> &nbsp;
+		<input type="submit" value="검색">
+		<div id="suggest" class="suggest">
+			<div id="suggestList" style="font-size: smaller;">
+				<!--<a href="javascript:select('자라');">자라</a>
+				<a href="javascript:select('자바라');">자바라</a>
+				<a href="javascript:select('자바바');">자바바</a>
+				<a href="javascript:select('자바');">자바</a>-->
+			</div>
 		</div>
-	</div>
-</form>
+	</form>
 </body>
+
 </html>

@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src="ajaxRequest.js"></script>
-<script type="text/javascript">
-	
-	
-</script>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		const requestServerClock = async () => {
+			const response = await fetch('/03.server_clock');
+			const responseServerTime = await response.text();
+			console.log(responseServerTime);
+			document.querySelector('#serverTimeSpan').innerHTML = responseServerTime;
+		};
+
+		window.addEventListener('load', function () {
+			setInterval(requestServerClock, 1000);
+		})
+	</script>
 </head>
+
 <body>
-<h1>clock[window.setTimeout,window.setInterval]</h1><hr/>
-<div>현재서버의시간은 <span id='serverTimeSpan'>12:45:45</span></div>
+	<h1>clock[window.setTimeout, window.setInterval]</h1>
+	<hr />
+	<div>현재 서버의 시간은 <span id='serverTimeSpan'>12:45:45</span></div>
 </body>
+
 </html>
-
-
