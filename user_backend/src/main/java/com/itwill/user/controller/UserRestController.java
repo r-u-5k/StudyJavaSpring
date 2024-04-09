@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,7 @@ PUT 	/user/{id} 			- modify user by {id}
 GET 	/user/{id} 			- GETs the details of the user with {id}
 DELETE 	/user/{id} 			- Delete the user with id 
 */
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/user")
 public class UserRestController {
