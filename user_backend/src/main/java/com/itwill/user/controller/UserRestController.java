@@ -128,7 +128,7 @@ public class UserRestController {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-		return new ResponseEntity<Response>(response, httpHeaders, HttpStatus.CREATED);
+		return new ResponseEntity<Response>(response, httpHeaders, HttpStatus.OK);
 	}
 
 	@Operation(summary = "회원탈퇴")
