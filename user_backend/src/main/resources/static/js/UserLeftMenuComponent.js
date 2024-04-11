@@ -26,10 +26,9 @@ export const UserLeftMenuComponent = async () => {
 		<li><a href="http://localhost:8080/swagger-ui/index.html#/">Swagger</a></li>
     </ul>`;
 	document.querySelector('#navigation').innerHTML = template;
-	if (document.querySelector('#a_user_logout') == null) {
-		document.querySelector('#a_user_logout') = null;
-	} else {
+	if (document.querySelector('#a_user_logout') != null) {
 		document.querySelector('#a_user_logout').onclick = userLogoutAction;
-	};
+	}
+
 
 };

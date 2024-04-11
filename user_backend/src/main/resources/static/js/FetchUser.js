@@ -57,3 +57,11 @@ export const userModifyAction = async (sendJsonObject, userId) => {
 	const responseJsonObject = await response.json();
 	return responseJsonObject;
 };
+
+export const userDeleteAction = async (userId) => {
+	const response = await fetch(`${BACKEND_SERVER}/user/${userId}`, {
+		method: 'DELETE'
+	});
+	const responseJsonObject = await response.json();
+	return responseJsonObject;
+};

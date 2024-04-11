@@ -1,6 +1,12 @@
 import * as FetchUser from './FetchUser.js';
+import * as ResponseStatusCode from "./ResponseStatusCode.js";
+
 
 export const UserViewComponent = async (userId) => {
+	const userDeleteAction = async (userId) => {
+		FetchUser.userDeleteAction(userId);
+		location.href = 'user.html';
+	};
 	const responseJsonObject = await FetchUser.userView(userId);
 	const user = responseJsonObject.data;
 	const template = `
@@ -58,4 +64,7 @@ export const UserViewComponent = async (userId) => {
 	</table>
     `;
 	document.querySelector('#content').innerHTML = template;
+	document.querySelector('#btn_user_delete_action').onclick = () => {
+		userDeleteAction(userId);
+	} 
 };
