@@ -87,23 +87,24 @@ public class AuthLoginAnnotationInterceptor implements HandlerInterceptor {
 
 		if (sUserId == null) {
 			// 로그인이 안되어 있는 상태임으로 로그인 폼으로 다시 돌려보냄(redirect)
-			throw new UnauthorizedUserException("인증받지않은예외");
+			throw new UnauthorizedUserException("인증받지 않은 예외");
 			// 더이상 컨트롤러 요청으로 가지 않도록 false로 반환함
 		} else {
 			String contextPath = request.getContextPath();
 			String requestURI = request.getRequestURI().substring(contextPath.length());
 			System.out.println(requestURI);
-			if (!requestURI.startsWith("/user/logout")) {
-				/*
-				PUT 	/user/{id} 			- modify user by {id}
-				GET 	/user/{id} 			- GETs the details of the user with {id}
-				DELETE 	/user/{id} 			- Delete the user with id 
-				 */
-				String userId = requestURI.substring(requestURI.lastIndexOf("/") + 1);
-				System.out.println(userId);
-				if (!sUserId.equals(userId)) {
-					throw new UnauthorizedUserException("인증받지않은예외");
-				}
+			if (requestURI.startsWith("/user/logout") || requestURI.startsWith("/user/login")) {
+				return true;
+			}
+			/*
+			PUT 	/user/{id} 			- modify user by {id}
+			GET 	/user/{id} 			- GETs the details of the user with {id}
+			DELETE 	/user/{id} 			- Delete the user with id 
+			 */
+			String userId = requestURI.substring(requestURI.lastIndexOf("/") + 1);
+			System.out.println(userId);
+			if (!sUserId.equals(userId)) {
+				throw new UnauthorizedUserException("인증받지 않은 예외");
 			}
 
 		}
