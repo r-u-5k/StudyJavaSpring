@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.itwill.user.User;
 import com.itwill.user.UserService;
@@ -25,6 +26,7 @@ import com.itwill.user.exception.PasswordMismatchException;
 import com.itwill.user.exception.UserNotFoundException;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.servlet.http.HttpSession;
 
 /*
@@ -77,7 +79,8 @@ public class UserRestController {
 	}
 
 	@Operation(summary = "로그아웃")
-	@PostMapping("/logout")
+	@LoginCheck
+	@GetMapping("/logout")
 	public ResponseEntity<Response> user_login_action(HttpSession session) throws Exception {
 		session.invalidate();
 
@@ -112,7 +115,8 @@ public class UserRestController {
 	@Operation(summary = "회원 정보 수정")
 	@LoginCheck
 	@PutMapping("/{userId}")
-	public ResponseEntity<Response> user_modify_action(@PathVariable(name = "userId") String userId, @RequestBody User user) throws Exception {
+	public ResponseEntity<Response> user_modify_action(@PathVariable(name = "userId") String userId,
+			@RequestBody User user) throws Exception {
 		user.setUserId(userId);
 		userService.update(user);
 
@@ -130,7 +134,8 @@ public class UserRestController {
 	@Operation(summary = "회원탈퇴")
 	@LoginCheck
 	@DeleteMapping("/{userId}")
-	public ResponseEntity<Response> user_remove_action(@PathVariable(name = "userId") String userId, HttpSession session) throws Exception {
+	public ResponseEntity<Response> user_remove_action(@PathVariable(name = "userId") String userId,
+			HttpSession session) throws Exception {
 		userService.remove(userId);
 		session.invalidate();
 
@@ -141,8 +146,24 @@ public class UserRestController {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-		ResponseEntity<Response> responseEntity = new ResponseEntity<Response>(response, httpHeaders, HttpStatus.CREATED);
+		ResponseEntity<Response> responseEntity = new ResponseEntity<Response>(response, httpHeaders,
+				HttpStatus.CREATED);
 		return responseEntity;
+	}
+
+	@Operation(summary = "로그인 여부 체크")
+	@LoginCheck
+	@GetMapping("/login")
+	public ResponseEntity<Response> login_check(@SessionAttribute(name = "sUserId", required = false) @Parameter(hidden = true) String sUserId) throws Exception {
+		User loginUser = userService.findUser(sUserId);
+		Response response = new Response();
+		response.setStatus(ResponseStatusCode.LOGIN_SUCCESS);
+		response.setMessage(ResponseMessage.LOGIN_SUCCESS);
+		response.setData(loginUser);
+
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		return new ResponseEntity<Response>(response, httpHeaders, HttpStatus.OK);
 	}
 
 	@ExceptionHandler(value = ExistedUserException.class)

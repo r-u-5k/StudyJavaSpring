@@ -1,17 +1,9 @@
 package com.itwill.user.config;
 
 import org.springframework.boot.web.servlet.ServletContextInitializer;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
-/*
- * web.xml설정을 대신할 클래스
- * -  톰캣실행시 기본설정
- */
-import jakarta.servlet.ServletRegistration;
 
 //@Configuration
 public class WebAppInitConf implements ServletContextInitializer {
