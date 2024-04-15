@@ -5,8 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.itwill.jpa.relation.entity.Product;
 
-public interface ProductRepository 
-		extends JpaRepository<Product, Long>{
-	
-	
+public interface ProductRepository extends JpaRepository<Product, Long> {
+
 }

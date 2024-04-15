@@ -19,8 +19,8 @@ spring:
     generate-ddl: false
     properties:
       hibernate: 
-        format_sql: true
-        use_sql_comments: true
+        format-sql: true
+        use-sql-comments: true
     hibernate:
       ddl-auto: create
     #defer-datasource-initialization: true   
