@@ -17,25 +17,32 @@ import com.itwill.jpa.relation.entity.Student;
 import jakarta.transaction.Transactional;
 
 class StudentRepositoryTest extends SpringJpaApplicationTests {
-	@Autowired
-	StudentRepository studentRepository;
-	@Autowired
-	AddressRepository addressRepository;
-	@Transactional
-	@Rollback(false)
-	@Test
-	@Disabled
-	void saveStudentWithAddress() {
-		
-	
-	}
-	@Transactional
-	@Rollback(false)
-	@Test
-	@Disabled
-	void selectStudentWithAddress() {
-		
-	}
+
+    @Autowired
+    StudentRepository studentRepository;
+
+    @Autowired
+    AddressRepository addressRepository;
+
+//    @Disabled
+    @Transactional
+    @Rollback(false)
+    @Test
+    void saveStudentWithAddress() {
+
+
+    }
+
+//    @Disabled
+    @Transactional
+    @Rollback(false)
+    @Test
+    void selectStudentWithAddress() {
+		Student student1 = studentRepository.findById(1L).get();
+        System.out.println("student1 = " + student1);
+    }
+
+
 
 }
 

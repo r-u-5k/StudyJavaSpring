@@ -1,10 +1,9 @@
 package com.itwill.jpa.relation.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -18,9 +17,15 @@ public class CourseEnrollment {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "COURSE_ENROLLMENT_ID_SEQ")
     private Long courseEnrollmentId;
 
-    private Long courseId;
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @JoinColumn(name = "stud_id")
+    private Student student;
 
-    private Long studentId;
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @JoinColumn(name = "course_id")
+    private Course course;
 
 }
 

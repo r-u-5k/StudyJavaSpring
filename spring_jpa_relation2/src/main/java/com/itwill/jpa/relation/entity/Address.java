@@ -32,10 +32,10 @@ public class Address {
       ------- -------- ------------
       ADDR_ID 	NOT NULL NUMBER(11)
       STREET 	NOT NULL VARCHAR2(50)
-      CITY 	NOT NULL VARCHAR2(50)
+      CITY 	    NOT NULL VARCHAR2(50)
       STATE 	NOT NULL VARCHAR2(50)
-      ZIP				VARCHAR2(10)
-      COUNTRY NOT NULL VARCHAR2(50)
+      ZIP				 VARCHAR2(10)
+      COUNTRY   NOT NULL VARCHAR2(50)
      */
     @Id
     @SequenceGenerator(name = "ADDRESS_ADDR_ID_SEQ", sequenceName = "ADDRESS_ADDR_ID_SEQ", initialValue = 1, allocationSize = 1)
@@ -49,10 +49,12 @@ public class Address {
 
     @OneToMany(mappedBy = "address", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @Builder.Default
+    @ToString.Exclude
     private List<Student> students = new ArrayList<>();
 
     @OneToMany(mappedBy = "address", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @Builder.Default
+    @ToString.Exclude
     private List<Tutor> tutors = new ArrayList<>();
 
 }
