@@ -1,7 +1,9 @@
 package com.itwill.jpa.relation.entity;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -22,14 +24,25 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+
 @Entity
-public class Tutor{
-	@Id
-	@SequenceGenerator(name = "TUTOR_TUTOR_ID_SEQ",sequenceName = "TUTOR_TUTOR_ID_SEQ",initialValue = 1,allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "TUTOR_TUTOR_ID_SEQ")
-	private Long tutorId;
-	private String name;
-	private String email;
-	private String phone;
-	private LocalDateTime dob;
+public class Tutor {
+    @Id
+    @SequenceGenerator(name = "TUTOR_TUTOR_ID_SEQ", sequenceName = "TUTOR_TUTOR_ID_SEQ", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TUTOR_TUTOR_ID_SEQ")
+    private Long tutorId;
+    private String name;
+    private String email;
+    private String phone;
+    private LocalDateTime dob;
+
+    @OneToMany(mappedBy = "tutor", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @Builder.Default
+    private List<Course> courses = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "addr_id")
+    private Address address;
+
+
 }

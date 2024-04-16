@@ -1,4 +1,5 @@
 package com.itwill.jpa.relation.entity;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,32 +27,42 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-@Entity
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Course  {
-	/*
-	이름          널?       유형            
-	----------- -------- ------------- 
-	COURSE_ID   NOT NULL NUMBER(11)    
-	NAME        NOT NULL VARCHAR2(100) 
-	DESCRIPTION          VARCHAR2(512) 
-	START_DATE           DATE          
-	END_DATE             DATE          
-	TUTOR_ID    NOT NULL NUMBER(11)    	
-	 */
-	@Id
-	@SequenceGenerator(name = "COURSE_COURSE_ID_SEQ", sequenceName = "COURSE_COURSE_ID_SEQ", initialValue = 1, allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "COURSE_COURSE_ID_SEQ")
-	private Long courseId;
-	
-	private String name;
-	private String description;
-	
-	
-	
-	
-	
+
+@Entity
+public class Course {
+    /*
+    이름          널?       유형
+    ----------- -------- -------------
+    COURSE_ID   NOT NULL NUMBER(11)
+    NAME        NOT NULL VARCHAR2(100)
+    DESCRIPTION          VARCHAR2(512)
+    START_DATE           DATE
+    END_DATE             DATE
+    TUTOR_ID    NOT NULL NUMBER(11)
+     */
+    @Id
+    @SequenceGenerator(name = "COURSE_COURSE_ID_SEQ", sequenceName = "COURSE_COURSE_ID_SEQ", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "COURSE_COURSE_ID_SEQ")
+    private Long courseId;
+
+    private String name;
+    private String description;
+
+    @CreationTimestamp
+    private LocalDateTime startDate;
+
+    @UpdateTimestamp
+    @Builder.Default
+    private LocalDateTime endDate = LocalDateTime.now().minusDays(30);
+
+    @ManyToOne
+    @JoinColumn(name = "tutor_id")
+    @ToString.Exclude
+    private Tutor tutor;
+
 }
