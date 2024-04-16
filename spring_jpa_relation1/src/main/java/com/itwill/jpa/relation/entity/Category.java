@@ -3,14 +3,7 @@ package com.itwill.jpa.relation.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,11 +14,12 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 @Entity
 public class Category {
 	@Id
 	@SequenceGenerator(name = "category_seq", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "category_seq")
 	private Long id; // PK
 
 	@Column(unique = true, nullable = false)
@@ -37,7 +31,7 @@ public class Category {
 	 * 1 (Category) : N (Product)
 	 * OWNER TABLE (X)
 	 */
-	@OneToMany(mappedBy = "category", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "category", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
 	@Builder.Default
 	@ToString.Exclude
 	private List<Product> products = new ArrayList<>(); // FK

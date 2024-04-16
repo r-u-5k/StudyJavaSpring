@@ -1,12 +1,6 @@
 package com.itwill.jpa.relation.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,7 +16,7 @@ import lombok.ToString;
 public class ProductDetail {
 	@Id
 	@SequenceGenerator(name = "product_detail_seq", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_detail_seq")
 	private Long id; // PK
 
 	private String description;
@@ -31,7 +25,8 @@ public class ProductDetail {
 	 * 1 (ProductDetail) : 1 (Product)
 	 * OWNER TABLE
 	 */
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@ToString.Exclude
-	private Product product; // FK
+	@Builder.Default
+	private Product product = new Product(); // FK
 }
