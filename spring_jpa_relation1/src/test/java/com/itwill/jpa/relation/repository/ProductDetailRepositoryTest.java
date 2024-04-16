@@ -16,7 +16,7 @@ class ProductDetailRepositoryTest extends SpringJpaRelationApplicationTests {
 	@Transactional
 	@Rollback(false)
 	@Test
-	void productDetailWithProductSaveRead() {
+	void productDetailWithProductSave() {
 		Product product = Product.builder().name("JPA").price(20000).stock(50).build();
 		ProductDetail productDetail = ProductDetail.builder().description("JPA 책 설명").build();
 
