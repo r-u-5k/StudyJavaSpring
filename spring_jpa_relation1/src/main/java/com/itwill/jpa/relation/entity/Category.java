@@ -10,10 +10,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Builder
 @Data
@@ -22,12 +24,13 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Category {
 	@Id
+	@SequenceGenerator(name = "category_seq", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id; // PK
-	
+
 	@Column(unique = true, nullable = false)
 	private String code;
-	
+
 	private String name;
 
 	/*
@@ -36,6 +39,7 @@ public class Category {
 	 */
 	@OneToMany(mappedBy = "category", cascade = CascadeType.PERSIST)
 	@Builder.Default
+	@ToString.Exclude
 	private List<Product> products = new ArrayList<>(); // FK
 
 }
