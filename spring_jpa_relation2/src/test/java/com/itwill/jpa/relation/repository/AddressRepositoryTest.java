@@ -18,34 +18,40 @@ import com.itwill.jpa.relation.entity.Address;
 import com.itwill.jpa.relation.entity.Student;
 import com.itwill.jpa.relation.entity.Tutor;
 
-class AddressRepositoryTest extends SpringJpaApplicationTests{
-	@Autowired
-	AddressRepository addressRepository;
-	@Autowired
-	StudentRepository studentRepository;
-	@Test
-	@Disabled
-	@Transactional
-	@Rollback(false)
-	void savAddressWithStudents() {
-		
-		
-	}
-	@Test
-	@Disabled
-	@Transactional
-	@Rollback(false)
-	void savAddressWithTutors() {
-		
-		
-		
-	}
-	@Test
-	@Disabled
-	@Transactional
-	@Rollback(false)
-	void selectAddressWithStudents() {
-		
-	}
+class AddressRepositoryTest extends SpringJpaApplicationTests {
+
+    @Autowired
+    AddressRepository addressRepository;
+
+    @Autowired
+    StudentRepository studentRepository;
+
+    @Disabled
+    @Test
+    @Transactional
+    @Rollback(false)
+    void savAddressWithStudents() {
+
+
+    }
+
+    @Disabled
+    @Test
+    @Transactional
+    @Rollback(false)
+    void savAddressWithTutors() {
+
+
+    }
+
+//    @Disabled
+    @Test
+    @Transactional
+    @Rollback(false)
+    void selectAddressWithStudents() {
+        Address address9 = addressRepository.findById(9L).get();
+        System.out.println("address9 = " + address9);
+        System.out.println(address9.getStudents());
+    }
 
 }

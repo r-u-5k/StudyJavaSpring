@@ -60,7 +60,9 @@ public class Student {
     @Builder.Default
     private Address address = new Address();
 
-
+    @OneToMany(mappedBy = "student")
+    @Builder.Default
+    private List<CourseEnrollment> courseEnrollments = new ArrayList<>();
 }
 
 
