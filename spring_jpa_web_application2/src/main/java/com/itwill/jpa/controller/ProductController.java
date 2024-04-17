@@ -1,5 +1,6 @@
 package com.itwill.jpa.controller;
 
+import com.itwill.jpa.dto.ProductDto;
 import com.itwill.jpa.entity.Product;
 import com.itwill.jpa.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,31 +23,31 @@ import java.util.Map;
 @RestController
 @RequestMapping("/product")
 public class ProductController {
-	@Autowired
+    @Autowired
     private ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<Product>> getProductList() {
-        List<Product> products = productService.products();
-        return ResponseEntity.status(HttpStatus.OK).body(products);
+    public ResponseEntity<List<ProductDto>> getProductList() {
+        List<ProductDto> productDtos = productService.productDtos();
+        return ResponseEntity.status(HttpStatus.OK).body(productDtos);
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<Product> getProduct(@PathVariable(name = "productId") Long productId) {
-        Product product = productService.getProduct(productId);
-        return ResponseEntity.status(HttpStatus.OK).body(product);
+    public ResponseEntity<ProductDto> getProduct(@PathVariable(name = "productId") Long productId) {
+        ProductDto productDto = productService.getProduct(productId);
+        return ResponseEntity.status(HttpStatus.OK).body(productDto);
     }
 
     @Operation(description = "제품 생성", summary = "제품 생성")
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(productService.saveProduct(product));
+    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.saveProduct(productDto));
     }
 
     @Operation(description = "제품 수정", summary = "제품 수정")
     @PutMapping
-    public ResponseEntity<Product> updateProduct(@RequestBody Product product) throws Exception {
-        return ResponseEntity.status(HttpStatus.CREATED).body(productService.updateProduct(product));
+    public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto) throws Exception {
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.updateProduct(productDto));
     }
 
     @Operation(description = "제품 삭제", summary = "제품 삭제")
