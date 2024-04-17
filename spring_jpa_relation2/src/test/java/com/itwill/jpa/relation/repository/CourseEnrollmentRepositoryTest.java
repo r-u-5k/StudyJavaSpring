@@ -32,28 +32,36 @@ class CourseEnrollmentRepositoryTest extends SpringJpaApplicationTests {
     @Autowired
     CourseRepository courseRepository;
 
+//    @Disabled
     @Test
-    @Disabled
     @Transactional
     @Rollback(false)
     void saveCourseEnrollmentWithStudentAndCourse1() {
-
-
+        Student student8 = studentRepository.findById(8L).get();
+        Course course6 = courseRepository.findById(6L).get();
+        CourseEnrollment courseEnrollment = CourseEnrollment.builder().student(student8).course(course6).build();
+//        CourseEnrollment courseEnrollment2 = CourseEnrollment.builder().student(student8).course(course6).build();
+        courseEnrollmentRepository.save(courseEnrollment);
+//        courseEnrollmentRepository.save(courseEnrollment2); // ORA-00001: 무결성 제약 조건(JDEVELOPER43.COURSE_ENROLLMENT_UQ)에 위배됩니다
     }
 
+//    @Disabled
     @Test
-    @Disabled
     @Transactional
     @Rollback(false)
     void saveCourseEnrollmentWithStudentAndCourse2() {
 
     }
 
-    @Test
     @Disabled
+    @Test
     @Transactional
     @Rollback(false)
     void selectCourseEnrollmentWithStudentAndCourse() {
+        CourseEnrollment courseEnrollment = courseEnrollmentRepository.findById(1L).get();
+        System.out.println("courseEnrollment = " + courseEnrollment);
+        System.out.println("courseEnrollment.getCourse() = " + courseEnrollment.getCourse());
+        System.out.println("courseEnrollment.getStudent() = " + courseEnrollment.getStudent());
 
     }
 }
