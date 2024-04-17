@@ -11,6 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 
 @Entity(name = "COURSE_ENROLLMENT")
+@Table(name = "COURSE_ENROLLMENT", uniqueConstraints =
+        {@UniqueConstraint(name = "COURSE_ENROLLMENT_UQ", columnNames = {"stud_id", "course_id"})})
 public class CourseEnrollment {
     @Id
     @SequenceGenerator(name = "COURSE_ENROLLMENT_ID_SEQ", sequenceName = "COURSE_ENROLLMENT_ID_SEQ", initialValue = 1, allocationSize = 1)
