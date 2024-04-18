@@ -62,8 +62,7 @@ public class Employee {
 	}
 
 	public String toString() {
-		return String.format("[%d][%s][%s][%s][%d]", id, name, email, phone,
-				salary);
+		return String.format("[%d][%s][%s][%s][%d]", id, name, email, phone, salary);
 	}
 
 }
