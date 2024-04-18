@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.itwill.guest.dao.mybatis.mapper.GuestMapper;
 
-import oracle.net.aso.f;
-
 @Repository
 public class GuestDaoImplMyBatis implements GuestDao {
 	@Autowired
