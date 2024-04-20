@@ -33,8 +33,8 @@ public class GuestRestController {
     @Operation(summary = "방명록 리스트")
     @GetMapping
     public ResponseEntity<List<GuestDto>> guest_list() throws Exception {
-        List<GuestDto> guestDtos = guestService.guestList();
-        return ResponseEntity.status(HttpStatus.OK).body(guestDtos);
+        List<GuestDto> guestDtoList = guestService.guestList();
+        return ResponseEntity.status(HttpStatus.OK).body(guestDtoList);
     }
 
     @Operation(summary = "방명록 상세보기")
