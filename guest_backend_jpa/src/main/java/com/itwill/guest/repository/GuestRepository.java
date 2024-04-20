@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Date;
 import java.util.List;
 
-public interface GuestRepository extends JpaRepository<com.itwill.guest.dto.GuestDto, Long> {
+public interface GuestRepository extends JpaRepository<GuestDto, Long> {
 	
 	GuestDto findByGuestNo(Integer guestNo);
 	List<GuestDto> findByGuestNoBetween(Integer no1, Integer no2);

@@ -1,8 +1,9 @@
-package com.itwill.guest;
+package com.itwill.guest.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.itwill.guest.dao.GuestDaoImplJPA;
 import com.itwill.guest.dto.GuestDto;
 import com.itwill.guest.entity.Guest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,16 +70,16 @@ public class GuestServiceImpl implements GuestService {
     public List<GuestDto> findByGuest(int searchType, String searchString) throws Exception {
         List<GuestDto> guestDtoList = new ArrayList<GuestDto>();
         switch (searchType) {
-            case GuestService.GUEST_SEARCH_BY_ALL:
+            case GUEST_SEARCH_BY_ALL:
                 guestDtoList = guestDaoImplJPA.findByAll();
                 break;
-            case GuestService.GUEST_SEARCH_BY_NAME:
+            case GUEST_SEARCH_BY_NAME:
                 guestDtoList = guestDaoImplJPA.findByGuestName(searchString);
                 break;
-            case GuestService.GUEST_SEARCH_BY_TITLE:
+            case GUEST_SEARCH_BY_TITLE:
                 guestDtoList = guestDaoImplJPA.findByGuestTitle(searchString);
                 break;
-            case GuestService.GUEST_SEARCH_BY_CONTENT:
+            case GUEST_SEARCH_BY_CONTENT:
                 guestDtoList = guestDaoImplJPA.findByGuestContent(searchString);
                 break;
         }
