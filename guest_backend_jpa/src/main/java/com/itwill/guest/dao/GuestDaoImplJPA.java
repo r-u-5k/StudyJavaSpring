@@ -14,23 +14,21 @@ public class GuestDaoImplJPA implements GuestDao {
     GuestRepository guestRepository;
 
     @Override
-    public int insert(GuestDto guestDto) throws Exception {
-        Guest guestEntity = Guest.toEntity(guestDto);
-        guestRepository.save(GuestDto.toDto(guestEntity));
-        return 0;
+    public GuestDto insert(GuestDto guestDto) throws Exception {
+         Guest guestEntity = guestRepository.save(Guest.toEntity(guestDto));
+         return GuestDto.toDto(guestEntity);
     }
 
     @Override
-    public int update(GuestDto guestDto) throws Exception {
-        Guest guestEntity = Guest.toEntity(guestDto);
-        guestRepository.save(guestDto);
-        return 0;
+    public GuestDto update(GuestDto guestDto) throws Exception {
+        Guest guestEntity = guestRepository.save(Guest.toEntity(guestDto));
+        return GuestDto.toDto(guestEntity);
     }
 
     @Override
     public void delete(int guestNo) throws Exception {
         Guest guestEntity = guestRepository.findByGuestNo(guestNo);
-        guestRepository.delete();
+        guestRepository.delete(guestEntity);
     }
 
     @Override
@@ -72,5 +70,10 @@ public class GuestDaoImplJPA implements GuestDao {
     @Override
     public List<GuestDto> findByGuestContent(String guestContent) throws Exception {
         List<Guest> guestEntityList = guestRepository.findByGuestContent(guestContent);
+        List<GuestDto> guestDtoList = new ArrayList<>();
+        for (Guest guestEntity : guestEntityList) {
+            guestDtoList.add(GuestDto.toDto(guestEntity));
+        }
+        return guestDtoList;
     }
 }

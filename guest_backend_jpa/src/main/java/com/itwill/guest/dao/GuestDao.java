@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface GuestDao {
 
-    int insert(GuestDto guest) throws Exception;
+    GuestDto insert(GuestDto guest) throws Exception;
 
-    int update(GuestDto guest) throws Exception;
+    GuestDto update(GuestDto guest) throws Exception;
 
     void delete(int guestNo) throws Exception;
 
