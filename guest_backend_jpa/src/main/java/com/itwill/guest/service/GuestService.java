@@ -1,4 +1,4 @@
-package com.itwill.guest;
+package com.itwill.guest.service;
 
 import com.itwill.guest.dto.GuestDto;
 

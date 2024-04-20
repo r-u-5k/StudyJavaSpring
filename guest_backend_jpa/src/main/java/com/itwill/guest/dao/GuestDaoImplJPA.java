@@ -1,7 +1,6 @@
-package com.itwill.guest;
+package com.itwill.guest.dao;
 
 import com.itwill.guest.dto.GuestDto;
-import com.itwill.guest.entity.Guest;
 import com.itwill.guest.repository.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

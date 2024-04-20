@@ -1,13 +1,11 @@
 package com.itwill.guest.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.itwill.guest.GuestService;
+import com.itwill.guest.service.GuestService;
 import com.itwill.guest.dto.GuestDto;
-import com.itwill.guest.entity.Guest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
