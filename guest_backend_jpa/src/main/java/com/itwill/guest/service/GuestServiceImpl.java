@@ -27,8 +27,8 @@ public class GuestServiceImpl implements GuestService {
      */
     @Override
     public GuestDto guestWrite(GuestDto guestDto) throws Exception {
-        Guest guestEntity = guestDaoImplJPA.insert(Guest.toEntity(guestDto));
-        return GuestDto.toDto(guestEntity);
+        Guest guestEntity = Guest.toEntity(guestDto);
+        return guestDaoImplJPA.insert(GuestDto.toDto(guestEntity));
     }
 
     /*
@@ -91,9 +91,8 @@ public class GuestServiceImpl implements GuestService {
      */
     @Override
     public GuestDto guestUpdate(GuestDto guestDto) throws Exception {
-        Guest guestEntity = guestDaoImplJPA.update(Guest.toEntity(guestDto));
-        return GuestDto.toDto(guestEntity);
+        Guest guestEntity = Guest.toEntity(guestDto);
+        return guestDaoImplJPA.update(GuestDto.toDto(guestEntity));
     }
-
 
 }

@@ -19,6 +19,7 @@ GUEST_CONTENT           VARCHAR2(4000)
 
 import com.itwill.guest.entity.Guest;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -26,7 +27,6 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
 public class GuestDto {
 
     private int guestNo;

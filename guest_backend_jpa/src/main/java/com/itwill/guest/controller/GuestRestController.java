@@ -45,17 +45,17 @@ public class GuestRestController {
         return ResponseEntity.status(HttpStatus.OK).body(guestDto);
     }
 
-    @Operation(summary = "방명록쓰기")
+    @Operation(summary = "방명록 쓰기")
     @PostMapping
-    public ResponseEntity<GuestDto> guest_write_action(@RequestBody GuestDto guest) throws Exception {
-        return ResponseEntity.status(HttpStatus.CREATED).body(guestService.guestWrite(guest));
+    public ResponseEntity<GuestDto> guest_write_action(@RequestBody GuestDto guestDto) throws Exception {
+        return ResponseEntity.status(HttpStatus.CREATED).body(guestService.guestWrite(guestDto));
     }
 
     @Operation(summary = "방명록 수정")
     @Parameter(name = "guest_no")
     @PutMapping(value = "/{guest_no}")
-    public ResponseEntity<GuestDto> guest_modify_action(@PathVariable(name = "guest_no") int guest_no, @RequestBody GuestDto guest) throws Exception {
-        return ResponseEntity.status(HttpStatus.CREATED).body(guestService.guestUpdate(guest));
+    public ResponseEntity<GuestDto> guest_modify_action(@PathVariable(name = "guest_no") int guest_no, @RequestBody GuestDto guestDto) throws Exception {
+        return ResponseEntity.status(HttpStatus.CREATED).body(guestService.guestUpdate(guestDto));
     }
 
     @Operation(summary = "방명록 삭제")

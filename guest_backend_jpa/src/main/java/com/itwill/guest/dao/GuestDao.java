@@ -10,7 +10,7 @@ public interface GuestDao {
 
     int update(GuestDto guest) throws Exception;
 
-    int delete(int guestNo) throws Exception;
+    void delete(int guestNo) throws Exception;
 
     GuestDto findByGuestNo(int guestNo) throws Exception;
 

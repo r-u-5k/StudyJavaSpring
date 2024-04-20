@@ -10,13 +10,10 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.Date;
 
+@Data
 @Builder
-@Getter
-@Setter
 @AllArgsConstructor
-@ToString
 @NoArgsConstructor
-@EqualsAndHashCode
 
 @DynamicUpdate
 @DynamicInsert
