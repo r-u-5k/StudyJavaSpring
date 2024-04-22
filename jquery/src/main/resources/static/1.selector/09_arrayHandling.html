@@ -1,53 +1,106 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>배열 처리 메소드 활용</title>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>배열 처리 메소드 활용</title>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
-<script type="text/javascript">
-	/*
-	자바스크립트 표준
-	- ECMA (European Computer Manufacturers Association)
-	- Ecma International
-	- ECMAScript 5
-	- ecma5
-	*/
-	
-	/*
-	sort()
-		The sort() method sorts the items of an array.
-		The sort order can be either alphabetic or numeric,
-			and either ascending or descending.
-		Default sort order is alphabetic and ascending.
-	*/
-	$(function(){
-		
-		var memberNameArray=['kim','sim','kang','king','hong'];
-		
-		var memberScoreArray=[89,45,23,98,12];
-		
-		var memberArray=[
-				{'id':'guard1','name':'kim1','address':'경기도'},
-				{'id':'guard2','name':'kim2','address':'경기레'},
-				{'id':'guard3','name':'kim3','address':'경기미'},
-				{'id':'guard4','name':'kim4','address':'경기파'},
-				{'id':'guard5','name':'kim5','address':'경기솔'}
-		];
-		
-		/*************정렬결과출력**************/
-		
-	});
-	
-	
-	
+        <script type="text/javascript">
+            /*
+            자바스크립트 표준
+            - ECMA (European Computer Manufacturers Association) International 
+            - ECMAScript는 JavaScript의 표준화된 버전을 제공합니다. 
+                ECMAScript의 버전은 주로 "ECMA-262" 표준 문서에 기반하며, 
+                이 문서는 JavaScript 언어의 기능과 구문을 정의합니다. 
+                현재까지 공개된 ECMAScript 버전은 다음과 같습니다.
 
-</script>
-</head>
-<body style="padding: 10px;">
-	<h2>Members of my Group are</h2>
-	<p class="sorted1"></p>
-	<p class="sorted2"></p>
-	<p class="sorted3"></p>
-</body>
+                ECMAScript 1 (ES1):
+                    1997년에 처음으로 표준화된 JavaScript 버전입니다.
+                ECMAScript 2 (ES2):
+                    1998년에 발표되었습니다.
+                    문자열 연결, 논리 연산자 등의 새로운 기능이 추가되었습니다.
+                ECMAScript 3 (ES3):
+                    1999년에 발표되었습니다.
+                    try/catch 문, 정규 표현식, JSON 등의 새로운 기능이 추가되었습니다.
+                ECMAScript 4 (ES4):
+                    개발 중단됨. 초기에는 ECMAScript 4가 개발되었지만, 스펙이 너무 복잡하고 구현이 어려워져 개발이 중단되었습니다.
+                ECMAScript 5 (ES5):
+                    2009년에 발표되었습니다.
+                    엄격 모드(strict mode), JSON 지원 등의 새로운 기능이 추가되었습니다.
+                ECMAScript 5.1 (ES5.1):
+                    2011년에 발표되었습니다. ES5의 기능을 보완하고 정정된 버전입니다.
+                ECMAScript 2015 (ES6):
+                    2015년에 발표되었습니다.
+                    화살표 함수, 클래스, 모듈, let/const 키워드 등의 새로운 기능이 추가되었습니다.
+
+                ----- Modern JavaScript -----
+                ECMAScript 2016 (ES7):
+                    2016년에 발표되었습니다.
+                    Array.includes(), 지수 연산자(**) 등의 새로운 기능이 추가되었습니다.
+                ECMAScript 2017 (ES8):
+                    2017년에 발표되었습니다.
+                    async/await, Object.values(), Object.entries() 등의 새로운 기능이 추가되었습니다.
+                ECMAScript 2018 (ES9):
+                    2018년에 발표되었습니다.
+                    Promise.prototype.finally(), rest/spread 프로퍼티 등의 새로운 기능이 추가되었습니다.
+                ECMAScript 2019 (ES10):
+                    2019년에 발표되었습니다.
+                    Array.prototype.flat(), Array.prototype.flatMap(), Object.fromEntries() 등의 새로운 기능이 추가되었습니다.
+                ECMAScript 2020 (ES11):
+                    2020년에 발표되었습니다.
+                    Optional chaining (?.), Nullish coalescing (??) 등의 새로운 기능이 추가되었습니다.
+            */
+
+            /*
+			sort()
+				The sort() method sorts the items of an array.
+				The sort order can be either alphabetic or numeric,
+					and either ascending or descending.
+				Default sort order is alphabetic and ascending.
+			*/
+            $(function () {
+                let memberNameArray = ['kim', 'sim', 'kang', 'king', 'hong'];
+                // memberNameArray.sort();
+                memberNameArray.sort((name1, name2) => {
+                    if (name1 > name2) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                });
+                $('.sorted1').html(memberNameArray.join(', '));
+
+                let memberScoreArray = [89, 45, 23, 98, 12];
+                // memberScoreArray.sort();
+                memberScoreArray.sort((score1, score2) => {
+                    // return score1 - score2; // 오름차순
+                    return score2 - score1; // 내림차순
+                });
+                $('.sorted2').html(memberScoreArray.join(', '));
+
+                let memberArray = [
+                    { id: 'guard1', name: 'kim1', address: '경기도' },
+                    { id: 'guard2', name: 'kim2', address: '경기레' },
+                    { id: 'guard3', name: 'kim3', address: '경기미' },
+                    { id: 'guard4', name: 'kim4', address: '경기파' },
+                    { id: 'guard5', name: 'kim5', address: '경기솔' },
+                ];
+                memberArray.sort((member1, member2) => {
+                    return member2.id.localeCompare(member1.id);
+                });
+
+                /*************정렬결과출력**************/
+                $.each(memberArray, (i, member) => {
+                    $('.sorted3').append(`[${member.id}] ${member.name}, ${member.address}<br>`);
+                });
+
+            });
+        </script>
+    </head>
+    <body style="padding: 10px">
+        <h2>Members of my Group are</h2>
+        <p class="sorted1"></p>
+        <p class="sorted2"></p>
+        <p class="sorted3"></p>
+    </body>
 </html>
