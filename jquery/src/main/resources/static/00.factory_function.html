@@ -13,9 +13,8 @@
             4 . $('<div></div>')							:태그문자열
                 div element jQuery wrapper객체생성
         */
-
-            window.onload = function () {
-                console.log('------DOM tree 로딩 직후 호출되는 코드[window.onlaod]------');
+            $(() => {
+                console.log('------DOM tree 로딩 직후 호출되는 코드 [window.onload]------');
                 // window.jQuery();
                 // window.$();
                 let jQueryWrapperObject1 = $('h1');
@@ -39,7 +38,9 @@
                 $.each(nameArray, function (i, name) {
                     console.log(i + ' --> ' + name);
                 });
-            };
+            });
+
+            window.onload = () => {};
         </script>
     </head>
     <body>

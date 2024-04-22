@@ -1,6 +1,6 @@
 window.jQuery = function (arg) {
     // jQuery factory함수의 가장 기본적인 동작은 도큐먼트의 일부를 선택하는 것
-    if (typeof arg === 'string') {
+    if (typeof arg == 'string') {
         // css selector 문자열
         let elementNodeList = document.querySelectorAll(arg);
         let jQueryWrapperObject = {
@@ -27,6 +27,13 @@ window.jQuery = function (arg) {
             },
         };
         return jQueryWrapperObject;
+    } else if (typeof arg == 'function') {
+        // function인 경우
+        /*
+        인자로 대입된 함수를 DOM Tree 생성 직후에 호출
+        window.onload 이벤트 프로퍼티에 등록
+        */
+        window.addEventListener('load', arg);
     }
 };
 // jQuery global function
