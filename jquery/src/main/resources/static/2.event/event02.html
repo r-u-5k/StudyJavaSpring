@@ -1,60 +1,51 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>jQuery에서 제공하는 Event 핸들링 메소드</title>
-<style>
-div,pre {
-	background: #FFF;
-	padding: 10px;
-	margin: 10px;
-}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>jQuery에서 제공하는 Event 핸들링 메소드</title>
+        <style>
+            div,
+            pre {
+                background: #fff;
+                padding: 10px;
+                margin: 10px;
+            }
 
-table {
-	border: 1px solid #AAA;
-}
+            table {
+                border: 1px solid #aaa;
+            }
 
-td {
-	border: 1px solid #AAA;
-	width: 25px;
-	height: 25px;
-}
+            td {
+                border: 1px solid #aaa;
+                width: 25px;
+                height: 25px;
+            }
 
-.selected {
-	font-weight: bold;
-	color: White;
-	background-color: Red;
-}
-</style>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
-$(function() {
-	
-});
-</script>
-</head>
-<body style="padding: 10px;">
-	<h2>jQuery에서 제공하는 Event 핸들링 메소드</h2>
-	<div>
-		text:<input type="text" id="txtInput" /> <br/>
-		keyCode:<input type="text" id="txtKeyCode"  value=""/>
-	</div>
-</body>
+            .selected {
+                font-weight: bold;
+                color: White;
+                background-color: Red;
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('#txtInput').keyup((e) => {
+                    console.log(e.key);
+                    console.log(e.keyCode);
+                    $('#txtKeyCode').val(e.key + '[' + e.keyCode + ']');
+					if (e.keyCode == 13) {
+						alert('가입 ㄱ?');
+					}
+                });
+            });
+        </script>
+    </head>
+    <body style="padding: 10px">
+        <h2>jQuery에서 제공하는 Event 핸들링 메소드</h2>
+        <div>
+            text:<input type="text" id="txtInput" /> <br />
+            keyCode:<input type="text" id="txtKeyCode" value="" />
+        </div>
+    </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

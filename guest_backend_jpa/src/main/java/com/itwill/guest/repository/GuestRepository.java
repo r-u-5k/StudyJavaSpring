@@ -1,6 +1,5 @@
 package com.itwill.guest.repository;
 
-import com.itwill.guest.dto.GuestDto;
 import com.itwill.guest.entity.Guest;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,9 +9,9 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
 
     Guest findByGuestNo(int guestNo);
 
-    List<Guest> findByGuestName(String guestName);
+    List<Guest> findByGuestNameContaining(String guestName);
 
-    List<Guest> findByGuestTitle(String guestTitle);
+    List<Guest> findByGuestTitleContaining(String guestTitle);
 
-    List<Guest> findByGuestContent(String guestContent);
+    List<Guest> findByGuestContentContaining(String guestContent);
 }
