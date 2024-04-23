@@ -1,15 +1,16 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript">
-        $(function(){
-        		$('h1,h3').next().hide();
-       	 	/*
-         	
-         	$('h1,h3').next().show();
-         	*/
-         	/*
+    <head>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script type="text/javascript">
+            $(function () {
+				/*
+                $('h1,h3').next().hide();
+				*/
+                /*
+				$('h1,h3').next().show();
+				*/
+                /*
         		$('h1,h3').next().fadeOut(2000);
         		$('h1,h3').next().fadeIn(2000);
         		$('h1,h3').next().slideUp(2000);
@@ -17,42 +18,50 @@
         		$('h1,h3').next().fadeToggle(2000);
         		$('h1,h3').next().slideToggle(2000);
         		*/
-        		$('h1,h3').click(function(e){
-        			//$(e.target).next().fadeToggle(1000);
-        			$(e.target).next().slideToggle(1000);
-        		});
-        		
-        });
-    </script>
-</head>
-<body>
-    <h1>방명록타이틀1</h1>
-    <div>
-        <h3>내용소제목1</h3>
+                $('h1,h3').click((e) => {
+                    //$(e.target).next().fadeToggle(1000);
+                    $(e.target).next().slideToggle(1000);
+                });
+
+				$('#logo').click((e) => {
+					$(e.target).animate({width: '50%', height: '50%'}, 2000);
+					$(e.target).animate({width: '150%', height: '150%'}, 2000);
+					$(e.target).animate({width: '100%', height: '100%'}, 2000);
+				})
+            });
+        </script>
+    </head>
+    <body>
+        <h1>방명록타이틀1</h1>
         <div>
-        	<p>내용1</p>
-        	<p>내용1</p>
-        	<p>내용1</p>
-        	<p>내용1</p>
-        	<p>내용1</p>
-        	<p>내용1</p>
-        	<p>내용1</p>
-        	<p>내용1</p>
+            <h3>내용소제목1</h3>
+            <div>
+                <p>내용1</p>
+                <p>내용1</p>
+                <p>내용1</p>
+                <p>내용1</p>
+                <p>내용1</p>
+                <p>내용1</p>
+                <p>내용1</p>
+                <p>내용1</p>
+            </div>
         </div>
-    </div>
-    <h1>방명록타이틀2</h1>
-    <div>
-        <h3>내용소제목2</h3>
+        <h1>방명록타이틀2</h1>
         <div>
-			<p>내용2</p>
-			<p>내용2</p>
-			<p>내용2</p>
-			<p>내용2</p>
-			<p>내용2</p>
-			<p>내용2</p>
-			<p>내용2</p>
-			<p>내용2</p>
+            <h3>내용소제목2</h3>
+            <div>
+                <p>내용2</p>
+                <p>내용2</p>
+                <p>내용2</p>
+                <p>내용2</p>
+                <p>내용2</p>
+                <p>내용2</p>
+                <p>내용2</p>
+                <p>내용2</p>
+            </div>
+        </div>
+		<div style="width: 30%; margin: 0 10px 0 0;">
+			<img id="logo" src="icon1.png" />
 		</div>
-    </div>
-</body>
+    </body>
 </html>
