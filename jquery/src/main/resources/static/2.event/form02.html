@@ -1,101 +1,100 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>jQuery에서 제공하는 Form 속성 메소드</title>
-<style>
-div,pre {
-	background: #FFF;
-	padding: 10px;
-	margin: 10px;
-}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>jQuery에서 제공하는 Form 속성 메소드</title>
+        <style>
+            div,
+            pre {
+                background: #fff;
+                padding: 10px;
+                margin: 10px;
+            }
 
-table {
-	border: 1px solid #AAA;
-}
+            table {
+                border: 1px solid #aaa;
+            }
 
-td {
-	border: 1px solid #AAA;
-	width: 25px;
-	height: 25px;
-}
-</style>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
-	$(function() {
-		   /*
-		   element속성접근
-		   */
-		   //attribute set
-		 
-		   //attribute get
-		 
-		
-			/*
-			form태그안에 있는 input element 접근
-			 	- 입력 엘레멘트의 값을 접근할때는  .val() 을사용
-		      	- .val() 은 DOM트리생성이후에 동적으로변하는 
-		           사용자입력데이타를 읽을수있다
-		     */
-			console.log('----------dom tree loading 후에 form element value get -------');
-			console.log("1.$('#id').attr('value')		  [x]:");
-			console.log("1.$('#id').val()        		  [o]:");
-			console.log("2.$('#name').val()      		  [o]:");
-			console.log("3.$('#alias').val()     		  [o]:");
-			console.log("4.$('#job option:selected').val()[o]:");
-			console.log('----------dom tree loading 후에 form element value set -------');
-			
-			
-			$('#f').submit(function(e){
-			   	console.log('----------submit 시에 form element value get -------');
-			   	console.log("1.$('#id').attr('value')		  [x]:");
-				console.log("1.$('#id').val()        		  [o]:");
-				console.log("2.$('#name').val()      		  [o]:");
-				console.log("3.$('#alias').val()     		  [o]:");
-				console.log("4.$('#job option:selected').val() [o]:");
-				/*
-				폼을이용한 서버로의 jquery ajax요청
-				1.parameter생성
-				2.유효성체크
-				3.jqury ajax요청
-				4.submit default중지
+            td {
+                border: 1px solid #aaa;
+                width: 25px;
+                height: 25px;
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                /*
+				element속성접근
 				*/
-				
-				console.log(">>>>>>요청파라메타생성:");
-				console.log(">>>>>>요청JSON Data생성:");
-				console.log(">>>>>>ajax요청");
-			    console.log(">>>>>>페이지요청중지");
-			    e.preventDefault();
-			});
-			
-		
-	
-		
-	});
-</script>
-</head>
+                //attribute set
+				$('#p_image').attr('src', 'icon1.png');
+				$('#p_image').attr('width', '30px');
+				$('#p_image').attr('height', '30px');
 
-<body style="padding: 10px;">
-	<h2>jQuery에서 제공하는 Form 엘레멘트 속성 메소드</h2>
-	
-	<div>
-		<form id="f" name="f" action="xxx.jsp">
-			아이디:<input type="text" name="id" id="id" value="guest"/>
-			<img id="p_image"  alt="프로필이미지" />
-			<br />
-			이이름:<input type="text"  id="name" name="name" /><br /> 
-			별명[히든]:<input type="hidden" id="alias" name="alias" value="제임스" /><br />
-			직업:
-			<select name="job" id="job">
-				<option value="학생" selected="selected">학생</option>
-				<option value="회사원">회사원</option>
-				<option value="프리렌서">프리렌서</option>
-			</select> <br /> 
-			<input type="submit" value="전송[submit]" />
-		</form>
-	</div>
-	
-	<xmp>
+                //attribute get
+
+                /*
+				form태그안에 있는 input element 접근
+					- 입력 엘레멘트의 값을 접근할때는  .val() 을사용
+					- .val() 은 DOM트리생성이후에 동적으로변하는 
+					사용자입력데이타를 읽을수있다
+				*/
+                console.log('----------dom tree loading 후에 form element value get -------');
+                console.log("1.$('#id').attr('value')		  [x]: " + $('#id').attr('value'));
+                console.log("1.$('#id').val()        		  [o]: " + $('#id').val());
+                console.log("2.$('#name').val()      		  [o]: " + $('#name').val());
+                console.log("3.$('#alias').val()     		  [o]: " + $('#alias').val());
+                console.log("4.$('#job option:selected').val()[o]: " + $('#job option:selected').val());
+                console.log('----------dom tree loading 후에 form element value set -------');
+
+                $('#f').submit(function (e) {
+                    console.log('----------submit 시에 form element value get -------');
+                    console.log("1.$('#id').attr('value')		  [x]: " + $('#id').attr('value'));
+                    console.log("1.$('#id').val()        		  [o]: " + $('#id').val());
+                    console.log("2.$('#name').val()      		  [o]: " + $('#name').val());
+                    console.log("3.$('#alias').val()     		  [o]: " + $('#alias').val());
+                    console.log("4.$('#job option:selected').val()[o]: " + $('#job option:selected').val());
+                    /*
+					폼을이용한 서버로의 jquery ajax요청
+					1.parameter생성
+					2.유효성체크
+					3.jqury ajax요청
+					4.submit default중지
+					*/
+
+                    console.log('>>>>>> 요청 파라메타 생성:');
+                    console.log('>>>>>> 요청 JSON Data 생성:');
+                    console.log('>>>>>> AJAX 요청');
+                    console.log('>>>>>> 페이지 요청 중지');
+                    e.preventDefault();
+                });
+            });
+        </script>
+    </head>
+
+    <body style="padding: 10px">
+        <h2>jQuery에서 제공하는 Form 엘레멘트 속성 메소드</h2>
+
+        <div>
+            <form id="f" name="f" action="xxx.jsp">
+                아이디:<input type="text" name="id" id="id" value="guest" />
+                <img id="p_image" alt="프로필이미지" />
+                <br />
+                이름:<input type="text" id="name" name="name" /><br />
+                별명[히든]:<input type="hidden" id="alias" name="alias" value="제임스" /><br />
+                직업:
+                <select name="job" id="job">
+                    <option value="학생" selected="selected">학생</option>
+                    <option value="회사원">회사원</option>
+                    <option value="프리렌서">프리렌서</option>
+                </select>
+                <br />
+                <input type="submit" value="전송[submit]" />
+            </form>
+        </div>
+
+        <xmp>
 		<!-- 
 		<< [jquery] select  box 선택값 가져오기 >>
 			// select box ID로 접근하여 선택된 값 읽기
@@ -168,5 +167,5 @@ td {
 			});
 			 -->
 	</xmp>
-</body>
+    </body>
 </html>

@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -29,7 +30,7 @@ public class Guest {
 //	@Column(columnDefinition = "date default sysdate") // default 설정 (이렇게도 가능)
 	@ColumnDefault(value = "sysdate") // default 설정
 	@CreationTimestamp // JPA insert시 현재 시각 자동 삽입 (update 시: UpdateTimeStamp)
-	private Date guestDate;
+	private LocalDateTime guestDate;
 	
 	private String guestEmail;
 	private String guestHomepage;
