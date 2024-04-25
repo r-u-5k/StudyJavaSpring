@@ -65,4 +65,12 @@ public class GuestRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new HashMap<>());
     }
 
+    @Operation(summary = "방명록 검색")
+    @GetMapping(value = "/search/{searchType}/{searchString}")
+    public ResponseEntity<List<GuestDto>> guest_find(@PathVariable(name = "searchType") int searchType,
+                                                     @PathVariable(name = "searchString") String searchString) throws Exception {
+        List<GuestDto> findGuestDtoList = guestService.findByGuest(searchType, searchString);
+        return ResponseEntity.status(HttpStatus.OK).body(findGuestDtoList);
+    }
+
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>jQuery에서 제공하는 Event 핸들링 메소드</title>
+        <style>
+            div,
+            pre {
+                background: #fff;
+                padding: 10px;
+                margin: 10px;
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script type="text/javascript">
+            $(() => {
+                /*
+				이벤트 1회 발생 후 이벤트 제거
+				*/
+				$('li').one('click', (e) => {
+					alert($(e.target).text);
+				})
+            });
+        </script>
+    </head>
+
+    <body style="padding: 10px">
+        <h2>jQuery에서 제공하는 Event 핸들링 메소드</h2>
+        <div>
+            <ul>
+                <li>list item 1</li>
+                <li>list item 2</li>
+                <li>list item 3</li>
+                <li>list item 4</li>
+                <li>list item 5</li>
+            </ul>
+        </div>
+    </body>
+</html>

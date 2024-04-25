@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>jQuery에서 제공하는 Event 핸들링 메소드</title>
+        <style>
+            #mouseArea {
+                background: #ffff00;
+                padding: 10px;
+                margin: 10px;
+            }
+            /* div {
+				background: #FFFF00;
+				padding: 10px;
+				margin: 10px;
+			} */
+        </style>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script type="text/javascript">
+            let clickCount = 0;
+            let enterCount = 0;
+            let leaveCount = 0;
+            $(() => {
+                $('h2').click((e) => {
+                    console.log('h2 표준 객체: ' + e.target);
+                    console.log('h2 jQuery 객체: ' + $(e.target));
+                    $(e.target).html('jQuery에서 제공하는 Event 핸들링 메소드 ' + ++clickCount);
+                });
+
+                /* 
+				$('#mouseArea').mouseenter(() => {
+                    console.log('mouseenter');
+                });
+                $('#mouseArea').mouseleave(() => {
+                    console.log('mouseleave');
+                }); 
+				*/
+                $('#mouseArea').on('mouseenter mouseleave', (e) => {
+                    if (e.type == 'mouseenter') {
+                        console.log('mouseenter');
+						enterCount++;
+                    } else if (e.type == 'mouseleave') {
+                        console.log('mouseleave');
+						leaveCount++;
+                    }
+					$('#spResult').html(`mouseenter: ${enterCount}, mouseleave: ${leaveCount}`);
+                });
+            });
+        </script>
+    </head>
+    <body style="padding: 10px">
+        <h2>jQuery에서 제공하는 Event 핸들링 메소드</h2>
+        <div id="mouseArea">AREA(DIV) MOUSE : <br /><span id="spResult"></span></div>
+    </body>
+</html>

@@ -49,7 +49,7 @@ public class GuestDaoImplJPA implements GuestDao {
 
     @Override
     public List<GuestDto> findByGuestName(String guestName) throws Exception {
-        List<Guest> guestEntityList = guestRepository.findByGuestName(guestName);
+        List<Guest> guestEntityList = guestRepository.findByGuestNameContaining(guestName);
         List<GuestDto> guestDtoList = new ArrayList<>();
         for (Guest guestEntity : guestEntityList) {
             guestDtoList.add(GuestDto.toDto(guestEntity));
@@ -59,7 +59,7 @@ public class GuestDaoImplJPA implements GuestDao {
 
     @Override
     public List<GuestDto> findByGuestTitle(String guestTitle) throws Exception {
-        List<Guest> guestEntityList = guestRepository.findByGuestTitle(guestTitle);
+        List<Guest> guestEntityList = guestRepository.findByGuestTitleContaining(guestTitle);
         List<GuestDto> guestDtoList = new ArrayList<>();
         for (Guest guestEntity : guestEntityList) {
             guestDtoList.add(GuestDto.toDto(guestEntity));
@@ -69,7 +69,7 @@ public class GuestDaoImplJPA implements GuestDao {
 
     @Override
     public List<GuestDto> findByGuestContent(String guestContent) throws Exception {
-        List<Guest> guestEntityList = guestRepository.findByGuestContent(guestContent);
+        List<Guest> guestEntityList = guestRepository.findByGuestContentContaining(guestContent);
         List<GuestDto> guestDtoList = new ArrayList<>();
         for (Guest guestEntity : guestEntityList) {
             guestDtoList.add(GuestDto.toDto(guestEntity));
