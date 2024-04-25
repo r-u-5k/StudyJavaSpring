@@ -21,6 +21,7 @@ import com.itwill.guest.entity.Guest;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -31,7 +32,7 @@ public class GuestDto {
 
     private int guestNo;
     private String guestName;
-    private Date guestDate;
+    private LocalDateTime guestDate;
     private String guestEmail;
     private String guestHomepage;
     private String guestTitle;

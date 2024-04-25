@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>CSS 선택자를 이용한 HTML DOM Element 검색</title>
+    </head>
+    <body style="font-size: 15pt">
+        <h2>CSS 선택자를 이용한 HTML Element 검색1</h2>
+        <h2>CSS 선택자를 이용한 HTML Element 검색2</h2>
+        <div id="title" style="border: 2px solid red">Hello jQuery~~</div>
+        <p class="contents1"></p>
+        <p class="contents2"></p>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script type="text/javascript">
+            let h2Text = $('h2').text();
+            $('#title').text(h2Text);
+            $('.contents1').html('<u>jQuery는 오픈소스</u>');
+            $('.contents2').text('<u>jQuery는 오픈소스</u>');
+            console.log($('.contents1').text());
+            console.log($('.contents1').html());
+            $('h2').text((i, oldText) => {
+				if (i % 2 == 0) {
+					return `${oldText} (i = ${i})`;
+				} else {
+					return `${oldText} (i = ${i})`;
+				}
+			});
+        </script>
+    </body>
+</html>
