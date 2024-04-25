@@ -14,7 +14,7 @@ import com.itwill.user.exception.UnauthorizedUserException;
 @RestControllerAdvice
 public class UserRestControllerAdvice {
 	@ExceptionHandler(UnauthorizedUserException.class)
-	public ResponseEntity<Response> user_unauthrize_exception_handler(UnauthorizedUserException e) {
+	public ResponseEntity<Response> user_unauthorize_exception_handler(UnauthorizedUserException e) {
 		Response response = new Response();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
