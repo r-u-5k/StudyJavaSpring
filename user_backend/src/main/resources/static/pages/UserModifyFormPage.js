@@ -1,8 +1,8 @@
-import * as FetchUser from './FetchUser.js';
-import * as ResponseStatusCode from "./ResponseStatusCode.js";
+import * as userApi from "../api/userApi.js";
+import * as ResponseStatusCode from "../api/responseStatusCode.js";
 
 
-export const UserModifyFormComponent = async (userId) => {
+export const UserModifyFormPage = async (userId) => {
 	const userModifyAction = async () => {
 		if (document.f.password.value == "") {
 			alert("비밀번호를 입력하세요.");
@@ -36,12 +36,12 @@ export const UserModifyFormComponent = async (userId) => {
 			name: document.f.name.value,
 			email: document.f.email.value,
 		};
-		const responseJsonObject = await FetchUser.userModifyAction(sendJsonObject, userId);
+		const responseJsonObject = await userApi.userModifyAction(sendJsonObject, userId);
 		if (responseJsonObject.status == ResponseStatusCode.UPDATE_USER) {
 			location.hash = `#/user_view/${userId}`;
 		}
 	}
-	const responseJsonObject = await FetchUser.userView(userId);
+	const responseJsonObject = await userApi.userView(userId);
 	const user = responseJsonObject.data;
 
 	const template = `
@@ -60,7 +60,7 @@ export const UserModifyFormComponent = async (userId) => {
                         </tbody>
                     </table> <!-- update Form  -->
                     <form name="f" method="post">
-                        <input type="hidden" name="userId" value="guard1">
+                        <input type="hidden" name="userId" value="${user.userId}">
                         <table border="0" cellpadding="0" cellspacing="1" width="590"
                             bgcolor="BBBBBB">
                             <tbody>
@@ -103,7 +103,7 @@ export const UserModifyFormComponent = async (userId) => {
                     <table width="590" border="0" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr>
-                                <td align="center"><input type="button" id="btn_user_modify" value="수정"> &nbsp;</td>
+                                <td align="center"><input type="button" id="btn_user_modify_action" value="수정"> &nbsp;</td>
                             </tr>
                         </tbody>
                     </table>
@@ -113,8 +113,13 @@ export const UserModifyFormComponent = async (userId) => {
         </tbody>
     </table>
     `;
-
-	document.querySelector('#content').innerHTML = template;
-	document.querySelector('#btn_user_modify').onclick = userModifyAction;
+    const pageObject = {
+        template: template,
+        render: () => {
+            document.querySelector("#content").innerHTML = template;
+            document.querySelector('#btn_user_modify_action').onclick = userModifyAction;
+        },
+    };
+    return pageObject;
 
 };
