@@ -69,16 +69,16 @@ public class SecurityConfiguration {
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails user1 = User.withUsername("user1").password(passwordEncoder().encode("1111")).roles("USER").build();
         UserDetails user2 = User.withUsername("user2").password(passwordEncoder().encode("2222")).roles("USER").build();
-        UserDetails admin = User.withUsername("admin").password(passwordEncoder().encode("admin")).roles("ADMIN", "USER").build();
+        UserDetails admin = User.withUsername("admin").password(passwordEncoder().encode("admin")).roles("ADMIN").build();
         return new InMemoryUserDetailsManager(user1, user2, admin);
     }
 
-    @Bean
-    public RoleHierarchy roleHierarchy() {
-        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
-        roleHierarchy.setHierarchy("ROLE_ADMIN > ROLE_USER");
-        return roleHierarchy;
-    }
+//    @Bean
+//    public RoleHierarchy roleHierarchy() {
+//        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
+//        roleHierarchy.setHierarchy("ROLE_ADMIN > ROLE_USER");
+//        return roleHierarchy;
+//    }
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
