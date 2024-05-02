@@ -2,7 +2,6 @@ package com.itwill.security.controller;
 
 import java.security.Principal;
 
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,27 +10,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /*
+
 @PreAuthorize("hasRole('USER')") == @Secured("ROLE_USER")
+@PreAuthorize("hasRole('ADMIN') OR hasRole('USER')") == @Secured({"ROLE_USER","ROLE_ADMIN"})
 @PreAuthorize("hasAnyAuthority('ROLE_USER')")
 @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')" OR hasAnyAuthority('ROLE_USER')") == @Secured({"ROLE_USER","ROLE_ADMIN"})
 */
 @Controller
 public class UserController {
-    @GetMapping({"/", "/index"})
+
+    @GetMapping("/")
     public String main(Authentication authentication, Principal principal) {
         System.out.println(authentication);
         System.out.println(principal);
         return "index";
     }
 
-    @GetMapping("/login-form")
+    @GetMapping("/login")
     public String login() {
         return "login-form";
     }
 
     @GetMapping("/login-error")
     public String loginError() {
-        return "redirect:login-form";
+        return "login";
     }
 
     @GetMapping("/access-denied")
@@ -45,7 +47,6 @@ public class UserController {
         return "user-page";
     }
 
-//    @Secured("ROLE_ADMIN")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/admin-page")
     public String adminPage() {
@@ -57,5 +58,6 @@ public class UserController {
     public Authentication authentication() {
         return SecurityContextHolder.getContext().getAuthentication();
     }
+
 
 }
