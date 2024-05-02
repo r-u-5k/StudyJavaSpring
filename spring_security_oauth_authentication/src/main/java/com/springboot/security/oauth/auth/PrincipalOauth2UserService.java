@@ -28,7 +28,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
-        System.out.println("인증유저" + oAuth2User);
+        System.out.println("인증유저 -> " + oAuth2User);
         System.out.println("***********useRequest********");
         System.out.println(userRequest);
         System.out.println("clientRegistration : " + userRequest.getClientRegistration().getClientName());
@@ -37,7 +37,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         System.out.println("additionaparameter : " + userRequest.getAdditionalParameters());
         System.out.println("***********END********");
         Oauth2UserInfo oauth2UserInfo = null;
-        String provider = userRequest.getClientRegistration().getRegistrationId();    //google 또는 naver
+        String provider = userRequest.getClientRegistration().getRegistrationId(); // google 또는 naver
 
         if (provider.equals("google")) {
             oauth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
@@ -47,12 +47,12 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             oauth2UserInfo = new KakaoUserInfo(oAuth2User.getAttributes());
         }
 
-        String email = oauth2UserInfo.getEmail();                        //이메일
+        String email = oauth2UserInfo.getEmail(); // 이메일
         String defaultNickname = oauth2UserInfo.getProvider() + "_user" + UUID.randomUUID().toString().substring(0, 6);
         String password = bCryptPasswordEncoder.encode("password" + UUID.randomUUID().toString().substring(0, 6));
         // 비밀번호. 사용자가 입력한 적은 없지만 만들어준다.
         Member findMember = memberRepository.findByEmail(email).orElse(null);
-        //DB에 없는 사용자라면 회원가입처리
+        // DB에 없는 사용자라면 회원가입 처리
         if (findMember == null) {
             findMember = Member.JoinOAuth2()
                     .nickname(defaultNickname)
