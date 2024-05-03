@@ -9,28 +9,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MemberController {
 
     //@GetMapping("/login")
-    @RequestMapping(value = {"/login","/"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String loginForm(){
+    @RequestMapping(value = {"/login", "/"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String loginForm() {
         return "member/login";
     }
 
     @GetMapping("/join")
-    public String joinForm(){
+    public String joinForm() {
         return "member/join";
     }
 
     @GetMapping("/joinOk")
-    public String joinOk(){
+    public String joinOk() {
         return "member/joinOk";
     }
 
     @GetMapping("/findPassword")
-    public String findPassword(){
+    public String findPassword() {
         return "member/findPassword";
     }
 
     @GetMapping("/findPasswordEmailSend")
-    public String findPasswordEmailSend(){
+    public String findPasswordEmailSend() {
         return "member/findPasswordEmailSend";
     }
 }
