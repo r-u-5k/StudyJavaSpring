@@ -1,4 +1,4 @@
-//const BACKEND_SERVER='http://192.168.15.31:8080';
+// const BACKEND_SERVER='http://192.168.15.31:8080';
 const BACKEND_SERVER = '';
 export const userDeleteAction = async (userId) => {
     const response = await fetch(`${BACKEND_SERVER}/user/${userId}`,
