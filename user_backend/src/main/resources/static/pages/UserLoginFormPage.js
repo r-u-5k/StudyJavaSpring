@@ -1,17 +1,17 @@
-import * as userApi from "../api/userApi.js";
-import * as responseStatusCode from "../api/ResponseStatusCode.js";
-import * as responseMessage from "../api/ResponseMessage.js";
+import * as userApi from '../api/userApi.js';
+import * as responseStatusCode from '../api/responseStatusCode.js';
+import * as responseMessage from '../api/responseMessage.js';
 
 export const UserLoginFormPage = () => {
     /********로그인함수*********/
     const userLoginAction = async () => {
-        if (document.f.userId.value == "") {
-            alert("사용자 아이디를 입력하십시요.");
+        if (document.f.userId.value == '') {
+            alert('사용자 아이디를 입력하십시요.');
             document.f.userId.focus();
             return;
         }
-        if (document.f.password.value == "") {
-            alert("비밀번호를 입력하십시요.");
+        if (document.f.password.value == '') {
+            alert('비밀번호를 입력하십시요.');
             f.password.focus();
             return;
         }
@@ -26,18 +26,16 @@ export const UserLoginFormPage = () => {
             case responseStatusCode.LOGIN_SUCCESS:
                 //location.href = "index.html";
                 //location.reload();
-                location.replace("index.html");
+                location.replace('index.html');
                 //page loading
                 break;
             case responseStatusCode.LOGIN_FAIL_NOT_FOUND_USER:
-                document.querySelector("#idMessage").innerHTML =
-                    responseMessage.LOGIN_FAIL_NOT_FOUND_USER;
-                document.querySelector("#passwordMessage").innerHTML ='';
+                document.querySelector('#idMessage').innerHTML = responseMessage.LOGIN_FAIL_NOT_FOUND_USER;
+                document.querySelector('#passwordMessage').innerHTML = '';
                 break;
             case responseStatusCode.LOGIN_FAIL_PASSWORD_MISMATCH_USER:
-                document.querySelector("#idMessage").innerHTML ='';
-                document.querySelector("#passwordMessage").innerHTML =
-                    responseMessage.LOGIN_FAIL_PASSWORD_MISMATCH_USER;
+                document.querySelector('#idMessage').innerHTML = '';
+                document.querySelector('#passwordMessage').innerHTML = responseMessage.LOGIN_FAIL_PASSWORD_MISMATCH_USER;
                 break;
         }
     };
@@ -87,12 +85,10 @@ export const UserLoginFormPage = () => {
     const pageObject = {
         template: template,
         render: () => {
-            document.querySelector("#content").innerHTML = template;
+            document.querySelector('#content').innerHTML = template;
             //이벤트
-            document.querySelector("#btn_user_login_action").onclick = userLoginAction;
+            document.querySelector('#btn_user_login_action').onclick = userLoginAction;
         },
     };
     return pageObject;
-
-
 };
