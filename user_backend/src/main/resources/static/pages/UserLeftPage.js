@@ -5,7 +5,7 @@ const UserLeftPage = async () => {
     /******로그아웃함수 ***********/
     const userLogoutAction = async (e) => {
         console.log('>>>>>>>>>>>');
-        const responseJsobObject =
+        const responseJsonObject =
             await userApi.userLogoutAction();
         //page reloading
         location.replace('index.html');
