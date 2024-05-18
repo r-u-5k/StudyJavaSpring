@@ -211,3 +211,5 @@ w
 G.idea/sonarlint/issuestore/5/7/576a1458d4d9a2b092fff948a769ef8f0088881b,2\2\223b7310a30a93cd6b08da2e5cef9fe635e3d323
 w
 G.idea/sonarlint/issuestore/5/0/50e216b4439d2538168c3ddca9c0c2fe23bd1c02,4\7\47deea973d12bd9a7ff5999d20135c170ce61489
+l
+<user_backend/src/main/resources/static/pages/UserLeftPage.js,7\7\7786523a4d7bb9cc69db214b3e37cf3df0019669
